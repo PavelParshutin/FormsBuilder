@@ -1,0 +1,50 @@
+.login_form{
+  max-width: 600px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+}
+.login_input_block{
+  display: block;
+  margin-bottom: 10px;
+}
+input{
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  padding: 4px;
+  border: 1px solid #ccc;
+}
+label{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+  color: black;
+}
+.btn {
+  display:block;
+  background: #f4f4f4;
+  color: #333;
+  padding: 10px 15px;
+  margin: 10px auto;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s linear;
+  outline: none;
+}
+.btn:disabled {
+   cursor: not-allowed;
+   background: #f4f4f4;
+   color: #111;
+ }
+.btn-primary{
+  background-color:  #dc3545;
+  color: #fff;
+}
+.login_error{
+  color: red;
+  text-align: center;
+}
+
