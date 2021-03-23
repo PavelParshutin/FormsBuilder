@@ -9,11 +9,25 @@ import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './store/effects/auth.effects';
 import {StoreModule} from '@ngrx/store';
 import {reducers} from './store';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {PortalModule} from '@angular/cdk/portal';
+import { InputTextComponent } from './components/input-text.component';
+import { ButtonComponent } from './components/button.component';
+import { CheckboxComponent } from './components/checkbox.component';
+import { TextAreaComponent } from './components/text-area.component';
+import { SelectComponent } from './components/select.component';
+import { LabelComponent } from './components/label.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    InputTextComponent,
+    ButtonComponent,
+    CheckboxComponent,
+    TextAreaComponent,
+    SelectComponent,
+    LabelComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +35,9 @@ import {reducers} from './store';
     FormsModule,
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    DragDropModule,
+    PortalModule
   ],
   providers: [AuthEffects],
   bootstrap: [AppComponent]

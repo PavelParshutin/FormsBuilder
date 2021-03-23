@@ -1,1 +1,35 @@
-<app-login-page></app-login-page>
+<!--<app-login-page></app-login-page>-->
+<div class="form-builder">
+  <div class="section">
+    accordion section
+  </div>
+
+  <div class="section" cdkDropList
+       #dropListSection="cdkDropList"
+       [cdkDropListData]="dropList"
+       [cdkDropListConnectedTo]="[dragListSection]"
+       (cdkDropListDropped)="drop($event)">
+    <template #elemContainer cdkDrag></template>
+  </div>
+
+  <div class="section" cdkDropList
+       #dragListSection="cdkDropList"
+       [cdkDropListData]="dragList"
+       [cdkDropListConnectedTo]="[dropListSection]"
+       (cdkDropListDropped)="drop($event)">
+
+    <label for="inputText" #labelElement cdkDrag>Label</label>
+    <input id="inputText" type="text" value="Input" #InputTextElement cdkDrag>
+    <button class="btn" #btnStandard cdkDrag>Button</button>
+    <button class="btn btn-blue" #btnBlue cdkDrag>Button</button>
+
+    <span #checkboxElement cdkDrag>
+      <input id="checkbox" type="checkbox">
+    <label for="checkbox">checkbox</label>
+    </span>
+
+    <select name="" #selectElement cdkDrag>
+      <option>Option 1</option>
+    </select>
+    <textarea cols="30" rows="10" #textAreaElement cdkDrag></textarea>
+</div>
