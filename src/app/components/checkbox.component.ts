@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-checkbox',
   template:`<span>
   <input id="inputCheckbox" type="checkbox">
-  <label for="inputCheckbox">checkbox</label>
+  <label for="inputCheckbox" cdkDrag>checkbox</label>
 </span>`,
   styles: [`input[type=checkbox]{
   margin: 5px;

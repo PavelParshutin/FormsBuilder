@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-text-area',
-  template: `<textarea></textarea>`,
+  template: `<textarea cdkDrag></textarea>`,
   styles: [`textarea{
   display: block;
   width: 100%;

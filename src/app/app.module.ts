@@ -5,10 +5,6 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {EffectsModule} from '@ngrx/effects';
-import {AuthEffects} from './store/effects/auth.effects';
-import {StoreModule} from '@ngrx/store';
-import {reducers} from './store';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {PortalModule} from '@angular/cdk/portal';
 import { InputTextComponent } from './components/input-text.component';
@@ -34,12 +30,10 @@ import { LabelComponent } from './components/label.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot(reducers),
     DragDropModule,
     PortalModule
   ],
-  providers: [AuthEffects],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

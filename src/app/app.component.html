@@ -1,7 +1,14 @@
 <!--<app-login-page></app-login-page>-->
-<div class="form-builder">
+<div class="form-builder" #form>
   <div class="section">
-    accordion section
+    <div class="item">
+      <div class="header">
+        <span>Name</span>
+        <span class="icon"> ></span>
+      </div>
+      <div class="styles_info">
+      </div>
+    </div>
   </div>
 
   <div class="section" cdkDropList
@@ -9,7 +16,11 @@
        [cdkDropListData]="dropList"
        [cdkDropListConnectedTo]="[dragListSection]"
        (cdkDropListDropped)="drop($event)">
-    <template #elemContainer cdkDrag></template>
+    <div #elemContainer cdkDrag ></div>
+<span *ngFor="let comp of dropList">
+  <ng-container  *ngComponentOutlet="comp" [ngStyle]="{borderColor:'red'}">
+ </ng-container>
+</span>
   </div>
 
   <div class="section" cdkDropList
@@ -18,18 +29,23 @@
        [cdkDropListConnectedTo]="[dropListSection]"
        (cdkDropListDropped)="drop($event)">
 
-    <label for="inputText" #labelElement cdkDrag>Label</label>
-    <input id="inputText" type="text" value="Input" #InputTextElement cdkDrag>
-    <button class="btn" #btnStandard cdkDrag>Button</button>
-    <button class="btn btn-blue" #btnBlue cdkDrag>Button</button>
-
-    <span #checkboxElement cdkDrag>
-      <input id="checkbox" type="checkbox">
-    <label for="checkbox">checkbox</label>
+    <span *ngFor="let comp of dragList">
+      <ng-container  *ngComponentOutlet="comp" cdkDrag>
+      </ng-container>
     </span>
 
-    <select name="" #selectElement cdkDrag>
-      <option>Option 1</option>
-    </select>
-    <textarea cols="30" rows="10" #textAreaElement cdkDrag></textarea>
+<!--    <label for="inputText" #labelElement cdkDrag>Label</label>-->
+<!--    <input id="inputText" type="text" value="Input" #InputTextElement cdkDrag>-->
+<!--    <button class="btn" #btnStandard cdkDrag>Button</button>-->
+<!--    <button class="btn btn-blue" #btnBlue cdkDrag>Button</button>-->
+
+<!--    <span #checkboxElement cdkDrag>-->
+<!--      <input id="checkbox" type="checkbox">-->
+<!--    <label for="checkbox">checkbox</label>-->
+<!--    </span>-->
+
+<!--    <select name="" #selectElement cdkDrag>-->
+<!--      <option>Option 1</option>-->
+<!--    </select>-->
+<!--    <textarea cols="30" rows="10" #textAreaElement cdkDrag></textarea>-->
 </div>

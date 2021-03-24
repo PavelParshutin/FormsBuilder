@@ -44,6 +44,16 @@ select{
   cursor: pointer;
   margin: 10px;
 }
+/*app-button{*/
+/*  border: 1px solid red;*/
+/*  outline: none;*/
+/*  padding: 10px 15px;*/
+/*  font-size: 14px;*/
+/*  color: black;*/
+/*  border-radius: 20px;*/
+/*  cursor: pointer;*/
+/*  margin: 10px;*/
+/*}*/
 .btn-blue{
   background-color: aqua;
 }
@@ -54,4 +64,18 @@ textarea{
   border-radius: 15px;
   outline: none;
   padding: 10px 15px;
+}
+
+.item{
+  width: 100%;
+  border: 1px solid black;
+}
+.header{
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.icon{
+  color: red;
 }
