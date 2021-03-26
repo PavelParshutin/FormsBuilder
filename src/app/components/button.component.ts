@@ -1,33 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {getBtnStyleSelector} from '../store/defaultStyles.reduser';
+import {Styles} from '../store/interfaces';
+import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-button',
-  template: `<button cdkDrag [ngStyle]="btn">Button</button>`,
-  // styles: [`button{
-  //   border: 1px solid black;
-  //   outline: none;
-  //   padding: 10px 15px;
-  //   font-size: 14px;
-  //   color: black;
-  //   border-radius: 20px;
-  //   cursor: pointer;
-  //   margin: 10px;
-  // }`]
+  template: `<button cdkDrag [ngStyle]="componentStyles$">{{title}}</button>`,
 })
 export class ButtonComponent implements OnInit {
-btn = {
-  border: '1px solid black',
-  outline: 'none',
-  padding: '10px 15px',
-  fontSize: '14px',
-  color: 'black',
-  borderRadius: '20px',
-  cursor: 'pointer',
-  margin: '10px'
-}
-  constructor() { }
+
+  @Input() componentStyles$: Observable<any>
+  @Input() title = 'Button'
+
+  defaultStyle$: Observable<any>
+  constructor(private store: Store<Styles>) {
+  }
 
   ngOnInit(): void {
+    this.defaultStyle$ = this.store.select(getBtnStyleSelector)
+    this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
   }
 
 }

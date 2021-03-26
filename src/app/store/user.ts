@@ -28,8 +28,10 @@ export const userReducer = createReducer(
   }))
 )
 
-export const featureSelector = createFeatureSelector<UserState>('user')
-export  const userSelector = createSelector(featureSelector, state => {
-    state.email
-    state.password
-})
+// export const featureSelector = createFeatureSelector<UserState>('user')
+// export  const userSelector = createSelector(featureSelector, state => {
+//     state.email
+//     state.password
+// })
+
+

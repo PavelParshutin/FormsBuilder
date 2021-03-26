@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {Styles} from '../store/interfaces';
+import {getTextAreaStyleSelector} from '../store/defaultStyles.reduser';
 
 @Component({
   selector: 'app-text-area',
-  template: `<textarea cdkDrag></textarea>`,
-  styles: [`textarea{
-  display: block;
-  width: 100%;
-  border: 1px solid black;
-  border-radius: 15px;
-  outline: none;
-  padding: 10px 15px;
-    margin: 10px auto;
-}`]
+  template: `<textarea cdkDrag [ngStyle]="componentStyles$" [placeholder]="title"></textarea>`,
+
 })
 export class TextAreaComponent implements OnInit {
+  @Input() title = 'text area'
+  @Input() componentStyles$
 
-  constructor() { }
+  defaultStyle$: Observable<any>
+  constructor(private store: Store<Styles>) {
+}
 
-  ngOnInit(): void {
-  }
+ngOnInit(): void {
+  this.defaultStyle$ = this.store.select(getTextAreaStyleSelector)
+  this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
+}
 
 }

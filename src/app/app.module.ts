@@ -13,6 +13,10 @@ import { CheckboxComponent } from './components/checkbox.component';
 import { TextAreaComponent } from './components/text-area.component';
 import { SelectComponent } from './components/select.component';
 import { LabelComponent } from './components/label.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import {styleReducer} from './store/defaultStyles.reduser';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,9 @@ import { LabelComponent } from './components/label.component';
     FormsModule,
     ReactiveFormsModule,
     DragDropModule,
-    PortalModule
+    PortalModule,
+    StoreModule.forRoot({defaultComponentStyles: styleReducer}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

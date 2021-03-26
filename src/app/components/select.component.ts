@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {Styles} from '../store/interfaces';
+import {getInputTextStyleSelector, getSelectStyleSelector} from '../store/defaultStyles.reduser';
 
 @Component({
   selector: 'app-select',
-  template: `<select name="" #selectElement cdkDrag>
-    <option>Option 1</option>
+  template: `<select [ngStyle]="componentStyles$" #selectElement cdkDrag>
+    <option>{{title}}</option>
   </select>`,
-  styles: [`select{
-  width: 30%;
-  padding: 10px 15px;
-  margin: 10px 30px;
-  border: 1px solid black;
-  border-radius: 30px;
-  outline: none;
-}`]
 })
 export class SelectComponent implements OnInit {
+  @Input() title = 'option 1'
+  @Input() componentStyles$
 
-  constructor() { }
+  defaultStyle$: Observable<any>
+  constructor(private store: Store<Styles>) {
+}
 
-  ngOnInit(): void {
-  }
-
+ngOnInit(): void {
+  this.defaultStyle$ = this.store.select(getSelectStyleSelector)
+  this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
+}
 }

@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {Styles} from '../store/interfaces';
+import {getInputTextStyleSelector, getLabelStyleSelector} from '../store/defaultStyles.reduser';
 
 @Component({
   selector: 'app-label',
-  template: `<label cdkDrag>Label</label>`,
-  styles: [`label{margin: 10px}`]
+  template: `<label [ngStyle]="componentStyles$" cdkDrag>{{title}}</label>`,
+
 })
 export class LabelComponent implements OnInit {
+  @Input() title = 'Label'
+  @Input() componentStyles$
 
-  constructor() { }
+    defaultStyle$: Observable<any>
+      constructor(private store: Store<Styles>) {
+}
 
-  ngOnInit(): void {
-  }
-
+ngOnInit(): void {
+  this.defaultStyle$ = this.store.select(getLabelStyleSelector)
+  this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
+}
 }
