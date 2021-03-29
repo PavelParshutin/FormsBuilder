@@ -11,7 +11,7 @@ import {getInputTextStyleSelector, getSelectStyleSelector} from '../store/defaul
   </select>`,
 })
 export class SelectComponent implements OnInit {
-  @Input() title = 'option 1'
+  @Input() title = 'Select'
   @Input() componentStyles$
 
   defaultStyle$: Observable<any>

@@ -35,7 +35,7 @@ export const initialState: Styles = {
     borderRadius: '30px',
     outline: 'none'
   },
-  textareatStyles:{
+  textareatStyles: {
     display: 'block',
     width: '100%',
     border: '1px solid black',
@@ -43,32 +43,18 @@ export const initialState: Styles = {
     outline: 'none',
     padding: '10px 15px',
     margin: '10px auto',
-  }
+  },
+  newComponents: []
 }
-
-//
-//
-// export const btnStyleReducer = createReducer(
-//   initialState, on(setStyle, (state, props) => (
-//     {
-//       ...state,
-//       btnStyle: props.btnStyle
-//     }
-//   )),
-//   on(setInputTextStyle,(state, props) =>({
-//     ...state,
-//     inputTextStyle: props.inputTextStyle
-//   }))
-// )
 
 export const styleReducer = createReducer(initialState,
   on(setComponentStyle, (state, prop) => ({
     ...state,
-    newComponents: prop /*state.newComponents.filter(item => item.id !== prop.id).push(prop)*/
+    newComponents: state.newComponents.filter(item => item.id !== prop.id).push(prop)
   })),
   on(addNewComponent, (state, prop) => ({
       ...state,
-    newComponents: prop
+    newComponents: [...state.newComponents, prop]
     })
   )
 )
@@ -81,3 +67,5 @@ export const getLabelStyleSelector = createSelector(defaultStylesFeatureSelector
 export const getSelectStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.selectStyles)
 export const getInputTextStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.inputTextStyle)
 export const getTextAreaStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.textareatStyles)
+
+export const getNewComponentsArray = createSelector(defaultStylesFeatureSelector, state => state.newComponents)

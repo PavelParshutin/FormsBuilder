@@ -1,0 +1,41 @@
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngFor="let elem of elementsList |keyvalue">
+    <div>
+      <input *ngIf="elem.key === 'id'" formControlName="id" hidden="true"/>
+      <div *ngIf="elem.key === 'title'" class="header" >
+        <div *ngIf="!active" (dblclick)="active = !active">{{elem.value}}</div>
+        <input type="text" formControlName="title" *ngIf="active" (dblclick)="active = !active">
+        <button type="button" (click)="showStyles = !showStyles" [disabled]="active"> +</button>
+      </div>
+    </div>
+    <div *ngIf="showStyles" class="style_item">
+      <div *ngIf="elem.key === 'style'">
+        <div *ngFor="let style of elem.value | keyvalue">
+          <span>{{style.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="active = !active">{{style.value}}</span>
+          <input type="text" formControlName={{style.key}} *ngIf="active" (dblclick)="active = !active">
+<!--          <app-input-text formControlName={{style.key}} *ngIf="active" (dblclick)="active = !active"></app-input-text>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" [hidden]="!active">Submit</button>
+</form>
+
+
+<!--<div *ngFor="let elem of elementsList |keyvalue">-->
+<!--  <div>-->
+<!--    <div *ngIf="elem.key === 'title'" class="header">{{elem.value}}-->
+<!--      <button (click)="showStyles = !showStyles"> ></button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div *ngIf="showStyles" class="style_item">-->
+<!--    <div *ngIf="elem.key === 'style'">-->
+<!--      <div *ngFor="let style of elem.value | keyvalue">-->
+<!--&lt;!&ndash;        <input type="text" (click)="onClick(style.key)">&ndash;&gt;-->
+<!--        <span>{{style.key}}</span>: <span>{{style.value}}</span>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+

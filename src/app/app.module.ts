@@ -17,6 +17,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import {styleReducer} from './store/defaultStyles.reduser';
+import { AcordionSectionComponent } from './acordion-section/acordion-section.component';
+import { StylesBlockComponent } from './styles-block/styles-block.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {styleReducer} from './store/defaultStyles.reduser';
     CheckboxComponent,
     TextAreaComponent,
     SelectComponent,
-    LabelComponent
+    LabelComponent,
+    AcordionSectionComponent,
+    StylesBlockComponent
   ],
   imports: [
     BrowserModule,

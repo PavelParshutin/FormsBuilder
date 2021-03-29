@@ -23,16 +23,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-    this.store.dispatch(login());
-    // const user: IUser = {
-    //   email: this.form.value.email,
-    //   password: this.form.value.password
-    // }
-    //  this.submited = true
-    // //this.store.dispatch(new Login(user))
-    // this.auth.logIn(user).subscribe(res => {
-    //   this.submited = false
-    //   console.log(res);
-    // })
+    console.log(this.form)
   }
 }

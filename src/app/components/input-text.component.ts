@@ -1,24 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {getBtnStyleSelector, getInputTextStyleSelector} from '../store/defaultStyles.reduser';
 import {Styles} from '../store/interfaces';
+import {} from 'events';
+
 
 @Component({
   selector: 'app-input-text',
   template: `<input type="text" [ngStyle]="componentStyles$" [placeholder]="title" cdkDrag>`,
-//   styles: [`input[type=text]{
-//   width: 100%;
-//   border: 1px solid black;
-//   padding: 10px 15px;
-//   margin-bottom: 20px;
-//   border-radius: 20px;
-//   outline: none;
-// }`]
 })
 export class InputTextComponent implements OnInit {
   @Input() title = 'Input'
   @Input() componentStyles$
+  @Input() active = false
+  @Output() visability = new EventEmitter
 
   defaultStyle$: Observable<any>
   constructor(private store: Store<Styles>) {
@@ -29,4 +25,7 @@ export class InputTextComponent implements OnInit {
     this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
   }
 
+  setActive(value){
+    this.visability.emit(value)
+  }
 }

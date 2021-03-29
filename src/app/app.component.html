@@ -1,35 +1,10 @@
 <!--<app-login-page></app-login-page>-->
 <div class="form-builder" #form>
   <div class="section">
-<!--    <div class="item" *ngFor="let comp of stylelist; let idx = index">-->
-<!--      <div class="header">-->
-<!--        <span>Button</span>-->
-<!--        <button class="icon" [style.transform]="clicked?'rotate(90deg)':'rotate(0deg)'" (click)="clicked = !clicked"> ></button>-->
-<!--        <button (click)="testBtn()">test Button</button>-->
-<!--      </div>-->
-<!--      <div *ngIf="clicked">-->
-<!--        <div *ngFor="let item of btnStyle$ | async | keyvalue">-->
-<!--          <span class="style_item">{{item.key}}</span>: <span class="style_item">{{item.value}}</span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-
-    <div *ngFor="let comp of elemDataForAccordion" class="item">
-      <div *ngFor="let item of comp | keyvalue">
-        <div class="header">
-          {{item.key}}
-          <button class="icon" [style.transform]="clicked?'rotate(90deg)':'rotate(0deg)'" (click)="clicked = !clicked"> ></button>
-        </div>
-        <div *ngIf="clicked">
-          <div *ngFor="let style of item.value | keyvalue" class="style_item">
-            {{style.key}} : {{style.value}}
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-acordion-section></app-acordion-section>
   </div>
 
-  <div class="section" cdkDropList
+    <div class="section" cdkDropList
        #dropListSection="cdkDropList"
        [cdkDropListData]="dropList"
        [cdkDropListConnectedTo]="[dragListSection]"

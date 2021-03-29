@@ -5,16 +5,18 @@ export interface Styles {
    labelStyles?: {[key: string]: string}
    selectStyles?: {[key: string]: string}
    textareatStyles?: {[key: string]: string}
-   newComponents?: [{
-     id?: string,
-     tittle?: string;
-     styles?: any;
-   }]
+   newComponents?: any
+   //   [{
+   //   id?: string,
+   //   tittle?: string;
+   //   styles?: any;
+   // }]
 }
 export interface Component{
-  components: [{
-    id?: string,
-    tittle?: string;
-    styles?: any;
-  }]
+  components: any
+  //   [{
+  //   id?: string,
+  //   tittle?: string;
+  //   styles?: any;
+  // }]
  }
