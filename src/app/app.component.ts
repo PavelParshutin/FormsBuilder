@@ -25,6 +25,7 @@ import {
   getSelectStyleSelector, getTextAreaStyleSelector
 } from './store/defaultStyles.reduser';
 import {addNewComponent, setComponentStyle} from './store/defaultStyle.actions';
+import {filter, map, tap} from 'rxjs/operators';
 
 
 @Component({
@@ -39,11 +40,25 @@ export class AppComponent implements OnInit, AfterViewInit{
   dropList = []
 
   tempComponentStyles
+  newTempStyles
+  tempAnotherProperties
+  componentList: Array<any> =[]
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private renderer: Renderer2, private store: Store) {
   }
   ngOnInit(): void {
-
+    const newElemStyles$ = this.store.select(getNewComponentsArray)
+    newElemStyles$.subscribe(elem => this.newTempStyles = elem.filter(object => {
+      if(object.style){
+        for(let elem of this.componentList){
+          if(elem.instance.id === object.id){
+            elem.instance.componentStyles$ = object.style
+            elem.instance.title = object.title
+            elem.instance.optionList = object.anotherProperties
+          }
+        }
+      }
+    }))
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -67,69 +82,51 @@ export class AppComponent implements OnInit, AfterViewInit{
   createElement(element): void{
     const btn: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(element)
     const ref = this.elemContainer.createComponent(btn)
-    const id = Math.floor((Math.random()*1000000)+1)
-    //console.log('tittle is', ref.instance.title)
+    const id = Math.floor((Math.random() * 1000000) + 1)
+    ref.instance.id = id
+
+    this.componentList.push(ref)
     switch (ref.instance.title){
       case 'Button':
         const btnStyles$ = this.store.select(getBtnStyleSelector)
         btnStyles$.subscribe(styles => this.tempComponentStyles = styles)
+        this.tempAnotherProperties = {}
         break
       case 'checkbox':
-        const checboxStyles$ = this.store.select(getCheckStyleSelector)
-        checboxStyles$.subscribe(styles => this.tempComponentStyles = styles)
+        const checkboxStyles$ = this.store.select(getCheckStyleSelector)
+        checkboxStyles$.subscribe(styles => this.tempComponentStyles = styles)
+        this.tempAnotherProperties = {}
         break
       case 'Input':
         const inputStyles$ = this.store.select(getInputTextStyleSelector)
         inputStyles$.subscribe(styles => this.tempComponentStyles = styles)
+        this.tempAnotherProperties = {}
         break
       case 'Label':
         const labelStyles$ = this.store.select(getLabelStyleSelector)
         labelStyles$.subscribe(styles => this.tempComponentStyles = styles)
+        this.tempAnotherProperties = {}
         break
       case 'Select':
         const selectStyles$ = this.store.select(getSelectStyleSelector)
         selectStyles$.subscribe(styles => this.tempComponentStyles = styles)
+        this.tempAnotherProperties = {
+          options: ['option 1', 'option 2']
+        }
+        ref.instance.optionList = this.tempAnotherProperties
         break
       case 'text area':
         const textAreaStyles$ = this.store.select(getTextAreaStyleSelector)
         textAreaStyles$.subscribe(styles => this.tempComponentStyles = styles)
+        this.tempAnotherProperties = {}
         break
       }
-      const obj = {
-        id,
-        title: ref.instance.title,
-        style: this.tempComponentStyles
-      }
+    const obj = {
+      id,
+      title: ref.instance.title,
+      style: this.tempComponentStyles,
+      anotherProperties: this.tempAnotherProperties
+    }
     this.store.dispatch(addNewComponent(obj))
-
-
   }
-
 }
-
-
-
-
-// elementsStylesList = []
-// clicked = false
-// stylelist = []
-
-//ref.instance.componentStyles$ = {border: '3px solid blue'}
-//this.store.select(getStylesSelector).subscribe(data => console.log('this is daa',data))
-// if(ref.instance.title = 'button'){
-//   const btnStyle$ = this.store.select(getBtnStyleSelector)
-//   btnStyle$.subscribe(data => this.tempBtnStyle = data)
-// }
-// this.elementsList.push({
-//   id: id,
-//   title: ref.instance.title,
-//   style: this.tempBtnStyle
-// })
-// console.log('btnbtn',this.tempBtnStyle)
-// const elemTitle = ref.instance.title
-// const elemStyle = ref.instance.componentStyles$
-// const temp = {
-//   [elemTitle]: elemStyle
-// }
-// this.elemDataForAccordion.push(temp)
-// this.store.dispatch(addNewComponent(this.elementsList))

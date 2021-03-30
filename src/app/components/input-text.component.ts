@@ -13,6 +13,8 @@ import {} from 'events';
 export class InputTextComponent implements OnInit {
   @Input() title = 'Input'
   @Input() componentStyles$
+  @Input() id = ''
+
   @Input() active = false
   @Output() visability = new EventEmitter
 

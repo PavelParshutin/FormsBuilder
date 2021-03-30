@@ -13,6 +13,8 @@ export class AcordionSectionComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.select(getNewComponentsArray).subscribe(data => this.elemDataForAccordion = data)
+    this.store.select(getNewComponentsArray).subscribe(data => {
+      this.elemDataForAccordion = data;
+    })
   }
 }

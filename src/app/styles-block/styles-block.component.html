@@ -14,28 +14,31 @@
         <div *ngFor="let style of elem.value | keyvalue">
           <span>{{style.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="active = !active">{{style.value}}</span>
           <input type="text" formControlName={{style.key}} *ngIf="active" (dblclick)="active = !active">
+
 <!--          <app-input-text formControlName={{style.key}} *ngIf="active" (dblclick)="active = !active"></app-input-text>-->
         </div>
       </div>
+
+      <div *ngIf="elem.key === 'anotherProperties'">
+        <div *ngFor="let option of elem.value | keyvalue">
+          <div *ngFor="let i of option | keyvalue">
+
+<!--            <div formArrayName="{{i.value}}">-->
+<!--              &lt;!&ndash;            <div *ngFor="let phone of form.controls[i.value]['controls']; let i = index">&ndash;&gt;-->
+<!--              &lt;!&ndash;              <input type="text" formControlName="{{i}}">&ndash;&gt;-->
+<!--              &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            </div>-->
+
+            <div *ngFor="let s of i.value | keyvalue">
+              <span [hidden]="active" (dblclick)="active = !active">{{s.value}}</span>
+              <input type="text" formControlName={{s.value}} *ngIf="active" (dblclick)="active = !active">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
-  <button type="submit" [hidden]="!active">Submit</button>
+  <button type="submit" [hidden]="!active">Apply</button>
 </form>
-
-
-<!--<div *ngFor="let elem of elementsList |keyvalue">-->
-<!--  <div>-->
-<!--    <div *ngIf="elem.key === 'title'" class="header">{{elem.value}}-->
-<!--      <button (click)="showStyles = !showStyles"> ></button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div *ngIf="showStyles" class="style_item">-->
-<!--    <div *ngIf="elem.key === 'style'">-->
-<!--      <div *ngFor="let style of elem.value | keyvalue">-->
-<!--&lt;!&ndash;        <input type="text" (click)="onClick(style.key)">&ndash;&gt;-->
-<!--        <span>{{style.key}}</span>: <span>{{style.value}}</span>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 

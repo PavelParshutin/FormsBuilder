@@ -13,6 +13,7 @@ export class ButtonComponent implements OnInit {
 
   @Input() componentStyles$: Observable<any>
   @Input() title = 'Button'
+  @Input() id = ''
 
   defaultStyle$: Observable<any>
   constructor(private store: Store<Styles>) {

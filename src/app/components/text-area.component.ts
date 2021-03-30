@@ -12,6 +12,7 @@ import {getTextAreaStyleSelector} from '../store/defaultStyles.reduser';
 export class TextAreaComponent implements OnInit {
   @Input() title = 'text area'
   @Input() componentStyles$
+  @Input() id = ''
 
   defaultStyle$: Observable<any>
   constructor(private store: Store<Styles>) {

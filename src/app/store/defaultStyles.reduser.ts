@@ -44,13 +44,13 @@ export const initialState: Styles = {
     padding: '10px 15px',
     margin: '10px auto',
   },
-  newComponents: []
+  newComponents: [],
 }
 
 export const styleReducer = createReducer(initialState,
   on(setComponentStyle, (state, prop) => ({
     ...state,
-    newComponents: state.newComponents.filter(item => item.id !== prop.id).push(prop)
+    newComponents: [...state.newComponents.filter(item => item.id !== prop.id), prop]
   })),
   on(addNewComponent, (state, prop) => ({
       ...state,
@@ -69,3 +69,5 @@ export const getInputTextStyleSelector = createSelector(defaultStylesFeatureSele
 export const getTextAreaStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.textareatStyles)
 
 export const getNewComponentsArray = createSelector(defaultStylesFeatureSelector, state => state.newComponents)
+export const getState = createSelector(defaultStylesFeatureSelector, state => state)
+

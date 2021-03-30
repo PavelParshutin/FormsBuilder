@@ -13,6 +13,7 @@ import {Store} from '@ngrx/store';
 export class CheckboxComponent implements OnInit {
   @Input() title = 'checkbox'
   @Input() componentStyles$
+  @Input() id = ''
 
   defaultStyle$: Observable<any>
   constructor(private store: Store) { }

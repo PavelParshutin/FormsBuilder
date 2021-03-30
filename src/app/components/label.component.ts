@@ -12,6 +12,7 @@ import {getInputTextStyleSelector, getLabelStyleSelector} from '../store/default
 export class LabelComponent implements OnInit {
   @Input() title = 'Label'
   @Input() componentStyles$
+  @Input() id = ''
 
     defaultStyle$: Observable<any>
       constructor(private store: Store<Styles>) {
