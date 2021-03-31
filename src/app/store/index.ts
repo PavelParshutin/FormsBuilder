@@ -1,15 +1,14 @@
-import {userReducer, UserState} from './user';
-import {ActionReducerMap} from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 
-import {styleReducer} from './defaultStyles.reduser';
-import {Styles, Component} from './interfaces';
+import { styleReducer } from './component-styles.reduser';
+import { Styles } from './interfaces';
 
-export interface  State{
+export interface State {
   // user: UserState
   defaultComponentStyles: Styles
 }
 
 export const reducers: ActionReducerMap<State> = {
   // user: userReducer,
-  defaultComponentStyles : styleReducer
-}
+  defaultComponentStyles: styleReducer
+};

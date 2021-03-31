@@ -1,18 +1,19 @@
 export interface Styles {
-   btnStyle?: {[key: string]: string}
-   inputTextStyle?: {[key: string]: string}
-   checboxStyles?: {[key: string]: string}
-   labelStyles?: {[key: string]: string}
-   selectStyles?: {[key: string]: string}
-   textareatStyles?: {[key: string]: string}
+   btnStyle?: { [key: string]: string }
+   inputTextStyle?: { [key: string]: string }
+   checkboxStyles?: { [key: string]: string }
+   labelStyles?: { [key: string]: string }
+   selectStyles?: { [key: string]: string }
+   textareaStyles?: { [key: string]: string }
    newComponents?: any
    //   [{
    //   id?: string,
    //   tittle?: string;
-   //   styles?: any;
+   //   styles?: {};
+   //   anotherProperties?: {};
    // }]
 }
-export interface Component{
+export interface Component {
   components: any
   //   [{
   //   id?: string,

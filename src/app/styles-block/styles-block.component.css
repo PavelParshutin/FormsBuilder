@@ -1,11 +1,11 @@
-
-.header{
+.header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   font-weight: 700;
 }
-.icon{
+
+.icon {
   color: red;
   border: none;
   outline: none;
@@ -13,7 +13,8 @@
   transform: rotate(0deg);
   transition: rotate .2s linear;
 }
-.style_item{
+
+.style-item {
   margin: 10px;
   font-size: 14px;
   font-style: italic;

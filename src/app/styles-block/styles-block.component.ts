@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {select, Store} from '@ngrx/store';
-import {setComponentStyle} from '../store/defaultStyle.actions';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { setComponentStyleAction } from '../store/component-styles.actions';
 
 @Component({
   selector: 'app-styles-block',
@@ -9,57 +10,56 @@ import {setComponentStyle} from '../store/defaultStyle.actions';
   styleUrls: ['./styles-block.component.css']
 })
 export class StylesBlockComponent implements OnInit {
-  form: FormGroup
-  @Input() elementsList
-  active: boolean = false
-  showStyles = false
+  form: FormGroup;
+  // @Input() elementsList
+  @Input() id;
+  @Input() title;
+  @Input() style;
+  @Input() anotherProperties;
 
-  constructor(private store: Store, private fb: FormBuilder) { }
+  active: boolean = false;
+  showStyles = false;
+
+  constructor(private store: Store) {
+  }
 
   ngOnInit(): void {
+    this.createForm();
+  }
+
+  createForm(): void {
     this.form = new FormGroup({
-    })
-    for(const key in this.elementsList){
-      if(key === 'title'){
-        this.form.addControl(key, new FormControl(this.elementsList[key]))
-      }else if(key === 'style'){
-        for(const item in this.elementsList[key]){
-          this.form.addControl(item.toString(), new FormControl(this.elementsList[key][item]))
-        }
-      }else if(key === 'id'){
-        this.form.addControl(key, new FormControl(this.elementsList[key]))
-      }else if (key === 'anotherProperties'){
-        for(const option in this.elementsList[key]){
-          if(option === 'options'){
-            console.log(option)
-            for(const i of this.elementsList[key][option]){
-              console.log(i)
-              this.form.addControl(i, new FormControl(i))
-              // this.form.addControl(option, new FormArray([new FormControl(i)]))
-            }
-          }
-        }
+      id: new FormControl(this.id),
+      title: new FormControl(this.title),
+      style: new FormGroup({}),
+      anotherProperties: new FormGroup({}),
+    });
+    for (const prop in this.style) {
+      (<FormGroup> this.form.controls['style']).addControl(prop, new FormControl(this.style[prop]));
+    }
+    for (const option in this.anotherProperties) {
+      (<FormGroup> this.form.controls['anotherProperties']).addControl(option, new FormArray([]));
+      for (const item of this.anotherProperties[option]) {
+        (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls[option]).push(new FormControl(item));
       }
     }
   }
-  onSubmit(): void{
-    let properties = {}
-    this.active = false
-    const {id, title, ...style} = this.form.value
-    if(this.form.value.title === 'select'){
-      properties = {
-        options: [this.form.value['option 1']]
-      }
-    }
+  //
+  // addSelectOptions(): void {
+  //   //console.log(this.anotherProperties.options)
+  //   //(<Array<any>>this.anotherProperties.options).push('new option')
+  // }
 
+  onSubmit(): void {
     const obj = {
-      id: id,
-      title: title,
-      style: style,
-      anotherProperties: {}
-    }
-    console.log(this.form.value)
-    this.store.dispatch(setComponentStyle(obj))
+      id: this.form.value.id,
+      title: this.form.value.title,
+      style: this.form.value.style,
+      anotherProperties: this.form.value.anotherProperties,
+    };
+    this.active = false;
+    console.log(this.form);
+    this.store.dispatch(setComponentStyleAction(obj));
   }
 
 }

@@ -1,9 +1,9 @@
-<form [formGroup]="form" class="login_form">
+<form [formGroup]="form" class="login-form">
 
-  <div class="login_input_block">
+  <div class="login-input-block">
     <label for="email">Email</label>
     <input id="email" type="text" formControlName="email" placeholder="Введите email">
-    <div *ngIf="form.get('email').touched && form.get('email').invalid" class="login_error">
+    <div *ngIf="form.get('email').touched && form.get('email').invalid" class="login-error">
       <small *ngIf="form.get('email').errors.required">Поле не может быть пустым</small>
       <small *ngIf="form.get('email').errors.email">Некоректный email</small>
     </div>
@@ -12,7 +12,7 @@
   <div class="login_input_block">
     <label for="password">Password</label>
     <input id="password" type="password" formControlName="password" placeholder="Введите пароль">
-    <div *ngIf="form.get('password').touched && form.get('password').invalid" class="login_error">
+    <div *ngIf="form.get('password').touched && form.get('password').invalid" class="login-error">
       <small *ngIf="form.get('password').errors.required">Поле не может быть пустым</small>
       <small *ngIf="form.get('password').errors.minlength">Пароль не может быть менше 4х символов</small>
     </div>

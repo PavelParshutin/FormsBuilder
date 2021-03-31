@@ -1,8 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {getBtnStyleSelector} from '../store/defaultStyles.reduser';
-import {Styles} from '../store/interfaces';
-import {Observable} from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { getBtnStyleSelector } from '../store/component-styles.reduser';
+import { Styles } from '../store/interfaces';
+
 
 
 @Component({

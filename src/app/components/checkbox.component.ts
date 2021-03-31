@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {getBtnStyleSelector, getCheckStyleSelector} from '../store/defaultStyles.reduser';
-import {Observable} from 'rxjs';
-import {Store} from '@ngrx/store';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { getCheckStyleSelector } from '../store/component-styles.reduser';
+
 
 @Component({
   selector: 'app-checkbox',

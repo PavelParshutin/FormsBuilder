@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Store} from '@ngrx/store';
-import {Styles} from '../store/interfaces';
-import {getInputTextStyleSelector, getLabelStyleSelector} from '../store/defaultStyles.reduser';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
+import { Styles } from '../store/interfaces';
+import { getLabelStyleSelector } from '../store/component-styles.reduser';
 
 @Component({
   selector: 'app-label',

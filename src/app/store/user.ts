@@ -1,10 +1,10 @@
-import {createAction, createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
+import { createAction, createReducer, on } from '@ngrx/store';
 
-export const  login = createAction('[USER] Login');
-export const  loginSuccess = createAction('[USER] LoginSuccess');
-export const  loginFailed = createAction('[USER] LoginFailed');
+export const login = createAction('[USER] Login');
+export const loginSuccess = createAction('[USER] LoginSuccess');
+export const loginFailed = createAction('[USER] LoginFailed');
 
-export interface UserState{
+export interface UserState {
   email: string
   password: number
 }
@@ -12,7 +12,7 @@ export interface UserState{
 export const initialState: UserState = {
   email: '',
   password: 0
-}
+};
 
 export const userReducer = createReducer(
   initialState,
@@ -26,7 +26,7 @@ export const userReducer = createReducer(
     email: '',
     password: 1
   }))
-)
+);
 
 // export const featureSelector = createFeatureSelector<UserState>('user')
 // export  const userSelector = createSelector(featureSelector, state => {

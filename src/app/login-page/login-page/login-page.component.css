@@ -1,20 +1,26 @@
-.login_form{
+.login-form {
   max-width: 600px;
   border: 1px solid #ccc;
   margin: 0 auto;
 }
-.login_input_block{
-  display: block;
+
+.login-input-block {
   margin-bottom: 10px;
 }
-input{
-  display: block;
+
+.login-error {
+  color: red;
+  text-align: center;
+}
+
+input {
   margin: 0 auto;
   width: 90%;
   padding: 4px;
   border: 1px solid #ccc;
 }
-label{
+
+label {
   display: block;
   margin: 0 auto;
   text-align: center;
@@ -34,17 +40,16 @@ label{
   transition: opacity 0.2s linear;
   outline: none;
 }
+
 .btn:disabled {
    cursor: not-allowed;
    background: #f4f4f4;
    color: #111;
  }
-.btn-primary{
+.btn-primary {
   background-color:  #dc3545;
   color: #fff;
 }
-.login_error{
-  color: red;
-  text-align: center;
-}
+
+
 
