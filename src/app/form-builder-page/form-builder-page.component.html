@@ -1,0 +1,26 @@
+
+<div class="form-builder" #form>
+  <app-accordion-section class="section"></app-accordion-section>
+  <div class="section" cdkDropList
+       #dropListSection="cdkDropList"
+       [cdkDropListData]="dropList"
+       [cdkDropListConnectedTo]="[dragListSection]"
+       (cdkDropListDropped)="drop($event)">
+    <div #elemContainer cdkDrag ></div>
+    <!--<span *ngFor="let comp of dropList">-->
+    <!--  <ng-container  *ngComponentOutlet="comp" [ngStyle]="{borderColor:'red'}">-->
+    <!-- </ng-container>-->
+    <!--</span>-->
+  </div>
+
+  <div class="section" cdkDropList
+       #dragListSection="cdkDropList"
+       [cdkDropListData]="dragList"
+       [cdkDropListConnectedTo]="[dropListSection]"
+       (cdkDropListDropped)="drop($event)">
+    <span *ngFor="let comp of dragList">
+      <ng-container  *ngComponentOutlet="comp">
+      </ng-container>
+    </span>
+  </div>
+</div>

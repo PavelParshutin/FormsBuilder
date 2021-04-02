@@ -1,0 +1,35 @@
+.container {
+
+}
+.inner {
+  padding: 10px;
+  border: 2px solid black;
+  max-width: 600px;
+  max-height: 200px;
+  margin: 0 auto;
+}
+
+.btn {
+  display:block;
+  width: 30%;
+  text-align: center;
+  text-decoration: none;
+  background: #f4f4f4;
+  color: #333;
+  padding: 10px 15px;
+  margin: 10px auto;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s linear;
+  outline: none;
+}
+
+.btn-primary {
+  background-color:  #dc3545;
+  color: #fff;
+}
+h1{
+  text-align: center;
+}

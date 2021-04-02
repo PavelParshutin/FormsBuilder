@@ -8,37 +8,25 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './login-page/login-page/login-page.component';
-import { InputTextComponent } from './components/input-text.component';
-import { ButtonComponent } from './components/button.component';
-import { CheckboxComponent } from './components/checkbox.component';
-import { TextAreaComponent } from './components/text-area.component';
-import { SelectComponent } from './components/select.component';
-import { LabelComponent } from './components/label.component';
 import { environment } from '../environments/environment';
 import { styleReducer } from './store/component-styles.reduser';
-import { AccordionSectionComponent } from './acordion-section/accordion-section.component';
-import { StylesBlockComponent } from './styles-block/styles-block.component';
 import { ReactiveComponentModule } from '@ngrx/component';
-import { InputComponent } from './shared/input/input.component';
 import { SharedModule } from './shared/shared.module';
+import { RegistartionPageComponent } from './registartion-page/registartion-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AppRoutingModule } from './app-routing-module';
+import { FormBuilderModule } from './form-builder-page/form-builder.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent,
-    InputTextComponent,
-    ButtonComponent,
-    CheckboxComponent,
-    TextAreaComponent,
-    SelectComponent,
-    LabelComponent,
-    AccordionSectionComponent,
-    StylesBlockComponent
+    RegistartionPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     DragDropModule,
@@ -46,7 +34,8 @@ import { SharedModule } from './shared/shared.module';
     StoreModule.forRoot({ defaultComponentStyles: styleReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ReactiveComponentModule,
-    SharedModule
+    SharedModule,
+    FormBuilderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

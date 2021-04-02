@@ -1,6 +1,45 @@
 {
-  "login": {
-    "email": "v@mail.com",
-    "password": "1112"
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "users": [
+    {
+      "name": "v@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": 36852,
+      "email": "test@gmail.com",
+      "password": "ssss"
+    },
+    {
+      "id": 67264,
+      "email": "test@gmail.com",
+      "password": "qqqq"
+    },
+    {
+      "id": 82146,
+      "email": "pavel@gmail.com",
+      "password": "ssss"
+    },
+    {
+      "id": 99184,
+      "email": "pavel@gmail.com",
+      "password": "ffff"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
   }
 }

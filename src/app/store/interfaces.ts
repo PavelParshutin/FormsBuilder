@@ -21,3 +21,13 @@ export interface Component {
   //   styles?: any;
   // }]
  }
+
+ export interface User {
+  id: string;
+  email: string;
+  password: string;
+ }
+
+ export interface AuthResponce {
+
+ }

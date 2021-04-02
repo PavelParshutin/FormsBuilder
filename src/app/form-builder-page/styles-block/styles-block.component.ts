@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { setComponentStyleAction } from '../store/component-styles.actions';
+import { setComponentStyleAction } from '../../store/component-styles.actions';
 
 @Component({
   selector: 'app-styles-block',
@@ -16,6 +16,9 @@ export class StylesBlockComponent implements OnInit {
   @Input() title;
   @Input() style;
   @Input() anotherProperties;
+  tempProperties ={
+    options: []
+  }
 
   active: boolean = false;
   showStyles = false;
@@ -44,11 +47,16 @@ export class StylesBlockComponent implements OnInit {
       }
     }
   }
-  //
-  // addSelectOptions(): void {
-  //   //console.log(this.anotherProperties.options)
-  //   //(<Array<any>>this.anotherProperties.options).push('new option')
-  // }
+
+  addSelectOptions(): void {
+    //console.log(this.anotherProperties.options)
+    //this.anotherProperties.options.push()
+    // this.tempProperties.options = this.anotherProperties.options
+    // this.tempProperties.options.push('new option')
+    // this.anotherProperties = this.tempProperties
+    // console.log(this.tempProperties)
+    //(<Array<any>>this.anotherProperties.options).push('new option')
+  }
 
   onSubmit(): void {
     const obj = {

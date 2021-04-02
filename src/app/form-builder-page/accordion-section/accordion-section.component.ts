@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { getNewComponentsArray } from '../store/component-styles.reduser';
-import { Observable } from 'rxjs';
+import { getNewComponentsArray } from '../../store/component-styles.reduser';
 
 @Component({
   selector: 'app-accordion-section',
@@ -20,4 +20,5 @@ export class AccordionSectionComponent implements OnInit {
     //   this.styleElements = data
     // })
   }
+
 }

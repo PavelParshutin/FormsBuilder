@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { getBtnStyleSelector } from '../store/component-styles.reduser';
-import { Styles } from '../store/interfaces';
+import { getBtnStyleSelector } from '../../store/component-styles.reduser';
+import { Styles } from '../../store/interfaces';
 
 
 

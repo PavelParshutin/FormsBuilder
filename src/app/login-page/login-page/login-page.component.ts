@@ -24,6 +24,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
+    this.auth.logIn()
   }
 }

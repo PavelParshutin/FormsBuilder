@@ -2,8 +2,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { getInputTextStyleSelector } from '../store/component-styles.reduser';
-import { Styles } from '../store/interfaces';
+import { getInputTextStyleSelector } from '../../store/component-styles.reduser';
+import { Styles } from '../../store/interfaces';
 
 
 @Component({

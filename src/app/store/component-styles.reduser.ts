@@ -10,6 +10,7 @@ export const initialState: Styles = {
     padding: '10px 15px',
     fontSize: '14px',
     color: 'black',
+    backgroundColor: 'transparent',
     borderRadius: '20px',
     cursor: 'pointer',
     margin: '10px'

@@ -42,10 +42,10 @@ label {
 }
 
 .btn:disabled {
-   cursor: not-allowed;
-   background: #f4f4f4;
-   color: #111;
- }
+  cursor: not-allowed;
+  background: #f4f4f4;
+  color: #111;
+}
 .btn-primary {
   background-color:  #dc3545;
   color: #fff;

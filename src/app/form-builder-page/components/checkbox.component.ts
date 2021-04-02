@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { getCheckStyleSelector } from '../store/component-styles.reduser';
+import { getCheckStyleSelector } from '../../store/component-styles.reduser';
 
 
 @Component({
