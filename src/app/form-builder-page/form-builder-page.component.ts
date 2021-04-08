@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, ComponentFactory, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ComponentFactory,
+  ComponentFactoryResolver,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -31,7 +40,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   tempAnotherProperties;
   componentList: Array<any> = [];
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private store: Store) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private store: Store, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -66,6 +75,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
       CheckboxComponent,
       TextAreaComponent
     ];
+    this.cdr.detectChanges();
   }
 
   createElement(element): void {

@@ -22,12 +22,23 @@ export interface Component {
   // }]
  }
 
- export interface User {
-  id: string;
+export interface User {
+  id?: string;
   email: string;
   password: string;
  }
 
- export interface AuthResponce {
-
+export interface AuthResponse {
+  accessToken: string;
  }
+
+export interface Error {
+  code: string;
+  message: string;
+}
+
+export interface Response {
+  token: AuthResponse;
+  error: Error;
+  isAuth: boolean;
+}

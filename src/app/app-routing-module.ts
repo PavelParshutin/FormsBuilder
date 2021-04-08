@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomePageComponent } from './home-page/home-page.component';
-import { RegistartionPageComponent } from './registartion-page/registartion-page.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import { FormBuilderPageComponent } from './form-builder-page/form-builder-page.component';
+import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
-  {path: 'registration', component: RegistartionPageComponent},
+  {path: 'registration', component: RegistrationPageComponent},
   {path: 'login', component: LoginPageComponent},
-  {path: 'forms', component: FormBuilderPageComponent},
+  {path: 'forms', component: FormBuilderPageComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''},
 ]
 

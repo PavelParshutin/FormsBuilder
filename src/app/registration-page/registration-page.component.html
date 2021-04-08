@@ -1,6 +1,5 @@
-<form [formGroup]="registrationForm" class="login-form">
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="login-form">
 
-  <input type="text" [hidden]="true" formControlName="id">
   <div class="login-input-block">
     <label for="email">Email</label>
     <input id="email" type="text" formControlName="email" placeholder="Введите email">
@@ -19,5 +18,5 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" [disabled]="registrationForm.invalid || submited" type="submit" (click)="onSubmit()">Create</button>
+  <button class="btn btn-primary" [disabled]="registrationForm.invalid || submited" type="submit">Create</button>
 </form>

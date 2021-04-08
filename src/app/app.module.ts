@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
@@ -12,15 +11,19 @@ import { environment } from '../environments/environment';
 import { styleReducer } from './store/component-styles.reduser';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { SharedModule } from './shared/shared.module';
-import { RegistartionPageComponent } from './registartion-page/registartion-page.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing-module';
 import { FormBuilderModule } from './form-builder-page/form-builder.module';
+import {AuthService} from "./services/auth.service";
+import {EffectsModule} from "@ngrx/effects";
+import {Effects} from "./store/effects";
+import {authReducer} from "./store/auth.reducer";
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistartionPageComponent,
+    RegistrationPageComponent,
     HomePageComponent
   ],
   imports: [
@@ -31,13 +34,14 @@ import { FormBuilderModule } from './form-builder-page/form-builder.module';
     ReactiveFormsModule,
     DragDropModule,
     PortalModule,
-    StoreModule.forRoot({ defaultComponentStyles: styleReducer }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([Effects]),
+    StoreModule.forRoot({ defaultComponentStyles: styleReducer, authReducer: authReducer }),
+    //StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ReactiveComponentModule,
     SharedModule,
     FormBuilderModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

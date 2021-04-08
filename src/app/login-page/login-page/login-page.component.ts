@@ -3,6 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '../../services/auth.service';
+import {loginAction} from "../../store/auth.actions";
+import {getToken} from "../../store/auth.reducer";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +16,7 @@ export class LoginPageComponent implements OnInit {
   form: FormGroup;
   submited = false;
 
-  constructor(private auth: AuthService, private store: Store) {
+  constructor(private auth: AuthService, private store: Store, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,7 +26,11 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.auth.logIn()
+  onSubmit(): void {
+    this.store.dispatch(loginAction(this.form.value))
+    // const token = this.store.select(getToken)
+    // if(token){
+    //   this.router.navigate(['/forms'])
+    // }
   }
 }
