@@ -1,7 +1,7 @@
 
 <div class="form-builder" #form>
-  <app-accordion-section class="section"></app-accordion-section>
-  <div class="section" cdkDropList
+  <app-accordion-section [ngStyle]="tempGeneralStyle"></app-accordion-section>
+  <div [ngStyle]="tempGeneralStyle" cdkDropList
        #dropListSection="cdkDropList"
        [cdkDropListData]="dropList"
        [cdkDropListConnectedTo]="[dragListSection]"
@@ -13,7 +13,7 @@
     <!--</span>-->
   </div>
 
-  <div class="section" cdkDropList
+  <div [ngStyle]="tempGeneralStyle" cdkDropList
        #dragListSection="cdkDropList"
        [cdkDropListData]="dragList"
        [cdkDropListConnectedTo]="[dropListSection]"

@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { AuthService } from '../services/auth.service';
-import { registrationAction } from '../store/auth.actions';
-import { getIsAuth } from '../store/auth.reducer';
+import { AuthService } from '../../services/auth.service';
+import { registrationAction } from '../../store/auth.actions';
+import { getIsAuth } from '../../store/auth.reducer';
 
 
 @Component({
@@ -29,11 +29,13 @@ export class RegistrationPageComponent implements OnInit {
 
   onSubmit(): void {
     this.store.dispatch(registrationAction(this.registrationForm.value))
-    // const isAuth = this.store.select(getIsAuth)
-    // if(isAuth){
-    //   this.router.navigate(['/forms'])
-    // }
-    // this.store.select(getIsAuth).subscribe(isauth => console.log(isauth))
-    this.router.navigate(['/forms'])
+    const isAuth = this.store.select(getIsAuth)
+    isAuth.subscribe(res => {
+      console.log('res registr', res)
+      if(res){
+        this.router.navigate(['/forms'])
+      }
+      return
+    })
   }
 }

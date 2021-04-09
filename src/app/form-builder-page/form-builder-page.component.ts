@@ -13,7 +13,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import {
   getBtnStyleSelector,
-  getCheckStyleSelector,
+  getCheckStyleSelector, getGeneralStyle,
   getInputTextStyleSelector, getLabelStyleSelector,
   getNewComponentsArray, getSelectStyleSelector, getTextAreaStyleSelector
 } from '../store/component-styles.reduser';
@@ -24,6 +24,7 @@ import { SelectComponent } from './components/select.component';
 import { CheckboxComponent } from './components/checkbox.component';
 import { TextAreaComponent } from './components/text-area.component';
 import { addNewComponentAction } from '../store/component-styles.actions';
+import {NewComponent} from "../store/interfaces";
 
 @Component({
   selector: 'app-form-builder-page',
@@ -35,6 +36,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   dragList = [];
   dropList = [];
 
+  tempGeneralStyle;
   tempComponentStyles;
   newTempStyles;
   tempAnotherProperties;
@@ -44,6 +46,8 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    const generalStyles$ = this.store.select(getGeneralStyle);
+    generalStyles$.subscribe(style => this.tempGeneralStyle = style)
     const newElemStyles$ = this.store.select(getNewComponentsArray);
     newElemStyles$.subscribe(elem => this.newTempStyles = elem.filter(object => {
       if (object.style) {
@@ -122,7 +126,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
         this.tempAnotherProperties = {};
         break;
     }
-    const obj = {
+    const obj: NewComponent = {
       id,
       title: ref.instance.title,
       style: this.tempComponentStyles,

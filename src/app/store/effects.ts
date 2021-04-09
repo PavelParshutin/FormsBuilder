@@ -5,6 +5,7 @@ import {Observable, of} from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AuthService } from '../services/auth.service';
 import {
+  loginAction,
   registrationAction,
   registrationFailedAction,
   registrationSuccessAction
@@ -28,7 +29,7 @@ export class Effects {
 
   onLogin$ = createEffect( () =>
     this.actions$.pipe(
-      ofType(registrationAction),
+      ofType(loginAction),
       switchMap((prop: User): Observable<any> => this.auth.logIn(prop).pipe(
           map((accessToken: AuthResponse) => registrationSuccessAction(accessToken)),
           catchError((err: Error) => registrationFailedAction)

@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 
 import { AuthService } from '../../services/auth.service';
 import {loginAction} from "../../store/auth.actions";
-import {getToken} from "../../store/auth.reducer";
 import {Router} from "@angular/router";
+import {getIsAuth} from "../../store/auth.reducer";
 
 @Component({
   selector: 'app-login-page',
@@ -28,9 +28,13 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(): void {
     this.store.dispatch(loginAction(this.form.value))
-    // const token = this.store.select(getToken)
-    // if(token){
-    //   this.router.navigate(['/forms'])
-    // }
+    const isAuth = this.store.select(getIsAuth)
+    isAuth.subscribe(res => {
+      console.log('res login',res)
+      if(res){
+        this.router.navigate(['/forms'])
+      }
+      return
+    })
   }
 }

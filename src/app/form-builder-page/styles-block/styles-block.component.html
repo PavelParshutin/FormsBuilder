@@ -1,8 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="header">
     <input type="text" formControlName="id" hidden="true">
-    <span *ngIf="!active" (dblclick)="active = !active">{{title}}</span>
-    <input type="text" formControlName="title" *ngIf="active" (dblclick)="active = !active">
+      <span *ngIf="!active" (dblclick)="active = !active">{{title}}</span>
+      <input type="text" formControlName="title" *ngIf="active" (dblclick)="active = !active">
     <button type="button" (click)="showStyles = !showStyles" [disabled]="active"> +</button>
   </div>
   <div class="style_item" *ngIf="showStyles">
@@ -24,5 +24,5 @@
       <button type="button" [hidden]="title !== 'Select'" (click)="addSelectOptions()">add new option</button>
     </div>
   </div>
- <button type="submit" (click)="onSubmit()" [hidden]="!active">Apply</button>
+ <button type="submit" [hidden]="!active">Apply</button>
 </form>

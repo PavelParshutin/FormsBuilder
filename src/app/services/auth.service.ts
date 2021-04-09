@@ -44,7 +44,6 @@ export class AuthService {
       ))
   }
 
-
   createToken(obj): string
   {
     return jwtEncode(obj, 'secretKey')

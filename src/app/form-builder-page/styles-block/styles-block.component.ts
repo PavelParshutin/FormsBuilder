@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { setComponentStyleAction } from '../../store/component-styles.actions';
+import {setComponentStyleAction, setGeneralStyle} from '../../store/component-styles.actions';
+import { NewComponent } from "../../store/interfaces";
+
 
 @Component({
   selector: 'app-styles-block',
@@ -11,17 +13,15 @@ import { setComponentStyleAction } from '../../store/component-styles.actions';
 })
 export class StylesBlockComponent implements OnInit {
   form: FormGroup;
-  // @Input() elementsList
+
   @Input() id;
   @Input() title;
   @Input() style;
   @Input() anotherProperties;
-  tempProperties ={
-    options: []
-  }
 
   active: boolean = false;
   showStyles = false;
+  showTitle = false;
 
   constructor(private store: Store) {
   }
@@ -59,15 +59,18 @@ export class StylesBlockComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const obj = {
+    const obj: NewComponent = {
       id: this.form.value.id,
       title: this.form.value.title,
       style: this.form.value.style,
       anotherProperties: this.form.value.anotherProperties,
     };
     this.active = false;
-    console.log(this.form);
-    this.store.dispatch(setComponentStyleAction(obj));
+    if (obj.id){
+      this.store.dispatch(setComponentStyleAction(obj));
+    }else {
+      this.store.dispatch(setGeneralStyle(obj));
+    }
   }
 
 }

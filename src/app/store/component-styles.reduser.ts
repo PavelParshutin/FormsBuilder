@@ -1,9 +1,16 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 import { Styles } from './interfaces';
-import { addNewComponentAction, setComponentStyleAction } from './component-styles.actions';
+import { addNewComponentAction, setComponentStyleAction, setGeneralStyle } from './component-styles.actions';
 
 export const initialState: Styles = {
+  generalStyle: {
+    width: '33.33333%',
+    minHeight: '100vh',
+    border: '1px solid black',
+    backgroundColor: 'white',
+    padding: '10px',
+  },
   btnStyle: {
     border: '1px solid black',
     outline: 'none',
@@ -50,6 +57,10 @@ export const initialState: Styles = {
 };
 
 export const styleReducer = createReducer(initialState,
+  on(setGeneralStyle, (state, prop) => ({
+    ...state,
+    generalStyle: prop.style
+  })),
   on(setComponentStyleAction, (state, prop) => ({
     ...state,
     newComponents: [...state.newComponents.filter(item => item.id !== prop.id), prop]
@@ -63,6 +74,8 @@ export const styleReducer = createReducer(initialState,
 
 export const defaultStylesFeatureSelector = createFeatureSelector<Styles>('defaultComponentStyles');
 
+export const getGeneralStyle = createSelector(defaultStylesFeatureSelector, state => state.generalStyle);
+
 export const getBtnStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.btnStyle);
 export const getCheckStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.checkboxStyles);
 export const getLabelStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.labelStyles);
@@ -71,5 +84,5 @@ export const getInputTextStyleSelector = createSelector(defaultStylesFeatureSele
 export const getTextAreaStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.textareaStyles);
 
 export const getNewComponentsArray = createSelector(defaultStylesFeatureSelector, state => state.newComponents);
-export const getState = createSelector(defaultStylesFeatureSelector, state => state);
+
 

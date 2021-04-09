@@ -7,7 +7,7 @@ import { PortalModule } from '@angular/cdk/portal';
 
 import { AccordionSectionComponent } from './accordion-section/accordion-section.component';
 import { FormBuilderPageComponent } from './form-builder-page.component';
-import { LoginPageComponent } from '../login-page/login-page/login-page.component';
+import { LoginPageComponent } from '../Auth/login-page/login-page.component';
 import { InputTextComponent } from './components/input-text.component';
 import { ButtonComponent } from './components/button.component';
 import { CheckboxComponent } from './components/checkbox.component';

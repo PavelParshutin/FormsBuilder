@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 import { styleReducer } from './store/component-styles.reduser';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { SharedModule } from './shared/shared.module';
-import { RegistrationPageComponent } from './registration-page/registration-page.component';
+import { RegistrationPageComponent } from './Auth/registration-page/registration-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing-module';
 import { FormBuilderModule } from './form-builder-page/form-builder.module';
@@ -19,6 +19,7 @@ import {AuthService} from "./services/auth.service";
 import {EffectsModule} from "@ngrx/effects";
 import {Effects} from "./store/effects";
 import {authReducer} from "./store/auth.reducer";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import {authReducer} from "./store/auth.reducer";
     PortalModule,
     EffectsModule.forRoot([Effects]),
     StoreModule.forRoot({ defaultComponentStyles: styleReducer, authReducer: authReducer }),
-    //StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ReactiveComponentModule,
     SharedModule,
     FormBuilderModule

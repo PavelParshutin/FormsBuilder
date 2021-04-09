@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { getNewComponentsArray } from '../../store/component-styles.reduser';
+import {getGeneralStyle, getNewComponentsArray} from '../../store/component-styles.reduser';
 
 @Component({
   selector: 'app-accordion-section',
@@ -11,14 +11,13 @@ import { getNewComponentsArray } from '../../store/component-styles.reduser';
 })
 export class AccordionSectionComponent implements OnInit {
 
+  generalStyle$: Observable<any>
   styleElements$: Observable<any>
   constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.generalStyle$ = this.store.select(getGeneralStyle)
     this.styleElements$ = this.store.select(getNewComponentsArray)
-    // this.store.select(getNewComponentsArray).subscribe(data => {
-    //   this.styleElements = data
-    // })
   }
 
 }
