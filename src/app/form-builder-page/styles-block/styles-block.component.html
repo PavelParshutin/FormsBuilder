@@ -11,6 +11,13 @@
         <span>{{st.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="active = !active">{{st.value}}</span>
         <input type="text" formControlName="{{st.key}}" *ngIf="active" (dblclick)="active = !active">
       </div>
+      <button type="button" (click)="isVisibleInput()">+</button>
+      <div *ngIf="isAddStyleProp">
+        <input type="text" #propName>
+        <input type="text" #propValue>
+<!--        <app-style-property-form [id]="id"></app-style-property-form>-->
+      </div>
+
     </div>
     <div formGroupName="anotherProperties">
       <div *ngFor="let option of anotherProperties | keyvalue">
@@ -18,6 +25,7 @@
           <div *ngFor="let i of option.value; let idx = index">
             <span *ngIf="!active" (dblclick)="active = !active">{{i}}</span>
             <input type="text" formControlName="{{idx}}" *ngIf="active" (dblclick)="active = !active">
+            <button type="button" (click)="deleteOption(idx)">x</button>
           </div>
         </div>
       </div>

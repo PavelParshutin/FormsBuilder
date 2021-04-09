@@ -1,9 +1,15 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
-import { Styles } from './interfaces';
-import { addNewComponentAction, setComponentStyleAction, setGeneralStyle } from './component-styles.actions';
+import {NewComponent, Styles} from './interfaces';
+import { addNewComponentAction, setComponentStyleAction, setGeneralStyle, addNewStyleProperty, updateOptions } from './component-styles.actions';
 
 export const initialState: Styles = {
+  defaultStyles: {
+    fontWeigh: 'font-weigh',
+    fontStyle: 'font-style',
+    position: 'position',
+    textDecoration: 'text-decoration',
+  },
   generalStyle: {
     width: '33.33333%',
     minHeight: '100vh',
@@ -17,7 +23,7 @@ export const initialState: Styles = {
     padding: '10px 15px',
     fontSize: '14px',
     color: 'black',
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     borderRadius: '20px',
     cursor: 'pointer',
     margin: '10px'
@@ -68,8 +74,22 @@ export const styleReducer = createReducer(initialState,
   on(addNewComponentAction, (state, prop) => ({
       ...state,
       newComponents: [...state.newComponents, prop]
-    })
-  )
+    })),
+  on(updateOptions, (state, prop) => ({
+      ...state,
+      newComponents: [...state.newComponents.filter(item => item.id !== prop.id), prop]
+    })),
+  on(addNewStyleProperty, (state, prop) => {
+    const comp: NewComponent = state.newComponents.find(item => item.id === prop.id)
+    let { style: propStyle } = prop
+    let { style: compStyle } = comp
+    console.log('reducer', propStyle)
+    Object.assign(compStyle, propStyle)
+    //comp.style = style as {}
+    return {
+      ...state,
+      newComponents: [...state.newComponents.filter(item => item.id !== prop.id), comp]
+    }})
 );
 
 export const defaultStylesFeatureSelector = createFeatureSelector<Styles>('defaultComponentStyles');
@@ -84,5 +104,6 @@ export const getInputTextStyleSelector = createSelector(defaultStylesFeatureSele
 export const getTextAreaStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.textareaStyles);
 
 export const getNewComponentsArray = createSelector(defaultStylesFeatureSelector, state => state.newComponents);
+export const getDefaultStyles = createSelector(defaultStylesFeatureSelector, state => state.defaultStyles);
 
 

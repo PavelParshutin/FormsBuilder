@@ -16,6 +16,7 @@ import { SelectComponent } from './components/select.component';
 import { LabelComponent } from './components/label.component';
 import { StylesBlockComponent } from './styles-block/styles-block.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { StylePropertyFormComponent } from './shared/components/style-property-form/style-property-form.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { BrowserModule } from '@angular/platform-browser';
     LabelComponent,
     AccordionSectionComponent,
     StylesBlockComponent,
-    FormBuilderPageComponent
+    FormBuilderPageComponent,
+    StylePropertyFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 
 export interface Styles {
+   defaultStyles?: { [key: string]: string }
    generalStyle?: { [key: string]: string }
    btnStyle?: { [key: string]: string }
    inputTextStyle?: { [key: string]: string }
@@ -13,7 +14,7 @@ export interface Styles {
 export interface NewComponent {
     id?: string | number;
     title?: string;
-    style?: { [key: string]: string };
+    style: { [key: string]: string };
     anotherProperties?: any;
  }
 

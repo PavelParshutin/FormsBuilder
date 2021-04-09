@@ -1,9 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import {setComponentStyleAction, setGeneralStyle} from '../../store/component-styles.actions';
-import { NewComponent } from "../../store/interfaces";
+import {
+  updateOptions,
+  setComponentStyleAction,
+  setGeneralStyle,
+  addNewStyleProperty
+} from '../../store/component-styles.actions';
+import { NewComponent } from '../../store/interfaces';
+import {getDefaultStyles} from "../../store/component-styles.reduser";
 
 
 @Component({
@@ -22,6 +28,11 @@ export class StylesBlockComponent implements OnInit {
   active: boolean = false;
   showStyles = false;
   showTitle = false;
+  isAddStyleProp = false
+  defaultStyles
+
+  @ViewChild('propName') newPropKey: ElementRef
+  @ViewChild('propValue')newPropValue: ElementRef
 
   constructor(private store: Store) {
   }
@@ -49,16 +60,44 @@ export class StylesBlockComponent implements OnInit {
   }
 
   addSelectOptions(): void {
-    //console.log(this.anotherProperties.options)
-    //this.anotherProperties.options.push()
-    // this.tempProperties.options = this.anotherProperties.options
-    // this.tempProperties.options.push('new option')
-    // this.anotherProperties = this.tempProperties
-    // console.log(this.tempProperties)
-    //(<Array<any>>this.anotherProperties.options).push('new option')
+    (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls['options']).push(new FormControl('option'));
+    const obj: NewComponent = {
+      id: this.form.value.id,
+      title: this.form.value.title,
+      style: this.form.value.style,
+      anotherProperties: this.form.value.anotherProperties,
+    };
+    this.store.dispatch(updateOptions(obj))
+  }
+
+  deleteOption(controlName): void {
+    (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls['options']).removeAt(controlName)
+    const obj: NewComponent = {
+      id: this.form.value.id,
+      title: this.form.value.title,
+      style: this.form.value.style,
+      anotherProperties: this.form.value.anotherProperties,
+    };
+    this.store.dispatch(updateOptions(obj))
+  }
+
+  addNewStyleProperty(): void{
+    if (this.newPropKey.nativeElement.value || this.newPropValue.nativeElement.value){
+      const controlName = this.newPropKey.nativeElement.value;
+      const controlValue = this.newPropValue.nativeElement.value;
+      this.store.select(getDefaultStyles).subscribe(styles => this.defaultStyles = styles )
+      for(const prop in this.defaultStyles){
+        if(prop === controlName || this.defaultStyles[prop] === controlName){
+          (<FormGroup> this.form.controls['style']).addControl(prop, new FormControl(controlValue));
+          break;
+        }
+      }
+    }
   }
 
   onSubmit(): void {
+    this.addNewStyleProperty()
+
     const obj: NewComponent = {
       id: this.form.value.id,
       title: this.form.value.title,
@@ -71,6 +110,11 @@ export class StylesBlockComponent implements OnInit {
     }else {
       this.store.dispatch(setGeneralStyle(obj));
     }
+  }
+
+  isVisibleInput() {
+    this.isAddStyleProp = !this.isAddStyleProp
+    this.active = !this.active
   }
 
 }
