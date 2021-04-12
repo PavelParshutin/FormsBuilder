@@ -856,6 +856,24 @@
       "password": "ffff",
       "type": "[AUTH] Registration",
       "id": 37312
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "ffff",
+      "type": "[AUTH] Registration",
+      "id": 37313
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "eeee",
+      "type": "[AUTH] Registration",
+      "id": 37314
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "ssss",
+      "type": "[AUTH] Login",
+      "id": 37315
     }
   ],
   "tokens": []

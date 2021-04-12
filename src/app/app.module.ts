@@ -20,11 +20,13 @@ import {EffectsModule} from "@ngrx/effects";
 import {Effects} from "./store/effects";
 import {authReducer} from "./store/auth.reducer";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {LoginPageComponent} from "./Auth/login-page/login-page.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationPageComponent,
+    LoginPageComponent,
     HomePageComponent
   ],
   imports: [

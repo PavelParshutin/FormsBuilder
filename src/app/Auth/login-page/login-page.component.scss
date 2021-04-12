@@ -1,6 +1,8 @@
+@import "src/assets/scss/variables";
+
 .login-form {
   max-width: 600px;
-  border: 1px solid #ccc;
+  border: 1px solid $color-5;
   margin: 0 auto;
 }
 
@@ -17,7 +19,7 @@ input {
   margin: 0 auto;
   width: 90%;
   padding: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid $color-5;
 }
 
 label {
@@ -29,8 +31,8 @@ label {
 }
 .btn {
   display:block;
-  background: #f4f4f4;
-  color: #333;
+  background: $color-2;
+  color: $color-4;
   padding: 10px 15px;
   margin: 10px auto;
   font-size: 16px;
@@ -42,14 +44,16 @@ label {
 }
 
 .btn:disabled {
-   cursor: not-allowed;
-   background: #f4f4f4;
-   color: #111;
- }
-.btn-primary {
-  background-color:  #dc3545;
-  color: #fff;
+  cursor: not-allowed;
+  background: $color-2;
+  color: $color-3;
 }
+.btn-primary {
+  background-color:  $color-1;
+  color: $color-white;
+}
+
+
 
 
 

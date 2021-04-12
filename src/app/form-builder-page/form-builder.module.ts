@@ -21,7 +21,6 @@ import { StylePropertyFormComponent } from './shared/components/style-property-f
 
 @NgModule({
   declarations: [
-    LoginPageComponent,
     InputTextComponent,
     ButtonComponent,
     CheckboxComponent,

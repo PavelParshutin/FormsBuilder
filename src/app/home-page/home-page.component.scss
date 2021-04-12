@@ -1,9 +1,11 @@
+@import 'src/assets/scss/variables';
+
 .container {
 
 }
 .inner {
   padding: 10px;
-  border: 2px solid black;
+  border: 2px solid $color-black;
   max-width: 600px;
   max-height: 200px;
   margin: 0 auto;
@@ -14,8 +16,8 @@
   width: 30%;
   text-align: center;
   text-decoration: none;
-  background: #f4f4f4;
-  color: #333;
+  background: $color-2;
+  color: $color-4;
   padding: 10px 15px;
   margin: 10px auto;
   font-size: 16px;
@@ -27,8 +29,8 @@
 }
 
 .btn-primary {
-  background-color:  #dc3545;
-  color: #fff;
+  background-color:  $color-1;
+  color: $color-white;
 }
 h1{
   text-align: center;
