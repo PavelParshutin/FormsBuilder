@@ -6,7 +6,7 @@ import {
   updateOptions,
   setComponentStyleAction,
   setGeneralStyle,
-  addNewStyleProperty
+  addNewStyleProperty, deleteComponent
 } from '../../store/component-styles.actions';
 import { NewComponent } from '../../store/interfaces';
 import {getDefaultStyles} from "../../store/component-styles.reduser";
@@ -81,10 +81,10 @@ export class StylesBlockComponent implements OnInit {
     this.store.dispatch(updateOptions(obj))
   }
 
-  addNewStyleProperty(): void{
-    if (this.newPropKey.nativeElement.value || this.newPropValue.nativeElement.value){
-      const controlName = this.newPropKey.nativeElement.value;
-      const controlValue = this.newPropValue.nativeElement.value;
+  addNewStyleProperty(): void {
+    const controlName = this.newPropKey ? this.newPropKey.nativeElement.value : null;
+    const controlValue = this.newPropValue ? this.newPropValue.nativeElement.value : null;
+    if (controlName && controlValue && !Object.keys(this.form.value.style).includes(controlName)){
       this.store.select(getDefaultStyles).subscribe(styles => this.defaultStyles = styles )
       for(const prop in this.defaultStyles){
         if(prop === controlName || this.defaultStyles[prop] === controlName){
@@ -93,6 +93,27 @@ export class StylesBlockComponent implements OnInit {
         }
       }
     }
+  }
+
+  deleteStyleProp(controlName): void {
+    (<FormGroup> this.form.controls['style']).removeControl(controlName);
+    const obj: NewComponent = {
+      id: this.form.value.id,
+      title: this.form.value.title,
+      style: this.form.value.style,
+      anotherProperties: this.form.value.anotherProperties,
+    };
+    this.store.dispatch(setComponentStyleAction(obj))
+  }
+
+  deleteComponent(): void {
+    const obj: NewComponent = {
+      id: this.form.value.id,
+      title: this.form.value.title,
+      style: this.form.value.style,
+      anotherProperties: this.form.value.anotherProperties,
+    };
+    this.store.dispatch(deleteComponent(obj))
   }
 
   onSubmit(): void {
@@ -112,9 +133,10 @@ export class StylesBlockComponent implements OnInit {
     }
   }
 
-  isVisibleInput() {
+  isVisibleInput(): void {
     this.isAddStyleProp = !this.isAddStyleProp
     this.active = !this.active
   }
+
 
 }

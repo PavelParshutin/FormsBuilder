@@ -3,19 +3,37 @@
   display: flex;
   justify-content: space-between;
   font-weight: 700;
+
 }
 
 .icon {
   color: red;
   border: none;
   outline: none;
-  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  /*background-color: black;*/
+  /*background: url(~src/assets/img/arrow.png);*/
   transform: rotate(0deg);
   transition: rotate .2s linear;
 }
 
-.style-item {
+.style-block {
   margin: 10px;
   font-size: 14px;
   font-style: italic;
 }
+
+.item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item:hover .deleteBtn{
+  display: block;
+}
+
+.deleteBtn {
+  display: none;
+}
+

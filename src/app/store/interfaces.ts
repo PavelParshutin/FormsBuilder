@@ -9,6 +9,7 @@ export interface Styles {
    selectStyles?: { [key: string]: string }
    textareaStyles?: { [key: string]: string }
    newComponents?: NewComponent[]
+  componentsList?: any[]
 }
 
 export interface NewComponent {

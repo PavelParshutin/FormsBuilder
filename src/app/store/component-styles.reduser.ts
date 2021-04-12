@@ -1,14 +1,31 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 import {NewComponent, Styles} from './interfaces';
-import { addNewComponentAction, setComponentStyleAction, setGeneralStyle, addNewStyleProperty, updateOptions } from './component-styles.actions';
+import { addNewComponentAction, setComponentStyleAction, setGeneralStyle, addNewStyleProperty, updateOptions, deleteComponent, addComponent } from './component-styles.actions';
 
 export const initialState: Styles = {
   defaultStyles: {
+    fontSize: 'font-size',
     fontWeigh: 'font-weigh',
     fontStyle: 'font-style',
-    position: 'position',
+    fontFamily: 'font-family',
     textDecoration: 'text-decoration',
+    color: 'color',
+    backgroundColor: 'background-color',
+    border: 'border',
+    borderRadius: 'border-radius',
+    borderColor: 'border-color',
+    outline: 'outline',
+    position: 'position',
+    width: 'width',
+    maxWidth: 'max-width',
+    minWidth: 'min-width',
+    height: 'height',
+    maxHeight: 'max-height',
+    minHeight: 'min-height',
+    margin: 'margin',
+    padding: 'padding',
+    cursor: 'cursor'
   },
   generalStyle: {
     width: '33.33333%',
@@ -60,6 +77,7 @@ export const initialState: Styles = {
     margin: '10px auto',
   },
   newComponents: [],
+  componentsList: []
 };
 
 export const styleReducer = createReducer(initialState,
@@ -79,17 +97,14 @@ export const styleReducer = createReducer(initialState,
       ...state,
       newComponents: [...state.newComponents.filter(item => item.id !== prop.id), prop]
     })),
-  on(addNewStyleProperty, (state, prop) => {
-    const comp: NewComponent = state.newComponents.find(item => item.id === prop.id)
-    let { style: propStyle } = prop
-    let { style: compStyle } = comp
-    console.log('reducer', propStyle)
-    Object.assign(compStyle, propStyle)
-    //comp.style = style as {}
-    return {
-      ...state,
-      newComponents: [...state.newComponents.filter(item => item.id !== prop.id), comp]
-    }})
+  on(deleteComponent, (state, prop) => ({
+    ...state,
+    newComponents: [...state.newComponents.filter(item => item.id !== prop.id)]
+  })),
+  on(addComponent, (state, prop) => ({
+    ...state,
+    componentsList: [...state.componentsList, prop]
+  }))
 );
 
 export const defaultStylesFeatureSelector = createFeatureSelector<Styles>('defaultComponentStyles');
@@ -105,5 +120,6 @@ export const getTextAreaStyleSelector = createSelector(defaultStylesFeatureSelec
 
 export const getNewComponentsArray = createSelector(defaultStylesFeatureSelector, state => state.newComponents);
 export const getDefaultStyles = createSelector(defaultStylesFeatureSelector, state => state.defaultStyles);
+export const getComponents = createSelector(defaultStylesFeatureSelector, state => state.componentsList);
 
 

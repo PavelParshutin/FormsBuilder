@@ -4,16 +4,16 @@ import {
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
-  OnInit,
+  OnInit, TemplateRef,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {CdkDragDrop, copyArrayItem, moveItemInArray} from '@angular/cdk/drag-drop';
 
 import {
   getBtnStyleSelector,
-  getCheckStyleSelector, getGeneralStyle,
+  getCheckStyleSelector, getComponents, getGeneralStyle,
   getInputTextStyleSelector, getLabelStyleSelector,
   getNewComponentsArray, getSelectStyleSelector, getTextAreaStyleSelector
 } from '../store/component-styles.reduser';
@@ -23,8 +23,9 @@ import { ButtonComponent } from './components/button.component';
 import { SelectComponent } from './components/select.component';
 import { CheckboxComponent } from './components/checkbox.component';
 import { TextAreaComponent } from './components/text-area.component';
-import { addNewComponentAction } from '../store/component-styles.actions';
-import {NewComponent} from "../store/interfaces";
+import {addComponent, addNewComponentAction} from '../store/component-styles.actions';
+import {NewComponent} from '../store/interfaces';
+import {ComponentPortal} from "@angular/cdk/portal";
 
 @Component({
   selector: 'app-form-builder-page',
@@ -42,30 +43,33 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   tempAnotherProperties;
   componentList: Array<any> = [];
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private store: Store, private cdr: ChangeDetectorRef) {
+  componentPortal: ComponentPortal<any>
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private store: Store, private viewContainerRef: ViewContainerRef, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     const generalStyles$ = this.store.select(getGeneralStyle);
     generalStyles$.subscribe(style => this.tempGeneralStyle = style)
     const newElemStyles$ = this.store.select(getNewComponentsArray);
-    newElemStyles$.subscribe(elem => this.newTempStyles = elem.filter(object => {
-      if (object.style) {
-        for (let elem of this.componentList) {
-          if (elem.instance.id === object.id) {
-            elem.instance.componentStyles$ = object.style;
-            elem.instance.title = object.title;
-            elem.instance.optionList = object.anotherProperties;
-          }
-        }
+    newElemStyles$.subscribe(comp => {
+      for(const object of comp){
+        const currentElement = this.dropList.find(elem => elem.instance.id === object.id)
+        currentElement.instance.componentStyles$ = object.style;
+        currentElement.instance.title = object.title;
+        currentElement.instance.optionList = object.anotherProperties;
       }
-    }));
+    });
   }
 
   drop(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      // copyArrayItem(event.previousContainer.data,
+      //   event.container.data,
+      //   event.previousIndex,
+      //   event.currentIndex);
       this.createElement(event.previousContainer.data[event.previousIndex]);
     }
   }
@@ -77,18 +81,19 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
       ButtonComponent,
       SelectComponent,
       CheckboxComponent,
-      TextAreaComponent
+      TextAreaComponent,
     ];
     this.cdr.detectChanges();
   }
 
   createElement(element): void {
     const btn: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(element);
+    // const ref = this.viewContainerRef.createComponent(btn);
     const ref = this.elemContainer.createComponent(btn);
     const id = Math.floor((Math.random() * 1000000) + 1);
     ref.instance.id = id;
-
-    this.componentList.push(ref);
+    //this.componentList.push(ref);
+    this.dropList.push(ref)
     switch (ref.instance.title) {
       case 'Button':
         const btnStyles$ = this.store.select(getBtnStyleSelector);
@@ -133,6 +138,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
       anotherProperties: this.tempAnotherProperties
     };
     this.store.dispatch(addNewComponentAction(obj));
+    this.store.dispatch(addComponent(element))
   }
 
 }

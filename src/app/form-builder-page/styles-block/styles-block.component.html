@@ -3,29 +3,43 @@
     <input type="text" formControlName="id" hidden="true">
       <span *ngIf="!active" (dblclick)="active = !active">{{title}}</span>
       <input type="text" formControlName="title" *ngIf="active" (dblclick)="active = !active">
-    <button type="button" (click)="showStyles = !showStyles" [disabled]="active"> +</button>
+    <button type="button" (click)="showStyles = !showStyles" [disabled]="active"> ></button>
+<!--    <img src="assets/img/arrow.png">-->
+    <i class="icon"></i>
   </div>
-  <div class="style_item" *ngIf="showStyles">
+
+  <div class="style-block" *ngIf="showStyles">
     <div formGroupName="style">
-      <div *ngFor="let st of style| keyvalue">
-        <span>{{st.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="active = !active">{{st.value}}</span>
-        <input type="text" formControlName="{{st.key}}" *ngIf="active" (dblclick)="active = !active">
-      </div>
-      <button type="button" (click)="isVisibleInput()">+</button>
-      <div *ngIf="isAddStyleProp">
-        <input type="text" #propName>
-        <input type="text" #propValue>
-<!--        <app-style-property-form [id]="id"></app-style-property-form>-->
+      <div *ngFor="let st of style| keyvalue" class="item">
+        <div>
+          <span (dblclick)="active = !active">{{st.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="active = !active">{{st.value}}</span>
+          <input type="text" formControlName="{{st.key}}" *ngIf="active" (dblclick)="active = !active">
+        </div>
+        <button (click)="deleteStyleProp(st.key)" class="deleteBtn">x</button>
       </div>
 
+      <button type="button" (click)="isVisibleInput()">+</button>
+      <div style="display: flex" *ngIf="isAddStyleProp">
+        <span>
+          <div>Property Name</div>
+          <input id="propName" type="text" #propName placeholder="enter property name">
+        </span>
+        <span>
+          <div>Property Value</div>
+          <input id="propValue" type="text" #propValue placeholder="enter property value">
+        </span>
+      </div>
     </div>
+
     <div formGroupName="anotherProperties">
       <div *ngFor="let option of anotherProperties | keyvalue">
         <div formArrayName="{{option.key}}">
-          <div *ngFor="let i of option.value; let idx = index">
-            <span *ngIf="!active" (dblclick)="active = !active">{{i}}</span>
-            <input type="text" formControlName="{{idx}}" *ngIf="active" (dblclick)="active = !active">
-            <button type="button" (click)="deleteOption(idx)">x</button>
+          <div *ngFor="let i of option.value; let idx = index" class="item">
+            <div>
+              <span *ngIf="!active" (dblclick)="active = !active">{{i}}</span>
+              <input type="text" formControlName="{{idx}}" *ngIf="active" (dblclick)="active = !active">
+            </div>
+            <button type="button" (click)="deleteOption(idx)" class="deleteBtn">x</button>
           </div>
         </div>
       </div>
@@ -33,4 +47,5 @@
     </div>
   </div>
  <button type="submit" [hidden]="!active">Apply</button>
+ <button type="button" [hidden]="!active" (click)="deleteComponent()">Delete Component</button>
 </form>
