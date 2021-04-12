@@ -30,7 +30,7 @@ import {ComponentPortal} from "@angular/cdk/portal";
 @Component({
   selector: 'app-form-builder-page',
   templateUrl: './form-builder-page.component.html',
-  styleUrls: ['./form-builder-page.component.css']
+  styleUrls: ['./form-builder-page.component.scss']
 })
 export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   @ViewChild('elemContainer', { read: ViewContainerRef }) elemContainer;

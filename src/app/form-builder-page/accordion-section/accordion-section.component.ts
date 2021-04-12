@@ -7,7 +7,7 @@ import {getGeneralStyle, getNewComponentsArray} from '../../store/component-styl
 @Component({
   selector: 'app-accordion-section',
   templateUrl: './accordion-section.component.html',
-  styleUrls: ['./accordion-section.component.css']
+  styleUrls: ['./accordion-section.component.scss']
 })
 export class AccordionSectionComponent implements OnInit {
 

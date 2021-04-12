@@ -9,7 +9,7 @@ import {addNewStyleProperty} from "../../../../store/component-styles.actions";
 @Component({
   selector: 'app-style-property-form',
   templateUrl: './style-property-form.component.html',
-  styleUrls: ['./style-property-form.component.css']
+  styleUrls: ['./style-property-form.component.scss']
 })
 export class StylePropertyFormComponent implements OnInit {
   @Input() id

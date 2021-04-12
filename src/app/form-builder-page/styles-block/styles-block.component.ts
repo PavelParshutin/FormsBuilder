@@ -15,7 +15,7 @@ import {getDefaultStyles} from "../../store/component-styles.reduser";
 @Component({
   selector: 'app-styles-block',
   templateUrl: './styles-block.component.html',
-  styleUrls: ['./styles-block.component.css']
+  styleUrls: ['./styles-block.component.scss']
 })
 export class StylesBlockComponent implements OnInit {
   form: FormGroup;
