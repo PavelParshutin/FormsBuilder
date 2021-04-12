@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { Styles } from '../../store/interfaces';
-import { getTextAreaStyleSelector } from '../../store/component-styles.reduser';
+import { Styles } from '../../../store/interfaces';
+import { getTextAreaStyleSelector } from '../../../store/component-styles.reduser';
 
 @Component({
   selector: 'app-text-area',

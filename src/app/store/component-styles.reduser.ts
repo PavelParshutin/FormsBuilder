@@ -100,10 +100,6 @@ export const styleReducer = createReducer(initialState,
   on(deleteComponent, (state, prop) => ({
     ...state,
     newComponents: [...state.newComponents.filter(item => item.id !== prop.id)]
-  })),
-  on(addComponent, (state, prop) => ({
-    ...state,
-    componentsList: [...state.componentsList, prop]
   }))
 );
 

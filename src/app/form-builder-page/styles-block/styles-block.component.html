@@ -1,25 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="header">
     <input type="text" formControlName="id" hidden="true">
-      <span *ngIf="!active" (dblclick)="active = !active">{{title}}</span>
-      <input type="text" formControlName="title" *ngIf="active" (dblclick)="active = !active">
-    <button type="button" (click)="showStyles = !showStyles" [disabled]="active"> ></button>
-<!--    <img src="assets/img/arrow.png">-->
-    <i class="icon"></i>
+      <span *ngIf="!active" (dblclick)="showInputs()">{{title}}</span>
+      <input type="text" formControlName="title" *ngIf="active" (dblclick)="showInputs()">
+    <i class="icon" (click)="showStyleBlock = !showStyleBlock"></i>
   </div>
 
-  <div class="style-block" *ngIf="showStyles">
+  <div class="style-block" *ngIf="showStyleBlock">
     <div formGroupName="style">
       <div *ngFor="let st of style| keyvalue" class="item">
         <div>
-          <span (dblclick)="active = !active">{{st.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="active = !active">{{st.value}}</span>
-          <input type="text" formControlName="{{st.key}}" *ngIf="active" (dblclick)="active = !active">
+          <span (dblclick)="showInputs()">{{st.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="showInputs()">{{st.value}}</span>
+          <input type="text" formControlName="{{st.key}}" *ngIf="active" (dblclick)="showInputs()">
         </div>
-        <button (click)="deleteStyleProp(st.key)" class="deleteBtn">x</button>
+        <i (click)="deleteStyleProp(st.key)" class="deleteBtn"></i>
       </div>
 
-      <button type="button" (click)="isVisibleInput()">+</button>
-      <div style="display: flex" *ngIf="isAddStyleProp">
+      <button type="button" (click)="isVisibleInput()">Add new Property</button>
+      <div style="display: flex" *ngIf="showAddProperty">
         <span>
           <div>Property Name</div>
           <input id="propName" type="text" #propName placeholder="enter property name">
@@ -46,6 +44,6 @@
       <button type="button" [hidden]="title !== 'Select'" (click)="addSelectOptions()">add new option</button>
     </div>
   </div>
- <button type="submit" [hidden]="!active">Apply</button>
- <button type="button" [hidden]="!active" (click)="deleteComponent()">Delete Component</button>
+ <button type="submit" [hidden]="!showApplyBtn">Apply</button>
+ <button type="button" (click)="deleteComponent()">Delete Component</button>
 </form>

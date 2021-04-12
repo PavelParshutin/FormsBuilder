@@ -17,15 +17,15 @@ import {
   getInputTextStyleSelector, getLabelStyleSelector,
   getNewComponentsArray, getSelectStyleSelector, getTextAreaStyleSelector
 } from '../store/component-styles.reduser';
-import { LabelComponent } from './components/label.component';
-import { InputTextComponent } from './components/input-text.component';
-import { ButtonComponent } from './components/button.component';
-import { SelectComponent } from './components/select.component';
-import { CheckboxComponent } from './components/checkbox.component';
-import { TextAreaComponent } from './components/text-area.component';
+import { LabelComponent } from './shared/components/label.component';
+import { InputTextComponent } from './shared/components/input-text.component';
+import { ButtonComponent } from './shared/components/button.component';
+import { SelectComponent } from './shared/components/select.component';
+import { CheckboxComponent } from './shared/components/checkbox.component';
+import { TextAreaComponent } from './shared/components/text-area.component';
 import {addComponent, addNewComponentAction} from '../store/component-styles.actions';
 import {NewComponent} from '../store/interfaces';
-import {ComponentPortal} from "@angular/cdk/portal";
+import {ComponentPortal} from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-form-builder-page',
@@ -43,12 +43,11 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   tempAnotherProperties;
   componentList: Array<any> = [];
 
-  componentPortal: ComponentPortal<any>
-
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private store: Store, private viewContainerRef: ViewContainerRef, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
+    //const defaultComponents
     const generalStyles$ = this.store.select(getGeneralStyle);
     generalStyles$.subscribe(style => this.tempGeneralStyle = style)
     const newElemStyles$ = this.store.select(getNewComponentsArray);
@@ -58,7 +57,16 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
         currentElement.instance.componentStyles$ = object.style;
         currentElement.instance.title = object.title;
         currentElement.instance.optionList = object.anotherProperties;
+        this.componentList.push(currentElement)
       }
+      console.log('componentList', this.componentList)
+      for(const component of this.dropList){
+        const res = this.componentList.find(item => item.instance.id === component.instance.id)
+        if(!res){
+          component.destroy()
+        }
+      }
+      this.componentList = []
     });
   }
 
@@ -66,10 +74,12 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      // copyArrayItem(event.previousContainer.data,
-      //   event.container.data,
-      //   event.previousIndex,
-      //   event.currentIndex);
+       // copyArrayItem(event.previousContainer.data,
+       //   event.container.data,
+       //   event.previousIndex,
+       //   event.currentIndex);
+      console.log('component', event.previousContainer.data)
+      console.log('prIndex', event.previousIndex)
       this.createElement(event.previousContainer.data[event.previousIndex]);
     }
   }
@@ -92,7 +102,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
     const ref = this.elemContainer.createComponent(btn);
     const id = Math.floor((Math.random() * 1000000) + 1);
     ref.instance.id = id;
-    //this.componentList.push(ref);
+    ref.changeDetectorRef.detectChanges()
     this.dropList.push(ref)
     switch (ref.instance.title) {
       case 'Button':

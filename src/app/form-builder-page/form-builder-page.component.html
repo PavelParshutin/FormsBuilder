@@ -6,7 +6,7 @@
        [cdkDropListData]="dropList"
        [cdkDropListConnectedTo]="[dragListSection]"
        (cdkDropListDropped)="drop($event)">
-      <div #elemContainer cdkDrag></div>
+      <ng-template #elemContainer ></ng-template>
 <!--    <span *ngFor="let comp of dropList">-->
 <!--      <ng-container  *ngComponentOutlet="comp.componentType">-->
 <!--      </ng-container>-->

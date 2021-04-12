@@ -11,10 +11,9 @@
   outline: none;
   width: 20px;
   height: 20px;
-  /*background-color: black;*/
-  /*background: url(~src/assets/img/arrow.png);*/
-  transform: rotate(0deg);
-  transition: rotate .2s linear;
+  background-color: black;
+  background: url("../../../assets/img/arrow.png") no-repeat center;
+  transform: rotate(90deg);
 }
 
 .style-block {
@@ -34,5 +33,8 @@
 
 .deleteBtn {
   display: none;
+  width: 20px;
+  height: 20px;
+  background: url("../../../assets/img/delete.png") no-repeat center;
 }
 

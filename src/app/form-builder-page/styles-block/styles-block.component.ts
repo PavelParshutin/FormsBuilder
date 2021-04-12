@@ -9,7 +9,7 @@ import {
   addNewStyleProperty, deleteComponent
 } from '../../store/component-styles.actions';
 import { NewComponent } from '../../store/interfaces';
-import {getDefaultStyles} from "../../store/component-styles.reduser";
+import { getDefaultStyles } from '../../store/component-styles.reduser';
 
 
 @Component({
@@ -28,8 +28,11 @@ export class StylesBlockComponent implements OnInit {
   active: boolean = false;
   showStyles = false;
   showTitle = false;
-  isAddStyleProp = false
   defaultStyles
+
+  showStyleBlock = false
+  showApplyBtn = false
+  showAddProperty = false
 
   @ViewChild('propName') newPropKey: ElementRef
   @ViewChild('propValue')newPropValue: ElementRef
@@ -61,27 +64,18 @@ export class StylesBlockComponent implements OnInit {
 
   addSelectOptions(): void {
     (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls['options']).push(new FormControl('option'));
-    const obj: NewComponent = {
-      id: this.form.value.id,
-      title: this.form.value.title,
-      style: this.form.value.style,
-      anotherProperties: this.form.value.anotherProperties,
-    };
+    const obj: NewComponent = this.createStyleObject()
     this.store.dispatch(updateOptions(obj))
   }
 
   deleteOption(controlName): void {
     (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls['options']).removeAt(controlName)
-    const obj: NewComponent = {
-      id: this.form.value.id,
-      title: this.form.value.title,
-      style: this.form.value.style,
-      anotherProperties: this.form.value.anotherProperties,
-    };
+    const obj: NewComponent = this.createStyleObject()
     this.store.dispatch(updateOptions(obj))
   }
 
   addNewStyleProperty(): void {
+    this.showApplyBtn = true
     const controlName = this.newPropKey ? this.newPropKey.nativeElement.value : null;
     const controlValue = this.newPropValue ? this.newPropValue.nativeElement.value : null;
     if (controlName && controlValue && !Object.keys(this.form.value.style).includes(controlName)){
@@ -97,46 +91,49 @@ export class StylesBlockComponent implements OnInit {
 
   deleteStyleProp(controlName): void {
     (<FormGroup> this.form.controls['style']).removeControl(controlName);
-    const obj: NewComponent = {
-      id: this.form.value.id,
-      title: this.form.value.title,
-      style: this.form.value.style,
-      anotherProperties: this.form.value.anotherProperties,
-    };
+    const obj: NewComponent = this.createStyleObject()
     this.store.dispatch(setComponentStyleAction(obj))
   }
 
   deleteComponent(): void {
-    const obj: NewComponent = {
-      id: this.form.value.id,
-      title: this.form.value.title,
-      style: this.form.value.style,
-      anotherProperties: this.form.value.anotherProperties,
-    };
+    const obj: NewComponent = this.createStyleObject()
     this.store.dispatch(deleteComponent(obj))
   }
 
   onSubmit(): void {
     this.addNewStyleProperty()
 
-    const obj: NewComponent = {
-      id: this.form.value.id,
-      title: this.form.value.title,
-      style: this.form.value.style,
-      anotherProperties: this.form.value.anotherProperties,
-    };
+    const obj: NewComponent = this.createStyleObject()
     this.active = false;
     if (obj.id){
       this.store.dispatch(setComponentStyleAction(obj));
     }else {
       this.store.dispatch(setGeneralStyle(obj));
     }
+    this.showApplyBtn = false
+    this.active = false;
+    this.showAddProperty = false
+  }
+
+  createStyleObject(): NewComponent{
+    return {
+      id: this.form.value.id,
+      title: this.form.value.title,
+      style: this.form.value.style,
+      anotherProperties: this.form.value.anotherProperties,
+    };
   }
 
   isVisibleInput(): void {
-    this.isAddStyleProp = !this.isAddStyleProp
-    this.active = !this.active
+    this.showAddProperty = !this.showAddProperty
+    this.showApplyBtn = !this.showApplyBtn
   }
 
+  showInputs(): void {
+    this.active = !this.active
+    if(this.showAddProperty !== true){
+      this.showApplyBtn = !this.showApplyBtn
+    }
+  }
 
 }
