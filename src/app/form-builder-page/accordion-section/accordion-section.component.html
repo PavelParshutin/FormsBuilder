@@ -1,7 +1,29 @@
 
+<!--<div *ngrxLet="generalStyle$ as styles" class="item">-->
+<!--  <app-styles-block [title]="'App General Styles'" [style]="styles"></app-styles-block>-->
+<!--</div>-->
 <div *ngrxLet="generalStyle$ as styles" class="item">
-  <app-styles-block [title]="'App General Styles'" [style]="styles"></app-styles-block>
+  <app-general-style [title]="'App General Styles'" [style]="styles"></app-general-style>
 </div>
+<div *ngrxLet="labelDefaultStyle$ as styles" class="item">
+  <app-general-style [title]="'Label'" [style]="styles"></app-general-style>
+</div>
+<div *ngrxLet="inputTextDefaultStyle$ as styles" class="item">
+  <app-general-style [title]="'Input'" [style]="styles"></app-general-style>
+</div>
+<div *ngrxLet="btnDefaultStyle$ as styles" class="item">
+  <app-general-style [title]="'Button'" [style]="styles"></app-general-style>
+</div>
+<div *ngrxLet="selectDefaultStyle$ as styles" class="item">
+  <app-general-style [title]="'Select'" [style]="styles"></app-general-style>
+</div>
+<div *ngrxLet="checkboxDefaultStyle$ as styles" class="item">
+  <app-general-style [title]="'checkbox'" [style]="styles"></app-general-style>
+</div>
+<div *ngrxLet="textAreaDefaultStyle$ as styles" class="item">
+  <app-general-style [title]="'text area'" [style]="styles"></app-general-style>
+</div>
+
 
 <div *ngrxLet="styleElements$ as elemArray">
   <div *ngFor="let elem of elemArray | keyvalue"  class="item">

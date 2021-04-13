@@ -16,6 +16,7 @@ import { SelectComponent } from './shared/components/select.component';
 import { LabelComponent } from './shared/components/label.component';
 import { StylesBlockComponent } from './styles-block/styles-block.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { GeneralStyleComponent } from './accordion-section/app-general-style/general-style/general-style.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { BrowserModule } from '@angular/platform-browser';
     AccordionSectionComponent,
     StylesBlockComponent,
     FormBuilderPageComponent,
+    GeneralStyleComponent,
   ],
   imports: [
     BrowserModule,

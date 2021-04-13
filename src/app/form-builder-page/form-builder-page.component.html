@@ -7,10 +7,12 @@
        [cdkDropListConnectedTo]="[dragListSection]"
        (cdkDropListDropped)="drop($event)">
       <ng-template #elemContainer ></ng-template>
+<!--      <div #elemContainer cdkDrag></div>-->
 <!--    <span *ngFor="let comp of dropList">-->
-<!--      <ng-container  *ngComponentOutlet="comp.componentType">-->
-<!--      </ng-container>-->
+<!--      <ng-template #templateRef  *ngComponentOutlet="comp.componentType">-->
+<!--      </ng-template>-->
 <!--    </span>-->
+<!--    <ng-template [cdkPortalOutlet]="templatePortal"></ng-template>-->
 <!--    <span *ngFor="let comp of dropList" >-->
 <!--      <ng-container [ngComponentOutlet]="comp" >-->
 <!--     </ng-container>-->
@@ -28,9 +30,10 @@
        [cdkDropListData]="dragList"
        [cdkDropListConnectedTo]="[dropListSection]"
        (cdkDropListDropped)="drop($event)">
-    <span *ngFor="let comp of dragList">
-      <ng-container  *ngComponentOutlet="comp">
-      </ng-container>
-    </span>
+<!--    <span *ngFor="let comp of dragList">-->
+<!--      <ng-container  *ngComponentOutlet="comp">-->
+<!--      </ng-container>-->
+<!--    </span>-->
+    <ng-template #defaultContainer ></ng-template>
   </div>
 </div>

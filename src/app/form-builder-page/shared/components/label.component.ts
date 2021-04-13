@@ -20,7 +20,7 @@ export class LabelComponent implements OnInit {
 }
 
 ngOnInit(): void {
-  this.defaultStyle$ = this.store.select(getLabelStyleSelector)
-  this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
+  // this.defaultStyle$ = this.store.select(getLabelStyleSelector)
+  // this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
 }
 }

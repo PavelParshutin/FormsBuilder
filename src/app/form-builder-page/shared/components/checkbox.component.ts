@@ -21,8 +21,8 @@ export class CheckboxComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.defaultStyle$ = this.store.select(getCheckStyleSelector)
-    this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
+    // this.defaultStyle$ = this.store.select(getCheckStyleSelector)
+    // this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
   }
 
 }

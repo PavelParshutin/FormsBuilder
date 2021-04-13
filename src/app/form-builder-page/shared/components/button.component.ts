@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { Styles } from '../../../store/interfaces';
   selector: 'app-button',
   template: `<button cdkDrag [ngStyle]="componentStyles$">{{title}}</button>`,
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent implements OnInit, OnDestroy{
 
   @Input() componentStyles$: Observable<any>
   @Input() title = 'Button'
@@ -22,8 +22,11 @@ export class ButtonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.defaultStyle$ = this.store.select(getBtnStyleSelector)
-    this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
+    // this.defaultStyle$ = this.store.select(getBtnStyleSelector)
+    // this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
+  }
+  ngOnDestroy(){
+
   }
 
 }

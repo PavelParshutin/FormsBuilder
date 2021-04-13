@@ -1,8 +1,8 @@
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="header">
-    <input type="text" formControlName="id" hidden="true">
-      <span *ngIf="!active" (dblclick)="showInputs()">{{title}}</span>
-      <input type="text" formControlName="title" *ngIf="active" (dblclick)="showInputs()">
+    <span *ngIf="!active" (dblclick)="showInputs()">{{title}}</span>
+    <input type="text" formControlName="title" *ngIf="active" (dblclick)="showInputs()">
     <i class="icon" (click)="showStyleBlock = !showStyleBlock"></i>
   </div>
 
@@ -30,23 +30,6 @@
       <small class="error-message" *ngIf="isErrorMessage">Fields must be not empty or should not contains already existing properties</small>
     </div>
 
-    <div formGroupName="anotherProperties">
-      <div *ngFor="let option of anotherProperties | keyvalue">
-        <div formArrayName="{{option.key}}">
-          <div *ngFor="let i of option.value; let idx = index" class="item">
-            <div>
-              <span *ngIf="!active" (dblclick)="active = !active">{{i}}</span>
-              <input type="text" formControlName="{{idx}}" *ngIf="active" (dblclick)="active = !active">
-            </div>
-            <button type="button" (click)="deleteOption(idx)" class="deleteBtn">x</button>
-          </div>
-        </div>
-      </div>
-      <button type="button" [hidden]="title !== 'Select'" (click)="addSelectOptions()">add option</button>
-    </div>
   </div>
- <button type="submit" [hidden]="!showApplyBtn">Apply</button>
- <button type="button" (click)="deleteComponent()" *ngIf="title !== 'App General Styles'">Delete Component</button>
-  <ng-container></ng-container>
+  <button type="submit" [hidden]="!showApplyBtn">Apply</button>
 </form>
-

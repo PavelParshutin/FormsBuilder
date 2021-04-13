@@ -18,24 +18,26 @@ import { getDefaultStyles } from '../../store/component-styles.reduser';
   styleUrls: ['./styles-block.component.scss']
 })
 export class StylesBlockComponent implements OnInit {
-  form: FormGroup;
+
+  @ViewChild('propName') newPropKey: ElementRef
+  @ViewChild('propValue')newPropValue: ElementRef
 
   @Input() id;
   @Input() title;
   @Input() style;
   @Input() anotherProperties;
 
-  active: boolean = false;
-  showStyles = false;
-  showTitle = false;
+  form: FormGroup;
+
   defaultStyles
 
+  active = false;
   showStyleBlock = false
   showApplyBtn = false
   showAddProperty = false
+  isErrorMessage = false
 
-  @ViewChild('propName') newPropKey: ElementRef
-  @ViewChild('propValue')newPropValue: ElementRef
+
 
   constructor(private store: Store) {
   }
@@ -74,7 +76,7 @@ export class StylesBlockComponent implements OnInit {
     this.store.dispatch(updateOptions(obj))
   }
 
-  addNewStyleProperty(): void {
+  addNewStyleProperty(): boolean {
     this.showApplyBtn = true
     const controlName = this.newPropKey ? this.newPropKey.nativeElement.value : null;
     const controlValue = this.newPropValue ? this.newPropValue.nativeElement.value : null;
@@ -83,16 +85,23 @@ export class StylesBlockComponent implements OnInit {
       for(const prop in this.defaultStyles){
         if(prop === controlName || this.defaultStyles[prop] === controlName){
           (<FormGroup> this.form.controls['style']).addControl(prop, new FormControl(controlValue));
-          break;
+          return true
         }
       }
     }
+    this.isErrorMessage = true
+    return false
   }
 
   deleteStyleProp(controlName): void {
     (<FormGroup> this.form.controls['style']).removeControl(controlName);
     const obj: NewComponent = this.createStyleObject()
-    this.store.dispatch(setComponentStyleAction(obj))
+    if(obj.id){
+      this.store.dispatch(setComponentStyleAction(obj))
+    }else {
+      this.store.dispatch(setGeneralStyle(obj))
+    }
+
   }
 
   deleteComponent(): void {
@@ -101,16 +110,20 @@ export class StylesBlockComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.addNewStyleProperty()
-    const obj: NewComponent = this.createStyleObject()
-    if (obj.id){
-      this.store.dispatch(setComponentStyleAction(obj));
+    if(this.addNewStyleProperty() || !this.showAddProperty){
+      const obj: NewComponent = this.createStyleObject()
+      if (obj.id){
+        this.store.dispatch(setComponentStyleAction(obj));
+      }else {
+        this.store.dispatch(setGeneralStyle(obj));
+      }
+      this.showApplyBtn = false
+      this.active = false;
+      this.showAddProperty = false
+      this.isErrorMessage = false
     }else {
-      this.store.dispatch(setGeneralStyle(obj));
+      return
     }
-    this.showApplyBtn = false
-    this.active = false;
-    this.showAddProperty = false
   }
 
   createStyleObject(): NewComponent{
@@ -125,10 +138,12 @@ export class StylesBlockComponent implements OnInit {
   isVisibleInput(): void {
     this.showAddProperty = !this.showAddProperty
     this.showApplyBtn = !this.showApplyBtn
+    this.isErrorMessage = false
   }
 
   showInputs(): void {
     this.active = !this.active
+    this.isErrorMessage = false
     if(this.showAddProperty !== true){
       this.showApplyBtn = !this.showApplyBtn
     }

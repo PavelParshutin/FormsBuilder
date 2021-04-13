@@ -21,8 +21,8 @@ export class TextAreaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.defaultStyle$ = this.store.select(getTextAreaStyleSelector);
-    this.defaultStyle$.subscribe(data => this.componentStyles$ = data);
+    // this.defaultStyle$ = this.store.select(getTextAreaStyleSelector);
+    // this.defaultStyle$.subscribe(data => this.componentStyles$ = data);
   }
 
 }

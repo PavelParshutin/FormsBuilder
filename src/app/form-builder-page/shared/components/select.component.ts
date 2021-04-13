@@ -24,7 +24,7 @@ export class SelectComponent implements OnInit {
 }
 
 ngOnInit(): void {
-  this.defaultStyle$ = this.store.select(getSelectStyleSelector)
-  this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
+  // this.defaultStyle$ = this.store.select(getSelectStyleSelector)
+  // this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
 }
 }

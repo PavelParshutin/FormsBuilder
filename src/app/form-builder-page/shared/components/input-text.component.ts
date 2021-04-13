@@ -24,8 +24,8 @@ export class InputTextComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.defaultStyle$ = this.store.select(getInputTextStyleSelector);
-    this.defaultStyle$.subscribe(data => this.componentStyles$ = data);
+    // this.defaultStyle$ = this.store.select(getInputTextStyleSelector);
+    // this.defaultStyle$.subscribe(data => this.componentStyles$ = data);
   }
 
   setActive(value) {

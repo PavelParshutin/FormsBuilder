@@ -1,10 +1,8 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 import {NewComponent, Styles} from './interfaces';
-import { addNewComponentAction, setComponentStyleAction, setGeneralStyle, addNewStyleProperty, updateOptions, deleteComponent, addComponent } from './component-styles.actions';
-import {LabelComponent} from "../form-builder-page/shared/components/label.component";
-import {InputTextComponent} from "../form-builder-page/shared/components/input-text.component";
-import {ButtonComponent} from "../form-builder-page/shared/components/button.component";
+import { addNewComponentAction, setComponentStyleAction, setGeneralStyle, addNewStyleProperty, updateOptions, deleteComponent, setNewGeneralBtnStyle, setNewGeneralTextAreaStyle, setNewGeneralCheckboxStyle, setNewGeneralInputStyle, setNewGeneralSelectStyle, setNewGeneralLabelStyle } from './component-styles.actions';
+
 
 export const initialState: Styles = {
   defaultStyles: {
@@ -80,7 +78,6 @@ export const initialState: Styles = {
     margin: '10px auto',
   },
   newComponents: [],
-  componentsList: []
 };
 
 export const styleReducer = createReducer(initialState,
@@ -109,6 +106,30 @@ export const styleReducer = createReducer(initialState,
   on(deleteComponent, (state, prop) => ({
     ...state,
     newComponents: [...state.newComponents.filter(item => item.id !== prop.id)]
+  })),
+  on(setNewGeneralBtnStyle, (state, prop) => ({
+    ...state,
+    btnStyle: prop
+  })),
+  on(setNewGeneralLabelStyle, (state, prop) => ({
+    ...state,
+    labelStyles: prop
+  })),
+  on(setNewGeneralInputStyle, (state, prop) => ({
+    ...state,
+    inputTextStyle: prop
+  })),
+  on(setNewGeneralCheckboxStyle, (state, prop) => ({
+    ...state,
+    checkboxStyles: prop
+  })),
+  on(setNewGeneralSelectStyle, (state, prop) => ({
+    ...state,
+    selectStyles: prop
+  })),
+  on(setNewGeneralTextAreaStyle, (state, prop) => ({
+    ...state,
+    textareaStyles: prop
   }))
 );
 
@@ -125,6 +146,5 @@ export const getTextAreaStyleSelector = createSelector(defaultStylesFeatureSelec
 
 export const getNewComponentsArray = createSelector(defaultStylesFeatureSelector, state => state.newComponents);
 export const getDefaultStyles = createSelector(defaultStylesFeatureSelector, state => state.defaultStyles);
-export const getComponents = createSelector(defaultStylesFeatureSelector, state => state.componentsList);
 
 
