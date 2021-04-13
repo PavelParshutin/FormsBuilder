@@ -2,6 +2,9 @@ import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/
 
 import {NewComponent, Styles} from './interfaces';
 import { addNewComponentAction, setComponentStyleAction, setGeneralStyle, addNewStyleProperty, updateOptions, deleteComponent, addComponent } from './component-styles.actions';
+import {LabelComponent} from "../form-builder-page/shared/components/label.component";
+import {InputTextComponent} from "../form-builder-page/shared/components/input-text.component";
+import {ButtonComponent} from "../form-builder-page/shared/components/button.component";
 
 export const initialState: Styles = {
   defaultStyles: {
@@ -85,10 +88,16 @@ export const styleReducer = createReducer(initialState,
     ...state,
     generalStyle: prop.style
   })),
-  on(setComponentStyleAction, (state, prop) => ({
-    ...state,
-    newComponents: [...state.newComponents.filter(item => item.id !== prop.id), prop]
-  })),
+  on(setComponentStyleAction, (state, prop) => {
+    const index = state.newComponents.findIndex(item => item.id === prop.id)
+    const tempComponentsArray = [...state.newComponents]
+    tempComponentsArray.splice(index, 1, prop)
+    console.log(tempComponentsArray)
+    return {
+      ...state,
+      newComponents: tempComponentsArray
+    }
+  }),
   on(addNewComponentAction, (state, prop) => ({
       ...state,
       newComponents: [...state.newComponents, prop]

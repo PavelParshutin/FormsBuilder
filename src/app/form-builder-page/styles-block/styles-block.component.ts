@@ -102,9 +102,7 @@ export class StylesBlockComponent implements OnInit {
 
   onSubmit(): void {
     this.addNewStyleProperty()
-
     const obj: NewComponent = this.createStyleObject()
-    this.active = false;
     if (obj.id){
       this.store.dispatch(setComponentStyleAction(obj));
     }else {

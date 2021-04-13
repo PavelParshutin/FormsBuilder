@@ -47,7 +47,6 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    //const defaultComponents
     const generalStyles$ = this.store.select(getGeneralStyle);
     generalStyles$.subscribe(style => this.tempGeneralStyle = style)
     const newElemStyles$ = this.store.select(getNewComponentsArray);
