@@ -4,12 +4,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { getDefaultStyles } from '../../../../store/component-styles.reduser';
 import {
-  setNewGeneralBtnStyle,
-  setNewGeneralCheckboxStyle,
-  setNewGeneralInputStyle,
-  setNewGeneralLabelStyle,
-  setNewGeneralSelectStyle,
-  setNewGeneralTextAreaStyle
+  setNewGeneralBtnStyleAction,
+  setNewGeneralCheckboxStyleAction,
+  setNewGeneralInputStyleAction,
+  setNewGeneralLabelStyleAction,
+  setNewGeneralSelectStyleAction,
+  setNewGeneralTextAreaStyleAction
 } from '../../../../store/component-styles.actions';
 
 @Component({
@@ -100,22 +100,22 @@ export class GeneralStyleComponent implements OnInit {
       this.isErrorMessage = false
       switch (this.form.value.title) {
         case 'Button':
-          this.store.dispatch(setNewGeneralBtnStyle(this.form.value.style))
+          this.store.dispatch(setNewGeneralBtnStyleAction(this.form.value.style))
           break;
         case 'Label':
-          this.store.dispatch(setNewGeneralLabelStyle(this.form.value.style))
+          this.store.dispatch(setNewGeneralLabelStyleAction(this.form.value.style))
           break;
         case 'Select':
-          this.store.dispatch(setNewGeneralSelectStyle(this.form.value.style))
+          this.store.dispatch(setNewGeneralSelectStyleAction(this.form.value.style))
           break;
         case 'Input':
-          this.store.dispatch(setNewGeneralInputStyle(this.form.value.style))
+          this.store.dispatch(setNewGeneralInputStyleAction(this.form.value.style))
           break;
         case 'checkbox':
-          this.store.dispatch(setNewGeneralCheckboxStyle(this.form.value.style))
+          this.store.dispatch(setNewGeneralCheckboxStyleAction(this.form.value.style))
           break;
         case 'text area':
-          this.store.dispatch(setNewGeneralTextAreaStyle(this.form.value.style))
+          this.store.dispatch(setNewGeneralTextAreaStyleAction(this.form.value.style))
           break;
       }
     }

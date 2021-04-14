@@ -4,14 +4,14 @@ import { Styles} from './interfaces';
 import { addNewComponentAction,
   setComponentStyleAction,
   setGeneralStyle,
-  updateOptions,
-  deleteComponent,
-  setNewGeneralBtnStyle,
-  setNewGeneralTextAreaStyle,
-  setNewGeneralCheckboxStyle,
-  setNewGeneralInputStyle,
-  setNewGeneralSelectStyle,
-  setNewGeneralLabelStyle } from './component-styles.actions';
+  updateOptionsAction,
+  deleteComponentAction,
+  setNewGeneralBtnStyleAction,
+  setNewGeneralTextAreaStyleAction,
+  setNewGeneralCheckboxStyleAction,
+  setNewGeneralInputStyleAction,
+  setNewGeneralSelectStyleAction,
+  setNewGeneralLabelStyleAction } from './component-styles.actions';
 
 
 export const initialState: Styles = {
@@ -109,35 +109,35 @@ export const styleReducer = createReducer(initialState,
       ...state,
       newComponents: [...state.newComponents, prop]
     })),
-  on(updateOptions, (state, prop) => ({
+  on(updateOptionsAction, (state, prop) => ({
       ...state,
       newComponents: [...state.newComponents.filter(item => item.id !== prop.id), prop]
     })),
-  on(deleteComponent, (state, prop) => ({
+  on(deleteComponentAction, (state, prop) => ({
     ...state,
     newComponents: [...state.newComponents.filter(item => item.id !== prop.id)]
   })),
-  on(setNewGeneralBtnStyle, (state, prop) => ({
+  on(setNewGeneralBtnStyleAction, (state, prop) => ({
     ...state,
     btnStyle: prop
   })),
-  on(setNewGeneralLabelStyle, (state, prop) => ({
+  on(setNewGeneralLabelStyleAction, (state, prop) => ({
     ...state,
     labelStyles: prop
   })),
-  on(setNewGeneralInputStyle, (state, prop) => ({
+  on(setNewGeneralInputStyleAction, (state, prop) => ({
     ...state,
     inputTextStyle: prop
   })),
-  on(setNewGeneralCheckboxStyle, (state, prop) => ({
+  on(setNewGeneralCheckboxStyleAction, (state, prop) => ({
     ...state,
     checkboxStyles: prop
   })),
-  on(setNewGeneralSelectStyle, (state, prop) => ({
+  on(setNewGeneralSelectStyleAction, (state, prop) => ({
     ...state,
     selectStyles: prop
   })),
-  on(setNewGeneralTextAreaStyle, (state, prop) => ({
+  on(setNewGeneralTextAreaStyleAction, (state, prop) => ({
     ...state,
     textareaStyles: prop
   }))

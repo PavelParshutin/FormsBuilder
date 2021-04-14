@@ -3,9 +3,9 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import {
-  updateOptions,
+  updateOptionsAction,
   setComponentStyleAction,
-  deleteComponent
+  deleteComponentAction
 } from '../../store/component-styles.actions';
 import { NewComponent } from '../../store/interfaces';
 import { getDefaultStyles } from '../../store/component-styles.reduser';
@@ -66,13 +66,13 @@ export class StylesBlockComponent implements OnInit {
   addSelectOptions(): void {
     (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls['options']).push(new FormControl('option'));
     const obj: NewComponent = this.createStyleObject()
-    this.store.dispatch(updateOptions(obj))
+    this.store.dispatch(updateOptionsAction(obj))
   }
 
   deleteOption(controlName): void {
     (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls['options']).removeAt(controlName)
     const obj: NewComponent = this.createStyleObject()
-    this.store.dispatch(updateOptions(obj))
+    this.store.dispatch(updateOptionsAction(obj))
   }
 
   addNewStyleProperty(): boolean {
@@ -100,7 +100,7 @@ export class StylesBlockComponent implements OnInit {
 
   deleteComponent(): void {
     const obj: NewComponent = this.createStyleObject()
-    this.store.dispatch(deleteComponent(obj))
+    this.store.dispatch(deleteComponentAction(obj))
   }
 
   onSubmit(): void {

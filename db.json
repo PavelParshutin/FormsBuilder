@@ -2404,6 +2404,54 @@
       "password": "ssss",
       "type": "[AUTH] Registration",
       "id": 37570
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "цццц",
+      "type": "[AUTH] Registration",
+      "id": 37571
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "ddddd",
+      "type": "[AUTH] Registration",
+      "id": 37572
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "ssss",
+      "type": "[AUTH] Registration",
+      "id": 37573
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "dddd",
+      "type": "[AUTH] Registration",
+      "id": 37574
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "ddddd",
+      "type": "[AUTH] Registration",
+      "id": 37575
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "fffff",
+      "type": "[AUTH] Registration",
+      "id": 37576
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "zzzz",
+      "type": "[AUTH] Registration",
+      "id": 37577
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "ssss",
+      "type": "[AUTH] Registration",
+      "id": 37578
     }
   ],
   "tokens": []

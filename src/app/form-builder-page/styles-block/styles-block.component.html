@@ -35,8 +35,8 @@
         <div formArrayName="{{option.key}}">
           <div *ngFor="let i of option.value; let idx = index" class="item">
             <div>
-              <span *ngIf="!active" (dblclick)="active = !active">{{i}}</span>
-              <input type="text" formControlName="{{idx}}" *ngIf="active" (dblclick)="active = !active">
+              <span *ngIf="!active" (dblclick)="showInputs()">{{i}}</span>
+              <input type="text" formControlName="{{idx}}" *ngIf="active" (dblclick)="showInputs()">
             </div>
             <i type="button" (click)="deleteOption(idx)" class="delete-btn"></i>
           </div>
