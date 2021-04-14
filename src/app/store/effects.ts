@@ -1,8 +1,9 @@
+import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {catchError, filter, map, mergeMap, switchMap, tap} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
-import { Store } from '@ngrx/store';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 import { AuthService } from '../services/auth.service';
 import {
   loginAction,
@@ -10,7 +11,7 @@ import {
   registrationFailedAction,
   registrationSuccessAction
 } from './auth.actions';
-import {AuthResponse, User, Error} from './interfaces';
+import { AuthResponse, User, Error } from './interfaces';
 
 @Injectable()
 export class Effects {

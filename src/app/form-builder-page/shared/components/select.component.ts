@@ -1,9 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-
-import { Styles } from '../../../store/interfaces';
-import { getSelectStyleSelector } from '../../../store/component-styles.reduser';
 
 @Component({
   selector: 'app-select',
@@ -19,12 +14,8 @@ export class SelectComponent implements OnInit {
   @Input() optionList = {
     options: []
   }
-  defaultStyle$: Observable<any>
-  constructor(private store: Store<Styles>) {
-}
 
-ngOnInit(): void {
-  // this.defaultStyle$ = this.store.select(getSelectStyleSelector)
-  // this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
-}
+  constructor() {}
+
+ngOnInit(): void {}
 }

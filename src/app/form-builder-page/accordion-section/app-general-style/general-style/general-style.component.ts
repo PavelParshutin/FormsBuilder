@@ -1,23 +1,21 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { FormControl, FormGroup } from '@angular/forms';
+
+import { getDefaultStyles } from '../../../../store/component-styles.reduser';
 import {
-  getBtnStyleSelector, getCheckStyleSelector, getGeneralStyle,
-  getInputTextStyleSelector,
-  getLabelStyleSelector, getSelectStyleSelector, getTextAreaStyleSelector
-} from "../../../../store/component-styles.reduser";
-import {Observable} from "rxjs";
-import {Store} from "@ngrx/store";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
-import {NewComponent} from "../../../../store/interfaces";
-import {
-  setNewGeneralBtnStyle, setNewGeneralCheckboxStyle, setNewGeneralInputStyle,
+  setNewGeneralBtnStyle,
+  setNewGeneralCheckboxStyle,
+  setNewGeneralInputStyle,
   setNewGeneralLabelStyle,
-  setNewGeneralSelectStyle, setNewGeneralTextAreaStyle
-} from "../../../../store/component-styles.actions";
+  setNewGeneralSelectStyle,
+  setNewGeneralTextAreaStyle
+} from '../../../../store/component-styles.actions';
 
 @Component({
   selector: 'app-general-style',
   templateUrl: './general-style.component.html',
-  styleUrls: ['./general-style.component.css']
+  styleUrls: ['./general-style.component.scss']
 })
 export class GeneralStyleComponent implements OnInit {
 
@@ -49,22 +47,15 @@ export class GeneralStyleComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(this.title),
       style: new FormGroup({
-        type: new FormControl()
+        // type: new FormControl()
       }),
     });
     for (const prop in this.style) {
       (<FormGroup> this.form.controls['style']).addControl(prop, new FormControl(this.style[prop]));
     }
   }
-  // createStyleObject(){
-  //   return {
-  //     // title: this.form.value.title,
-  //     // style: this.form.value.style
-  //     true
-  //   };
-  // }
 
-  isVisibleInput(): void {
+  showNewPropertyInputs(): void {
     this.showAddProperty = !this.showAddProperty
     this.showApplyBtn = !this.showApplyBtn
     this.isErrorMessage = false
@@ -78,33 +69,55 @@ export class GeneralStyleComponent implements OnInit {
     }
   }
 
-
-  deleteStyleProp(key: unknown) {
-
+  addNewStyleProperty(): boolean {
+    const controlName = this.newPropKey ? this.newPropKey.nativeElement.value : null;
+    const controlValue = this.newPropValue ? this.newPropValue.nativeElement.value : null;
+    if (controlName && controlValue && !Object.keys(this.form.value.style).includes(controlName)){
+      this.store.select(getDefaultStyles).subscribe(styles => this.defaultStyles = styles )
+      for(const prop in this.defaultStyles){
+        if(prop === controlName || this.defaultStyles[prop] === controlName){
+          (<FormGroup> this.form.controls['style']).addControl(prop, new FormControl(controlValue));
+          return true
+        }
+      }
+    }
+    this.isErrorMessage = true
+    this.showApplyBtn = true
+    return false
   }
 
-  onSubmit() {
-    // const obj = this.createStyleObject()
-    console.log(this.form)
-    switch (this.form.value.title){
-      case 'Button':
-        this.store.dispatch(setNewGeneralBtnStyle(this.form.value.style))
-        break;
-      case 'Label':
-        this.store.dispatch(setNewGeneralLabelStyle(this.form.value.style))
-        break;
-      case 'Select':
-        this.store.dispatch(setNewGeneralSelectStyle(this.form.value.style))
-        break;
-      case 'Input':
-        this.store.dispatch(setNewGeneralInputStyle(this.form.value.style))
-        break;
-      case 'Checkbox':
-        this.store.dispatch(setNewGeneralCheckboxStyle(this.form.value.style))
-        break;
-      case 'text area':
-        this.store.dispatch(setNewGeneralTextAreaStyle(this.form.value.style))
-        break;
+
+  deleteStyleProp(controlName): void {
+    (<FormGroup> this.form.controls['style']).removeControl(controlName);
+    this.onSubmit()
+  }
+
+  onSubmit(): void {
+    if(this.addNewStyleProperty() || !this.showAddProperty) {
+      this.showApplyBtn = false
+      this.active = false;
+      this.showAddProperty = false
+      this.isErrorMessage = false
+      switch (this.form.value.title) {
+        case 'Button':
+          this.store.dispatch(setNewGeneralBtnStyle(this.form.value.style))
+          break;
+        case 'Label':
+          this.store.dispatch(setNewGeneralLabelStyle(this.form.value.style))
+          break;
+        case 'Select':
+          this.store.dispatch(setNewGeneralSelectStyle(this.form.value.style))
+          break;
+        case 'Input':
+          this.store.dispatch(setNewGeneralInputStyle(this.form.value.style))
+          break;
+        case 'checkbox':
+          this.store.dispatch(setNewGeneralCheckboxStyle(this.form.value.style))
+          break;
+        case 'text area':
+          this.store.dispatch(setNewGeneralTextAreaStyle(this.form.value.style))
+          break;
+      }
     }
 
   }

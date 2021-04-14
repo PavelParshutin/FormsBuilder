@@ -1,9 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-
-import { getCheckStyleSelector } from '../../../store/component-styles.reduser';
-
 
 @Component({
   selector: 'app-checkbox',
@@ -17,12 +12,8 @@ export class CheckboxComponent implements OnInit {
   @Input() componentStyles$
   @Input() id = ''
 
-  defaultStyle$: Observable<any>
-  constructor(private store: Store) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    // this.defaultStyle$ = this.store.select(getCheckStyleSelector)
-    // this.defaultStyle$.subscribe(data => this.componentStyles$ = data)
-  }
+  ngOnInit(): void {}
 
 }

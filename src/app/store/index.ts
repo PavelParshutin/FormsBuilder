@@ -1,8 +1,8 @@
 import { ActionReducerMap } from '@ngrx/store';
 
 import { styleReducer } from './component-styles.reduser';
-import {Response, Styles} from './interfaces';
-import {authReducer} from "./auth.reducer";
+import { Response, Styles } from './interfaces';
+import { authReducer } from './auth.reducer';
 
 
 export interface State {

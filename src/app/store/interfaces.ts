@@ -1,14 +1,6 @@
 
 export interface Styles {
    defaultStyles?: { [key: string]: string }
-   defaultComponentsStyle?: [
-     generalStyle?: { [key: string]: string },
-     btnStyle?: { [key: string]: string },
-     inputTextStyle?: { [key: string]: string },
-     checkboxStyles?: { [key: string]: string },
-     labelStyles?: { [key: string]: string },
-     selectStyles?: { [key: string]: string },
-     textareaStyles?: { [key: string]: string }]
    generalStyle?: { [key: string]: string }
    btnStyle?: { [key: string]: string }
    inputTextStyle?: { [key: string]: string }
@@ -17,7 +9,6 @@ export interface Styles {
    selectStyles?: { [key: string]: string }
    textareaStyles?: { [key: string]: string }
    newComponents?: NewComponent[]
-  componentsList?: any[]
 }
 
 export interface NewComponent {

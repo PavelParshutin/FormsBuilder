@@ -5,22 +5,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { styleReducer } from './store/component-styles.reduser';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { SharedModule } from './shared/shared.module';
-import { RegistrationPageComponent } from './Auth/registration-page/registration-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing-module';
 import { FormBuilderModule } from './form-builder-page/form-builder.module';
-import {AuthService} from "./services/auth.service";
-import {EffectsModule} from "@ngrx/effects";
-import {Effects} from "./store/effects";
-import {authReducer} from "./store/auth.reducer";
-import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-import {LoginPageComponent} from "./Auth/login-page/login-page.component";
+import { AuthService } from './services/auth.service';
+import { Effects } from './store/effects';
+import { authReducer } from './store/auth.reducer';
+import { styleReducer } from './store/component-styles.reduser';
+import { LoginPageComponent } from './Auth/login-page/login-page.component';
+import { RegistrationPageComponent } from './Auth/registration-page/registration-page.component';
 
 @NgModule({
   declarations: [

@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit, Provider } from '@angular/core';
+import { Component, forwardRef, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const VALUE_ACCESSOR: Provider = {

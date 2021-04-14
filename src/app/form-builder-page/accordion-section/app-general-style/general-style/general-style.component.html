@@ -1,8 +1,8 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="header">
-    <span *ngIf="!active" (dblclick)="showInputs()">{{title}}</span>
-    <input type="text" formControlName="title" *ngIf="active" (dblclick)="showInputs()">
+    <span (dblclick)="showInputs()">{{title}}</span>
+    <input type="text" formControlName="title" hidden="true">
     <i class="icon" (click)="showStyleBlock = !showStyleBlock"></i>
   </div>
 
@@ -13,10 +13,10 @@
           <span (dblclick)="showInputs()">{{st.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="showInputs()">{{st.value}}</span>
           <input type="text" formControlName="{{st.key}}" *ngIf="active" (dblclick)="showInputs()">
         </div>
-        <i (click)="deleteStyleProp(st.key)" class="deleteBtn"></i>
+        <i (click)="deleteStyleProp(st.key)" class="delete-btn"></i>
       </div>
 
-      <button type="button" (click)="isVisibleInput()">Add new Property</button>
+      <button class="add-btn" type="button" (click)="showNewPropertyInputs()">Add Property</button>
       <div style="display: flex" *ngIf="showAddProperty">
         <span>
           <div>Property Name</div>
@@ -31,5 +31,5 @@
     </div>
 
   </div>
-  <button type="submit" [hidden]="!showApplyBtn">Apply</button>
+  <button class="apply-btn" type="submit" [hidden]="!showApplyBtn">Save changes</button>
 </form>

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import {
-  getBtnStyleSelector, getCheckStyleSelector,
-  getGeneralStyle, getInputTextStyleSelector, getLabelStyleSelector,
-  getNewComponentsArray, getSelectStyleSelector,
+  getBtnStyleSelector,
+  getCheckStyleSelector,
+  getInputTextStyleSelector,
+  getLabelStyleSelector,
+  getNewComponentsArray,
+  getSelectStyleSelector,
   getTextAreaStyleSelector
 } from '../../store/component-styles.reduser';
 
@@ -16,7 +19,6 @@ import {
 })
 export class AccordionSectionComponent implements OnInit {
 
-  generalStyle$: Observable<any>
   styleElements$: Observable<any>
   btnDefaultStyle$: Observable<any>
   inputTextDefaultStyle$: Observable<any>
@@ -28,7 +30,6 @@ export class AccordionSectionComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.generalStyle$ = this.store.select(getGeneralStyle)
     this.styleElements$ = this.store.select(getNewComponentsArray)
     this.btnDefaultStyle$ = this.store.select(getBtnStyleSelector)
     this.inputTextDefaultStyle$ = this.store.select(getInputTextStyleSelector)

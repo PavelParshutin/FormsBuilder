@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { NewComponent } from "./interfaces";
+
+import { NewComponent } from './interfaces';
 
 export const setGeneralStyle = createAction('[STYLE] set general style', props<NewComponent>());
 

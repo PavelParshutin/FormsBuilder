@@ -1,6 +1,6 @@
 import { Action, createAction, props } from '@ngrx/store';
 
-import {AuthResponse, User, Error} from './interfaces';
+import { AuthResponse, User, Error } from './interfaces';
 
 export const loginAction = createAction('[AUTH] Login', props<User>())
 export const loginSuccessAction = createAction('[AUTH] Login Success', props<AuthResponse>())

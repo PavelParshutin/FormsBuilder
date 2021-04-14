@@ -1,6 +1,7 @@
 import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
+
 import { registrationSuccessAction, registrationFailedAction, loginSuccessAction, loginFailedAction } from './auth.actions';
-import {Response, Styles} from "./interfaces";
+import { Response } from './interfaces';
 
 export const initialstate: Response =
   {
@@ -8,7 +9,6 @@ export const initialstate: Response =
     error: null,
     isAuth: false
   }
-
 
 export const authReducer = createReducer(
   initialstate,
@@ -37,7 +37,6 @@ export const authReducer = createReducer(
       isAuth: false
 }))
 )
-
 
 export const defaultStylesFeatureSelector = createFeatureSelector<Response>('authReducer');
 

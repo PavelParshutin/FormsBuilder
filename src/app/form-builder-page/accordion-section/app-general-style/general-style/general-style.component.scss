@@ -1,3 +1,5 @@
+@import "src/assets/scss/variables.scss";
+
 .header {
   width: 100%;
   display: flex;
@@ -11,7 +13,7 @@
   outline: none;
   width: 20px;
   height: 20px;
-  background-color: black;
+  background-color: $color-black;
   background: url("../../../../../assets/img/arrow.png") no-repeat center;
   transform: rotate(90deg);
 }
@@ -27,18 +29,34 @@
   justify-content: space-between;
 }
 
-.item:hover .deleteBtn{
+.item:hover .delete-btn{
   display: block;
 }
 
-.deleteBtn {
+.delete-btn {
   display: none;
   width: 20px;
   height: 20px;
   background: url("../../../../../assets/img/delete.png") no-repeat center;
+  text-transform: uppercase;
 }
 
 .error-message{
-  color: red;
+  color: $error-color;
 }
 
+.apply-btn {
+  background-color: $color-6;
+  color: $color-white;
+  padding: 5px;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+
+.add-btn {
+  background-color: $color-7;
+  color: $color-black;
+  text-transform: uppercase;
+  padding: 5px;
+  margin: 5px;
+}

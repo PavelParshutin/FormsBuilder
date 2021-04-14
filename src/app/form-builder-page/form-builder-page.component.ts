@@ -2,20 +2,23 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ComponentFactory,
   ComponentFactoryResolver,
-  OnInit, TemplateRef,
+  OnInit,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {CdkDragDrop, copyArrayItem, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import {
   getBtnStyleSelector,
-  getCheckStyleSelector, getGeneralStyle,
-  getInputTextStyleSelector, getLabelStyleSelector,
-  getNewComponentsArray, getSelectStyleSelector, getTextAreaStyleSelector
+  getCheckStyleSelector,
+  getGeneralStyle,
+  getInputTextStyleSelector,
+  getLabelStyleSelector,
+  getNewComponentsArray,
+  getSelectStyleSelector,
+  getTextAreaStyleSelector
 } from '../store/component-styles.reduser';
 import { LabelComponent } from './shared/components/label.component';
 import { InputTextComponent } from './shared/components/input-text.component';
@@ -24,8 +27,16 @@ import { SelectComponent } from './shared/components/select.component';
 import { CheckboxComponent } from './shared/components/checkbox.component';
 import { TextAreaComponent } from './shared/components/text-area.component';
 import { addNewComponentAction} from '../store/component-styles.actions';
-import {NewComponent} from '../store/interfaces';
-import {ComponentPortal, TemplatePortal} from '@angular/cdk/portal';
+import { NewComponent } from '../store/interfaces';
+
+enum ComponentName{
+  Button = 'Button',
+  Label = 'Label',
+  Input = 'Input',
+  Select = 'Select',
+  Checkbox = 'checkbox',
+  TextArea = 'text area'
+}
 
 @Component({
   selector: 'app-form-builder-page',
@@ -35,7 +46,7 @@ import {ComponentPortal, TemplatePortal} from '@angular/cdk/portal';
 export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   @ViewChild('elemContainer', { read: ViewContainerRef }) elemContainer;
   @ViewChild('defaultContainer', { read: ViewContainerRef }) defaultContainer;
-  // @ViewChild('templateRef') templateContainer: TemplateRef<any>;
+
   dragList = [];
   dropList = [];
 
@@ -53,11 +64,18 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
     TextAreaComponent,
   ];
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private store: Store, private viewContainerRef: ViewContainerRef, private cdr: ChangeDetectorRef) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private store: Store, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.subscribe()
+  }
+
+  ngAfterViewInit(): void {
+    for(const elem of this.defaultElements){
+      this.createElement(elem, this.defaultContainer, 'init')
+    }
+    this.cdr.detectChanges();
   }
 
   drop(event: CdkDragDrop<string[]>): void {
@@ -68,53 +86,38 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    // this.dragList = [
-    //   LabelComponent,
-    //   InputTextComponent,
-    //   ButtonComponent,
-    //   SelectComponent,
-    //   CheckboxComponent,
-    //   TextAreaComponent,
-    // ];
-    for(const elem of this.defaultElements){
-      this.createElement(elem, this.defaultContainer, 'init')
-    }
-    this.cdr.detectChanges();
-  }
-
-  createElement(element, container?, typeOperation?): void {
-    let btn = null
+  createElement(element, container, operation): void {
+    let factory = null
     let ref = null
     let id = null
-    if(typeOperation === 'init'){
-      btn = this.componentFactoryResolver.resolveComponentFactory(element);
-      ref = container.createComponent(btn);
+    if(operation === 'init'){
+      factory = this.componentFactoryResolver.resolveComponentFactory(element);
+      ref = container.createComponent(factory);
       id = Math.floor((Math.random() * 1000000) + 1);
       ref.instance.id = id;
       this.dragList.push(ref)
-      this.setDefaultstyle(ref)
+      this.setDefaultStyle(ref)
     }else {
-      btn = this.componentFactoryResolver.resolveComponentFactory(element.componentType);
-      ref = container.createComponent(btn);
+      factory = this.componentFactoryResolver.resolveComponentFactory(element.componentType);
+      ref = container.createComponent(factory);
       id = Math.floor((Math.random() * 1000000) + 1);
       ref.instance.id = id;
       this.dropList.push(ref)
-      const obj = this.setDefaultstyle(ref)
+      const obj = this.setDefaultStyle(ref)
       this.store.dispatch(addNewComponentAction(obj));
     }
   }
 
 
-  setDefaultstyle(ref){
+  setDefaultStyle(ref): NewComponent{
     switch (ref.instance.title) {
-      case 'Button':
+      case ComponentName.Button:
         const btnStyles$ = this.store.select(getBtnStyleSelector);
         btnStyles$.subscribe(styles => this.tempComponentStyles = styles);
         ref.instance.componentStyles$ = this.tempComponentStyles
         this.tempAnotherProperties = {};
         break;
-      case 'checkbox':
+      case ComponentName.Checkbox:
         const checkboxStyles$ = this.store.select(getCheckStyleSelector);
         checkboxStyles$.subscribe(styles => this.tempComponentStyles = styles);
         ref.instance.componentStyles$ = this.tempComponentStyles
@@ -122,19 +125,19 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
           checked: [false]
         };
         break;
-      case 'Input':
+      case ComponentName.Input:
         const inputStyles$ = this.store.select(getInputTextStyleSelector);
         inputStyles$.subscribe(styles => this.tempComponentStyles = styles);
         ref.instance.componentStyles$ = this.tempComponentStyles
         this.tempAnotherProperties = {};
         break;
-      case 'Label':
+      case ComponentName.Label:
         const labelStyles$ = this.store.select(getLabelStyleSelector);
         labelStyles$.subscribe(styles => this.tempComponentStyles = styles);
         ref.instance.componentStyles$ = this.tempComponentStyles
         this.tempAnotherProperties = {};
         break;
-      case 'Select':
+      case ComponentName.Select:
         const selectStyles$ = this.store.select(getSelectStyleSelector);
         selectStyles$.subscribe(styles => this.tempComponentStyles = styles);
         ref.instance.componentStyles$ = this.tempComponentStyles
@@ -143,7 +146,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
         };
         ref.instance.optionList = this.tempAnotherProperties;
         break;
-      case 'text area':
+      case ComponentName.TextArea:
         const textAreaStyles$ = this.store.select(getTextAreaStyleSelector);
         textAreaStyles$.subscribe(styles => this.tempComponentStyles = styles);
         ref.instance.componentStyles$ = this.tempComponentStyles
@@ -158,18 +161,14 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
     };
   }
 
-  subscribe(){
-    const generalStyles$ = this.store.select(getGeneralStyle);
-    generalStyles$.subscribe(style => this.tempGeneralStyle = style)
-
-    const generalBtnStyles$ = this.store.select(getBtnStyleSelector);
-    generalBtnStyles$.subscribe(style => this.setNewGeneralStyle(style, 'Button'))
+  subscribe(): void{
+    this.store.select(getGeneralStyle).subscribe(style => this.tempGeneralStyle = style)
+    this.store.select(getBtnStyleSelector).subscribe(style => this.setNewGeneralStyle(style, 'Button'))
     this.store.select(getSelectStyleSelector).subscribe(style => this.setNewGeneralStyle(style, 'Select'))
     this.store.select(getLabelStyleSelector).subscribe(style => this.setNewGeneralStyle(style, 'Label'))
     this.store.select(getInputTextStyleSelector).subscribe(style => this.setNewGeneralStyle(style, 'Input'))
     this.store.select(getCheckStyleSelector).subscribe(style => this.setNewGeneralStyle(style, 'checkbox'))
     this.store.select(getTextAreaStyleSelector).subscribe(style => this.setNewGeneralStyle(style, 'text area'))
-
 
     const newElemStyles$ = this.store.select(getNewComponentsArray);
     newElemStyles$.subscribe(comp => {
@@ -189,7 +188,8 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
       this.componentList = []
     });
   }
-  setNewGeneralStyle(style, elemName){
+
+  setNewGeneralStyle(style, elemName): void {
     if(this.dragList.length > 0){
       const elem = this.dragList.find(item => item.instance.title === elemName)
       elem.instance.componentStyles$ = style
@@ -198,6 +198,14 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
 
 }
 
+// this.dragList = [
+//   LabelComponent,
+//   InputTextComponent,
+//   ButtonComponent,
+//   SelectComponent,
+//   CheckboxComponent,
+//   TextAreaComponent,
+// ];
 
 
 
@@ -252,4 +260,4 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
 //   style: this.tempComponentStyles,
 //   anotherProperties: this.tempAnotherProperties
 // };
-//this.store.dispatch(addNewComponentAction(obj));
+// this.store.dispatch(addNewComponentAction(obj));

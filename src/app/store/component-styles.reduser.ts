@@ -1,7 +1,17 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
-import {NewComponent, Styles} from './interfaces';
-import { addNewComponentAction, setComponentStyleAction, setGeneralStyle, addNewStyleProperty, updateOptions, deleteComponent, setNewGeneralBtnStyle, setNewGeneralTextAreaStyle, setNewGeneralCheckboxStyle, setNewGeneralInputStyle, setNewGeneralSelectStyle, setNewGeneralLabelStyle } from './component-styles.actions';
+import { Styles} from './interfaces';
+import { addNewComponentAction,
+  setComponentStyleAction,
+  setGeneralStyle,
+  updateOptions,
+  deleteComponent,
+  setNewGeneralBtnStyle,
+  setNewGeneralTextAreaStyle,
+  setNewGeneralCheckboxStyle,
+  setNewGeneralInputStyle,
+  setNewGeneralSelectStyle,
+  setNewGeneralLabelStyle } from './component-styles.actions';
 
 
 export const initialState: Styles = {

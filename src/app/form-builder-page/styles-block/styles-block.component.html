@@ -13,10 +13,10 @@
           <span (dblclick)="showInputs()">{{st.key}}</span>: <span style="color: green" *ngIf="!active" (dblclick)="showInputs()">{{st.value}}</span>
           <input type="text" formControlName="{{st.key}}" *ngIf="active" (dblclick)="showInputs()">
         </div>
-        <i (click)="deleteStyleProp(st.key)" class="deleteBtn"></i>
+        <i (click)="deleteStyleProp(st.key)" class="delete-btn"></i>
       </div>
 
-      <button type="button" (click)="isVisibleInput()">Add new Property</button>
+      <button class="add-btn" type="button" (click)="showNewPropertyInputs()">Add Property</button>
       <div style="display: flex" *ngIf="showAddProperty">
         <span>
           <div>Property Name</div>
@@ -38,15 +38,15 @@
               <span *ngIf="!active" (dblclick)="active = !active">{{i}}</span>
               <input type="text" formControlName="{{idx}}" *ngIf="active" (dblclick)="active = !active">
             </div>
-            <button type="button" (click)="deleteOption(idx)" class="deleteBtn">x</button>
+            <i type="button" (click)="deleteOption(idx)" class="delete-btn"></i>
           </div>
         </div>
       </div>
-      <button type="button" [hidden]="title !== 'Select'" (click)="addSelectOptions()">add option</button>
+      <button class="add-btn" type="button" [hidden]="title !== 'Select'" (click)="addSelectOptions()">add option</button>
     </div>
   </div>
- <button type="submit" [hidden]="!showApplyBtn">Apply</button>
- <button type="button" (click)="deleteComponent()" *ngIf="title !== 'App General Styles'">Delete Component</button>
+ <button class="apply-btn" type="submit" [hidden]="!showApplyBtn">Save Changes</button>
+ <button class="delete-component-btn" type="button" (click)="deleteComponent()" *ngIf="title !== 'App General Styles'">Delete Component</button>
   <ng-container></ng-container>
 </form>
 

@@ -1,12 +1,11 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import {
   updateOptions,
   setComponentStyleAction,
-  setGeneralStyle,
-  addNewStyleProperty, deleteComponent
+  deleteComponent
 } from '../../store/component-styles.actions';
 import { NewComponent } from '../../store/interfaces';
 import { getDefaultStyles } from '../../store/component-styles.reduser';
@@ -96,12 +95,7 @@ export class StylesBlockComponent implements OnInit {
   deleteStyleProp(controlName): void {
     (<FormGroup> this.form.controls['style']).removeControl(controlName);
     const obj: NewComponent = this.createStyleObject()
-    if(obj.id){
-      this.store.dispatch(setComponentStyleAction(obj))
-    }else {
-      this.store.dispatch(setGeneralStyle(obj))
-    }
-
+    this.store.dispatch(setComponentStyleAction(obj))
   }
 
   deleteComponent(): void {
@@ -112,11 +106,7 @@ export class StylesBlockComponent implements OnInit {
   onSubmit(): void {
     if(this.addNewStyleProperty() || !this.showAddProperty){
       const obj: NewComponent = this.createStyleObject()
-      if (obj.id){
-        this.store.dispatch(setComponentStyleAction(obj));
-      }else {
-        this.store.dispatch(setGeneralStyle(obj));
-      }
+      this.store.dispatch(setComponentStyleAction(obj));
       this.showApplyBtn = false
       this.active = false;
       this.showAddProperty = false
@@ -135,7 +125,7 @@ export class StylesBlockComponent implements OnInit {
     };
   }
 
-  isVisibleInput(): void {
+  showNewPropertyInputs(): void {
     this.showAddProperty = !this.showAddProperty
     this.showApplyBtn = !this.showApplyBtn
     this.isErrorMessage = false
