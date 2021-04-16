@@ -16,6 +16,7 @@ import { SelectComponent } from './shared/components/select.component';
 import { LabelComponent } from './shared/components/label.component';
 import { StylesBlockComponent } from './styles-block/styles-block.component';
 import { GeneralStyleComponent } from './accordion-section/app-general-style/general-style/general-style.component';
+import {DynamicIoModule, DynamicModule} from "ng-dynamic-component";
 
 
 @NgModule({
@@ -38,7 +39,9 @@ import { GeneralStyleComponent } from './accordion-section/app-general-style/gen
     ReactiveFormsModule,
     ReactiveComponentModule,
     DragDropModule,
-    PortalModule
+    PortalModule,
+    DynamicModule,
+    DynamicIoModule
   ],
   exports: [FormBuilderPageComponent]
 })

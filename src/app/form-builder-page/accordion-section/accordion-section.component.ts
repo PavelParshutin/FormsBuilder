@@ -3,14 +3,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import {
-  getBtnStyleSelector,
-  getCheckStyleSelector,
-  getInputTextStyleSelector,
-  getLabelStyleSelector,
+  getDefaultComponentsStyle,
   getNewComponentsArray,
-  getSelectStyleSelector,
-  getTextAreaStyleSelector
 } from '../../store/component-styles.reduser';
+import { ComponentFields } from '../../store/interfaces';
 
 @Component({
   selector: 'app-accordion-section',
@@ -19,24 +15,14 @@ import {
 })
 export class AccordionSectionComponent implements OnInit {
 
-  styleElements$: Observable<any>
-  btnDefaultStyle$: Observable<any>
-  inputTextDefaultStyle$: Observable<any>
-  labelDefaultStyle$: Observable<any>
-  checkboxDefaultStyle$: Observable<any>
-  selectDefaultStyle$: Observable<any>
-  textAreaDefaultStyle$: Observable<any>
+  styleElements$: Observable<ComponentFields[]>
+  defaultComponentsStyle: Observable<ComponentFields[]>
 
   constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.styleElements$ = this.store.select(getNewComponentsArray)
-    this.btnDefaultStyle$ = this.store.select(getBtnStyleSelector)
-    this.inputTextDefaultStyle$ = this.store.select(getInputTextStyleSelector)
-    this.labelDefaultStyle$ = this.store.select(getLabelStyleSelector)
-    this.checkboxDefaultStyle$ = this.store.select(getCheckStyleSelector)
-    this.selectDefaultStyle$ = this.store.select(getSelectStyleSelector)
-    this.textAreaDefaultStyle$ = this.store.select(getTextAreaStyleSelector)
+    this.defaultComponentsStyle = this.store.select(getDefaultComponentsStyle)
   }
 
 }

@@ -3,11 +3,11 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-button',
-  template: `<button cdkDrag [ngStyle]="componentStyles$">{{title}}</button>`,
+  template: `<button cdkDrag [ngStyle]="style">{{title}}</button>`,
 })
 export class ButtonComponent implements OnInit {
 
-  @Input() componentStyles$: Observable<any>
+  @Input() style: {}
   @Input() title = 'Button'
   @Input() id = ''
 

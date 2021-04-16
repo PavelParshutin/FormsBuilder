@@ -6,7 +6,10 @@
        [cdkDropListData]="dropList"
        [cdkDropListConnectedTo]="[dragListSection]"
        (cdkDropListDropped)="drop($event)">
-      <ng-template #elemContainer ></ng-template>
+    <span *ngFor="let item of dropList">
+      <ng-container  *ngComponentOutlet="item.component; ndcDynamicInputs: item.inputs">
+      </ng-container>
+    </span>
   </div>
 
   <div [ngStyle]="tempGeneralStyle" cdkDropList
@@ -14,10 +17,9 @@
        [cdkDropListData]="dragList"
        [cdkDropListConnectedTo]="[dropListSection]"
        (cdkDropListDropped)="drop($event)">
-<!--    <span *ngFor="let comp of dragList">-->
-<!--      <ng-container  *ngComponentOutlet="comp">-->
-<!--      </ng-container>-->
-<!--    </span>-->
-    <ng-template #defaultContainer ></ng-template>
+    <span *ngFor="let item of dragList">
+      <ng-container  *ngComponentOutlet="item.component; ndcDynamicInputs: item.inputs">
+      </ng-container>
+    </span>
   </div>
 </div>

@@ -1,26 +1,33 @@
+<!--<div *ngrxLet="labelDefaultStyle$ as elem" class="item">-->
+<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
+<!--</div>-->
+<!--<div *ngrxLet="inputTextDefaultStyle$ as elem" class="item">-->
+<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
+<!--</div>-->
+<!--<div *ngrxLet="btnDefaultStyle$ as elem" class="item">-->
+<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
+<!--</div>-->
+<!--<div *ngrxLet="selectDefaultStyle$ as elem" class="item">-->
+<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
+<!--</div>-->
+<!--<div *ngrxLet="checkboxDefaultStyle$ as elem" class="item">-->
+<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
+<!--</div>-->
+<!--<div *ngrxLet="textAreaDefaultStyle$ as elem" class="item">-->
+<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
+<!--</div>-->
 
-<div *ngrxLet="labelDefaultStyle$ as styles" class="item">
-  <app-general-style [title]="'Label'" [style]="styles"></app-general-style>
-</div>
-<div *ngrxLet="inputTextDefaultStyle$ as styles" class="item">
-  <app-general-style [title]="'Input'" [style]="styles"></app-general-style>
-</div>
-<div *ngrxLet="btnDefaultStyle$ as styles" class="item">
-  <app-general-style [title]="'Button'" [style]="styles"></app-general-style>
-</div>
-<div *ngrxLet="selectDefaultStyle$ as styles" class="item">
-  <app-general-style [title]="'Select'" [style]="styles"></app-general-style>
-</div>
-<div *ngrxLet="checkboxDefaultStyle$ as styles" class="item">
-  <app-general-style [title]="'checkbox'" [style]="styles"></app-general-style>
-</div>
-<div *ngrxLet="textAreaDefaultStyle$ as styles" class="item">
-  <app-general-style [title]="'text area'" [style]="styles"></app-general-style>
+<div *ngrxLet="defaultComponentsStyle as elemArray">
+  <div *ngFor="let elem of elemArray | keyvalue"  class="item">
+    {{elem.value.id}}
+    <app-styles-block [id]="elem.value.id" [componentType]="elem.value.componentType" [title]="elem.value.title" [style]="elem.value.style" [anotherProperties]="elem.value.anotherProperties"></app-styles-block>
+  </div>
 </div>
 
 <div *ngrxLet="styleElements$ as elemArray">
   <div *ngFor="let elem of elemArray | keyvalue"  class="item">
-    <app-styles-block [id]="elem.value.id" [title]="elem.value.title" [style]="elem.value.style" [anotherProperties]="elem.value.anotherProperties"></app-styles-block>
+    {{elem.value.id}}
+    <app-styles-block [id]="elem.value.id" [componentType]="elem.value.componentType" [title]="elem.value.title" [style]="elem.value.style" [anotherProperties]="elem.value.anotherProperties"></app-styles-block>
   </div>
 </div>
 

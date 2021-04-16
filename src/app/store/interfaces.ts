@@ -1,21 +1,18 @@
+import {ComponentType} from "@angular/cdk/overlay";
 
 export interface Styles {
    defaultStyles?: { [key: string]: string }
    generalStyle?: { [key: string]: string }
-   btnStyle?: { [key: string]: string }
-   inputTextStyle?: { [key: string]: string }
-   checkboxStyles?: { [key: string]: string }
-   labelStyles?: { [key: string]: string }
-   selectStyles?: { [key: string]: string }
-   textareaStyles?: { [key: string]: string }
-   newComponents?: NewComponent[]
+   defaultComponentsStyle: ComponentFields[]
+  newComponents?: ComponentFields[],
 }
 
-export interface NewComponent {
+export interface ComponentFields {
     id?: string | number;
-    title?: string;
+    componentType: string;
+    title: string;
     style: { [key: string]: string };
-    anotherProperties?: any;
+    anotherProperties?: {};
  }
 
 export interface User {
@@ -37,4 +34,9 @@ export interface Response {
   token: AuthResponse;
   error: Error;
   isAuth: boolean;
+}
+
+export interface DefaultComponent {
+  component?: ComponentType<any>
+  inputs: ComponentFields
 }

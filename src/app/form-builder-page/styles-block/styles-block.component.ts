@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 import {
   updateOptionsAction,
   setComponentStyleAction,
-  deleteComponentAction
+  deleteComponentAction, setNewGeneralBtnStyleAction, setDefaultComponentStyleAction
 } from '../../store/component-styles.actions';
-import { NewComponent } from '../../store/interfaces';
+import { ComponentFields } from '../../store/interfaces';
 import { getDefaultStyles } from '../../store/component-styles.reduser';
 
 
@@ -22,6 +22,7 @@ export class StylesBlockComponent implements OnInit {
   @ViewChild('propValue')newPropValue: ElementRef
 
   @Input() id;
+  @Input() componentType;
   @Input() title;
   @Input() style;
   @Input() anotherProperties;
@@ -48,6 +49,7 @@ export class StylesBlockComponent implements OnInit {
   createForm(): void {
     this.form = new FormGroup({
       id: new FormControl(this.id),
+      componentType: new FormControl(this.componentType),
       title: new FormControl(this.title),
       style: new FormGroup({}),
       anotherProperties: new FormGroup({}),
@@ -65,14 +67,12 @@ export class StylesBlockComponent implements OnInit {
 
   addSelectOptions(): void {
     (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls['options']).push(new FormControl('option'));
-    const obj: NewComponent = this.createStyleObject()
-    this.store.dispatch(updateOptionsAction(obj))
+    this.dispatchNewStyle()
   }
 
   deleteOption(controlName): void {
     (<FormArray> (<FormGroup> this.form.controls['anotherProperties']).controls['options']).removeAt(controlName)
-    const obj: NewComponent = this.createStyleObject()
-    this.store.dispatch(updateOptionsAction(obj))
+    this.dispatchNewStyle()
   }
 
   addNewStyleProperty(): boolean {
@@ -81,6 +81,7 @@ export class StylesBlockComponent implements OnInit {
     const controlValue = this.newPropValue ? this.newPropValue.nativeElement.value : null;
     if (controlName && controlValue && !Object.keys(this.form.value.style).includes(controlName)){
       this.store.select(getDefaultStyles).subscribe(styles => this.defaultStyles = styles )
+      console.log(this.defaultStyles)
       for(const prop in this.defaultStyles){
         if(prop === controlName || this.defaultStyles[prop] === controlName){
           (<FormGroup> this.form.controls['style']).addControl(prop, new FormControl(controlValue));
@@ -94,35 +95,51 @@ export class StylesBlockComponent implements OnInit {
 
   deleteStyleProp(controlName): void {
     (<FormGroup> this.form.controls['style']).removeControl(controlName);
-    const obj: NewComponent = this.createStyleObject()
-    this.store.dispatch(setComponentStyleAction(obj))
+    this.dispatchNewStyle()
   }
 
   deleteComponent(): void {
-    const obj: NewComponent = this.createStyleObject()
+    const obj: ComponentFields = {
+      id: this.form.value.id,
+      componentType: this.form.value.componentType,
+      title: this.form.value.title,
+      style: this.form.value.style,
+      anotherProperties: this.form.value.anotherProperties,
+    }
     this.store.dispatch(deleteComponentAction(obj))
   }
 
   onSubmit(): void {
-    if(this.addNewStyleProperty() || !this.showAddProperty){
-      const obj: NewComponent = this.createStyleObject()
-      this.store.dispatch(setComponentStyleAction(obj));
-      this.showApplyBtn = false
-      this.active = false;
-      this.showAddProperty = false
-      this.isErrorMessage = false
-    }else {
-      return
-    }
+    this.addNewStyleProperty()
+    this.dispatchNewStyle()
+    // console.log('form', this.form.value)
+    // const obj: ComponentFields = this.createStyleObject()
+    // if(this.form.value.id){
+    //   if(this.addNewStyleProperty() || !this.showAddProperty){
+    //     this.store.dispatch(setComponentStyleAction(obj));
+    //     this.showApplyBtn = false
+    //     this.active = false;
+    //     this.showAddProperty = false
+    //     this.isErrorMessage = false
+    //   }
+    // }else {
+    //   this.store.dispatch(setDefaultComponentStyleAction(obj))
+    // }
   }
 
-  createStyleObject(): NewComponent{
-    return {
+  dispatchNewStyle(): void{
+    const obj: ComponentFields = {
       id: this.form.value.id,
+      componentType: this.form.value.componentType,
       title: this.form.value.title,
       style: this.form.value.style,
       anotherProperties: this.form.value.anotherProperties,
-    };
+    }
+    if(this.form.value.id){
+      this.store.dispatch(setComponentStyleAction(obj))
+    }else {
+      this.store.dispatch(setDefaultComponentStyleAction(obj))
+    }
   }
 
   showNewPropertyInputs(): void {

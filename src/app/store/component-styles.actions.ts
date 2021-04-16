@@ -1,11 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 
-import { NewComponent } from './interfaces';
+import { ComponentFields } from './interfaces';
 
-export const setGeneralStyle = createAction('[STYLE] set general style', props<NewComponent>());
+export const setGeneralStyle = createAction('[STYLE] set general style', props<ComponentFields>());
 
-export const setComponentStyleAction = createAction('[STYLE] set component style', props<NewComponent>());
-export const addNewComponentAction = createAction('[STYLE] add new component', props<NewComponent>());
+export const setComponentStyleAction = createAction('[STYLE] set component style', props<ComponentFields>());
+export const setDefaultComponentStyleAction = createAction('[STYLE] set default component style', props<ComponentFields>());
+
+export const addNewComponentAction = createAction('[STYLE] add new component', props<ComponentFields>());
 export const addNewStylePropertyAction = createAction('[STYLE] add new style property', props<any>());
 export const updateOptionsAction = createAction('[STYLE] add new option', props<any>());
 export const deleteComponentAction = createAction('[STYLE] delete component', props<any>());

@@ -1,6 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="header">
     <input type="text" formControlName="id" hidden="true">
+    <input type="text" formControlName="componentType" hidden="true">
       <span *ngIf="!active" (dblclick)="showInputs()">{{title}}</span>
       <input type="text" formControlName="title" *ngIf="active" (dblclick)="showInputs()">
     <i class="icon" (click)="showStyleBlock = !showStyleBlock"></i>
@@ -42,11 +43,11 @@
           </div>
         </div>
       </div>
-      <button class="add-btn" type="button" [hidden]="title !== 'Select'" (click)="addSelectOptions()">add option</button>
+      <button class="add-btn" type="button" [hidden]="componentType !== 'Select'" (click)="addSelectOptions()">add option</button>
     </div>
   </div>
  <button class="apply-btn" type="submit" [hidden]="!showApplyBtn">Save Changes</button>
- <button class="delete-component-btn" type="button" (click)="deleteComponent()" *ngIf="title !== 'App General Styles'">Delete Component</button>
+ <button class="delete-component-btn" type="button" (click)="deleteComponent()" *ngIf="id">Delete Component</button>
   <ng-container></ng-container>
 </form>
 
