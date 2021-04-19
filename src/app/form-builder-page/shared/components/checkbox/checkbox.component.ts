@@ -2,10 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-checkbox',
-  template:`<span>
-  <input [ngStyle]="style" id="inputCheckbox" type="checkbox">
-  <label for="inputCheckbox" cdkDrag>{{title}}</label>
-</span>`,
+  templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss']
 })
 export class CheckboxComponent implements OnInit {
   @Input() title = 'checkbox'

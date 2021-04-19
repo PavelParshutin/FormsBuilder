@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-text-area',
-  template: `<textarea cdkDrag [ngStyle]="style" [placeholder]="title"></textarea>`,
+  templateUrl: './text-area.component.html',
+  styleUrls: ['./text-area.component.scss']
 })
 export class TextAreaComponent implements OnInit {
   @Input() title = 'text area';

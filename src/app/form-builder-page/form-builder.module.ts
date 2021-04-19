@@ -8,15 +8,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AccordionSectionComponent } from './accordion-section/accordion-section.component';
 import { FormBuilderPageComponent } from './form-builder-page.component';
-import { InputTextComponent } from './shared/components/input-text.component';
-import { ButtonComponent } from './shared/components/button.component';
-import { CheckboxComponent } from './shared/components/checkbox.component';
-import { TextAreaComponent } from './shared/components/text-area.component';
-import { SelectComponent } from './shared/components/select.component';
-import { LabelComponent } from './shared/components/label.component';
+import { InputTextComponent } from './shared/components/input-text/input-text.component';
+import { ButtonComponent } from './shared/components/button/button.component';
+import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
+import { TextAreaComponent } from './shared/components/text-area/text-area.component';
+import { SelectComponent } from './shared/components/select/select.component';
+import { LabelComponent } from './shared/components/label/label.component';
 import { StylesBlockComponent } from './styles-block/styles-block.component';
-import { GeneralStyleComponent } from './accordion-section/app-general-style/general-style/general-style.component';
-import {DynamicIoModule, DynamicModule} from "ng-dynamic-component";
+import { DynamicIoModule, DynamicModule } from 'ng-dynamic-component';
+import { SharedModule } from '../shared/shared.module';
+import { AddPropertyComponent } from './shared/add-property/add-property.component';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import {DynamicIoModule, DynamicModule} from "ng-dynamic-component";
     AccordionSectionComponent,
     StylesBlockComponent,
     FormBuilderPageComponent,
-    GeneralStyleComponent,
+    AddPropertyComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +42,8 @@ import {DynamicIoModule, DynamicModule} from "ng-dynamic-component";
     DragDropModule,
     PortalModule,
     DynamicModule,
-    DynamicIoModule
+    DynamicIoModule,
+    SharedModule
   ],
   exports: [FormBuilderPageComponent]
 })

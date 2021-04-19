@@ -11,7 +11,6 @@ import { AuthResponse, User } from '../store/interfaces';
 @Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {}
-  isAuth = false
 
   logIn(newUser: User): Observable<AuthResponse>{
     return this.http.post(`${environment.baseUrl}/users`, newUser).pipe(
@@ -26,7 +25,6 @@ export class AuthService {
   registration(newUser: User): Observable<AuthResponse>{
     return this.http.post(`${environment.baseUrl}/users`, newUser).pipe(
       map((user: User) => {
-          this.isAuth = true
           const accessToken = this.createToken(user);
           return {accessToken};
         },

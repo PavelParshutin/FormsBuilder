@@ -2,10 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-select',
-  template: `<select [ngStyle]="style" #selectElement cdkDrag>
-    <option>{{title}}</option>
-    <option *ngFor="let option of anotherProperties.options">{{option}}</option>
-  </select>`,
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
   @Input() title = 'Select'

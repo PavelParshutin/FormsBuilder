@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-label',
-  template: `<label [ngStyle]="style" cdkDrag>{{title}}</label>`,
+  templateUrl: './label.component.html',
+  styleUrls: ['./label.component.scss']
 })
 export class LabelComponent implements OnInit {
   @Input() title = 'Label'

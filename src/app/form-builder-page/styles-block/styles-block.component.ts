@@ -1,14 +1,13 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import {
-  updateOptionsAction,
   setComponentStyleAction,
-  deleteComponentAction, setNewGeneralBtnStyleAction, setDefaultComponentStyleAction
+  deleteComponentAction,
+  setDefaultComponentStyleAction
 } from '../../store/component-styles.actions';
 import { ComponentFields } from '../../store/interfaces';
-import { getDefaultStyles } from '../../store/component-styles.reduser';
 
 
 @Component({
@@ -18,9 +17,6 @@ import { getDefaultStyles } from '../../store/component-styles.reduser';
 })
 export class StylesBlockComponent implements OnInit {
 
-  @ViewChild('propName') newPropKey: ElementRef
-  @ViewChild('propValue')newPropValue: ElementRef
-
   @Input() id;
   @Input() componentType;
   @Input() title;
@@ -29,18 +25,10 @@ export class StylesBlockComponent implements OnInit {
 
   form: FormGroup;
 
-  defaultStyles
-
-  active = false;
   showStyleBlock = false
   showApplyBtn = false
-  showAddProperty = false
-  isErrorMessage = false
 
-
-
-  constructor(private store: Store) {
-  }
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -75,22 +63,10 @@ export class StylesBlockComponent implements OnInit {
     this.dispatchNewStyle()
   }
 
-  addNewStyleProperty(): boolean {
+  addNewStyleProperty(styleProp): void{
     this.showApplyBtn = true
-    const controlName = this.newPropKey ? this.newPropKey.nativeElement.value : null;
-    const controlValue = this.newPropValue ? this.newPropValue.nativeElement.value : null;
-    if (controlName && controlValue && !Object.keys(this.form.value.style).includes(controlName)){
-      this.store.select(getDefaultStyles).subscribe(styles => this.defaultStyles = styles )
-      console.log(this.defaultStyles)
-      for(const prop in this.defaultStyles){
-        if(prop === controlName || this.defaultStyles[prop] === controlName){
-          (<FormGroup> this.form.controls['style']).addControl(prop, new FormControl(controlValue));
-          return true
-        }
-      }
-    }
-    this.isErrorMessage = true
-    return false
+    const {property, value} = styleProp;
+    (<FormGroup> this.form.controls['style']).addControl(property, new FormControl(value));
   }
 
   deleteStyleProp(controlName): void {
@@ -99,42 +75,16 @@ export class StylesBlockComponent implements OnInit {
   }
 
   deleteComponent(): void {
-    const obj: ComponentFields = {
-      id: this.form.value.id,
-      componentType: this.form.value.componentType,
-      title: this.form.value.title,
-      style: this.form.value.style,
-      anotherProperties: this.form.value.anotherProperties,
-    }
+    const obj: ComponentFields = this.createObj()
     this.store.dispatch(deleteComponentAction(obj))
   }
 
   onSubmit(): void {
-    this.addNewStyleProperty()
     this.dispatchNewStyle()
-    // console.log('form', this.form.value)
-    // const obj: ComponentFields = this.createStyleObject()
-    // if(this.form.value.id){
-    //   if(this.addNewStyleProperty() || !this.showAddProperty){
-    //     this.store.dispatch(setComponentStyleAction(obj));
-    //     this.showApplyBtn = false
-    //     this.active = false;
-    //     this.showAddProperty = false
-    //     this.isErrorMessage = false
-    //   }
-    // }else {
-    //   this.store.dispatch(setDefaultComponentStyleAction(obj))
-    // }
   }
 
   dispatchNewStyle(): void{
-    const obj: ComponentFields = {
-      id: this.form.value.id,
-      componentType: this.form.value.componentType,
-      title: this.form.value.title,
-      style: this.form.value.style,
-      anotherProperties: this.form.value.anotherProperties,
-    }
+    const obj: ComponentFields = this.createObj()
     if(this.form.value.id){
       this.store.dispatch(setComponentStyleAction(obj))
     }else {
@@ -142,17 +92,13 @@ export class StylesBlockComponent implements OnInit {
     }
   }
 
-  showNewPropertyInputs(): void {
-    this.showAddProperty = !this.showAddProperty
-    this.showApplyBtn = !this.showApplyBtn
-    this.isErrorMessage = false
-  }
-
-  showInputs(): void {
-    this.active = !this.active
-    this.isErrorMessage = false
-    if(this.showAddProperty !== true){
-      this.showApplyBtn = !this.showApplyBtn
+  createObj(): ComponentFields {
+    return {
+      id: this.form.value.id,
+      componentType: this.form.value.componentType,
+      title: this.form.value.title,
+      style: this.form.value.style,
+      anotherProperties: this.form.value.anotherProperties,
     }
   }
 

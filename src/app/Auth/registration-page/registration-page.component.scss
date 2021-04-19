@@ -11,7 +11,7 @@
 }
 
 .login-error {
-  color: red;
+  color: $error-color;
   text-align: center;
 }
 
@@ -27,8 +27,9 @@ label {
   margin: 0 auto;
   text-align: center;
   font-size: 16px;
-  color: black;
+  color: $color-black;
 }
+
 .btn {
   display:block;
   background: $color-2;

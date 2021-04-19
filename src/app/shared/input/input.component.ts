@@ -1,4 +1,4 @@
-import { Component, forwardRef, Provider } from '@angular/core';
+import { Component, forwardRef, Input, Output, EventEmitter, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const VALUE_ACCESSOR: Provider = {
@@ -14,9 +14,30 @@ const VALUE_ACCESSOR: Provider = {
   providers: [VALUE_ACCESSOR]
 })
 export class InputComponent implements ControlValueAccessor {
-  state = ''
+  @Input() propName: string
+  @Output() isChange = new EventEmitter<boolean>()
 
-  private onChange = (value: any) => {}
+  previousValue: string
+  state: string
+  isActiveInput = false
+
+  compareValue(previousValue, newValue): boolean{
+    if (previousValue !== newValue) {
+      return true
+    }
+    return false
+  }
+
+  private onChange = (toOutsideValue: string) => {
+  }
+
+  onBlur(currentState: string): void {
+    this.isActiveInput = false
+    if(this.compareValue(this.previousValue, currentState)){
+      this.isChange.emit(true)
+      this.onChange(currentState)
+    }
+  }
 
   registerOnChange(fn: any): void {
     this.onChange = fn
@@ -28,9 +49,11 @@ export class InputComponent implements ControlValueAccessor {
   setDisabledState(isDisabled: boolean): void {
   }
 
-  writeValue(state : any): void {
-    this.state = state
+  writeValue(fromOutsideValue: string): void {
+    this.state = fromOutsideValue
+    this.previousValue = fromOutsideValue
   }
+
 
 
 }

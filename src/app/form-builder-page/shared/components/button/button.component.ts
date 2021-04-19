@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-button',
-  template: `<button cdkDrag [ngStyle]="style">{{title}}</button>`,
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent implements OnInit {
 

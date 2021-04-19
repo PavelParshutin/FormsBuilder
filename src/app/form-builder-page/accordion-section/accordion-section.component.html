@@ -1,21 +1,3 @@
-<!--<div *ngrxLet="labelDefaultStyle$ as elem" class="item">-->
-<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
-<!--</div>-->
-<!--<div *ngrxLet="inputTextDefaultStyle$ as elem" class="item">-->
-<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
-<!--</div>-->
-<!--<div *ngrxLet="btnDefaultStyle$ as elem" class="item">-->
-<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
-<!--</div>-->
-<!--<div *ngrxLet="selectDefaultStyle$ as elem" class="item">-->
-<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
-<!--</div>-->
-<!--<div *ngrxLet="checkboxDefaultStyle$ as elem" class="item">-->
-<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
-<!--</div>-->
-<!--<div *ngrxLet="textAreaDefaultStyle$ as elem" class="item">-->
-<!--  <app-styles-block [id]="" [componentType]="elem.componentType" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
-<!--</div>-->
 
 <div *ngrxLet="defaultComponentsStyle as elemArray">
   <div *ngFor="let elem of elemArray | keyvalue"  class="item">
@@ -26,7 +8,6 @@
 
 <div *ngrxLet="styleElements$ as elemArray">
   <div *ngFor="let elem of elemArray | keyvalue"  class="item">
-    {{elem.value.id}}
     <app-styles-block [id]="elem.value.id" [componentType]="elem.value.componentType" [title]="elem.value.title" [style]="elem.value.style" [anotherProperties]="elem.value.anotherProperties"></app-styles-block>
   </div>
 </div>

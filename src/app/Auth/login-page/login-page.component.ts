@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import {loginAction} from "../../store/auth.actions";
-import {Router} from "@angular/router";
-import {getIsAuth} from "../../store/auth.reducer";
+import { loginAction } from '../../store/auth.actions';
+import { getIsAuth } from '../../store/auth.reducer';
 
 @Component({
   selector: 'app-login-page',
@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
     this.store.dispatch(loginAction(this.form.value))
     const isAuth = this.store.select(getIsAuth)
     isAuth.subscribe(res => {
-      console.log('res login',res)
+      console.log('response login', res)
       if(res){
         this.router.navigate(['/forms'])
       }

@@ -13,12 +13,12 @@ import {
   getDefaultComponentsStyle,
   getGeneralStyle, getNewComponentsArray
 } from '../store/component-styles.reduser';
-import { LabelComponent } from './shared/components/label.component';
-import { InputTextComponent } from './shared/components/input-text.component';
-import { ButtonComponent } from './shared/components/button.component';
-import { SelectComponent } from './shared/components/select.component';
-import { CheckboxComponent } from './shared/components/checkbox.component';
-import { TextAreaComponent } from './shared/components/text-area.component';
+import { LabelComponent } from './shared/components/label/label.component';
+import { InputTextComponent } from './shared/components/input-text/input-text.component';
+import { ButtonComponent } from './shared/components/button/button.component';
+import { SelectComponent } from './shared/components/select/select.component';
+import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
+import { TextAreaComponent } from './shared/components/text-area/text-area.component';
 import { addNewComponentAction} from '../store/component-styles.actions';
 import { DefaultComponent, ComponentFields } from '../store/interfaces';
 import { ComponentName } from '../store/enums';
