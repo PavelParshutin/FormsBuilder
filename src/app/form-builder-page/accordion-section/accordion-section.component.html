@@ -1,0 +1,17 @@
+
+<div *ngrxLet="defaultComponentsStyle as elemArray">
+  <div *ngFor="let elem of elemArray | keyvalue"  class="item">
+    {{elem.value.id}}
+    <app-styles-block [id]="elem.value.id" [componentType]="elem.value.componentType" [title]="elem.value.title" [style]="elem.value.style" [anotherProperties]="elem.value.anotherProperties"></app-styles-block>
+  </div>
+</div>
+
+<div *ngrxLet="styleElements$ as elemArray">
+  <div *ngFor="let elem of elemArray | keyvalue"  class="item">
+    <app-styles-block [id]="elem.value.id" [componentType]="elem.value.componentType" [title]="elem.value.title" [style]="elem.value.style" [anotherProperties]="elem.value.anotherProperties"></app-styles-block>
+  </div>
+</div>
+
+<!--<div *ngFor="let elem of styleElements" class="item">-->
+<!--  <app-styles-block [id]="elem.id" [title]="elem.title" [style]="elem.style" [anotherProperties]="elem.anotherProperties"></app-styles-block>-->
+<!--</div>-->

@@ -1,0 +1,25 @@
+
+<div class="form-builder" #form>
+  <app-accordion-section [ngStyle]="tempGeneralStyle"></app-accordion-section>
+  <div [ngStyle]="tempGeneralStyle" cdkDropList
+       #dropListSection="cdkDropList"
+       [cdkDropListData]="dropList"
+       [cdkDropListConnectedTo]="[dragListSection]"
+       (cdkDropListDropped)="drop($event)">
+    <span *ngFor="let item of dropList">
+      <ng-container  *ngComponentOutlet="item.component; ndcDynamicInputs: item.inputs">
+      </ng-container>
+    </span>
+  </div>
+
+  <div [ngStyle]="tempGeneralStyle" cdkDropList
+       #dragListSection="cdkDropList"
+       [cdkDropListData]="dragList"
+       [cdkDropListConnectedTo]="[dropListSection]"
+       (cdkDropListDropped)="drop($event)">
+    <span *ngFor="let item of dragList">
+      <ng-container  *ngComponentOutlet="item.component; ndcDynamicInputs: item.inputs">
+      </ng-container>
+    </span>
+  </div>
+</div>

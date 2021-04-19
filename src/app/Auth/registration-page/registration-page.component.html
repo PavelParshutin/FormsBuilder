@@ -1,0 +1,22 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="login-form">
+
+  <div class="login-input-block">
+    <label for="email">Email</label>
+    <input id="email" type="text" formControlName="email" placeholder="Введите email">
+    <div *ngIf="registrationForm.get('email').touched && registrationForm.get('email').invalid" class="login-error">
+      <small *ngIf="registrationForm.get('email').errors.required">Поле не может быть пустым</small>
+      <small *ngIf="registrationForm.get('email').errors.email">Некоректный email</small>
+    </div>
+  </div>
+
+  <div class="login-input-block">
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password" placeholder="Введите пароль">
+    <div *ngIf="registrationForm.get('password').touched && registrationForm.get('password').invalid" class="login-error">
+      <small *ngIf="registrationForm.get('password').errors.required">Поле не может быть пустым</small>
+      <small *ngIf="registrationForm.get('password').errors.minlength">Пароль не может быть менше 4х символов</small>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="registrationForm.invalid || submited" type="submit">Create</button>
+</form>
