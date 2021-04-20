@@ -7,10 +7,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { ReactiveComponentModule } from '@ngrx/component';
 import { SharedModule } from './shared/shared.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppRoutingModule } from './app-routing-module';
@@ -49,5 +49,4 @@ import { AuthPageComponent } from './Auth/auth-page/auth-page.component';
   providers: [AuthService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

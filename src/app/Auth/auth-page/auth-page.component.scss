@@ -1,16 +1,16 @@
 @import "src/assets/scss/variables";
 
-.login-form {
+.auth-form {
   max-width: 600px;
   border: 1px solid $color-5;
   margin: 0 auto;
 }
 
-.login-input-block {
+.auth-input-block {
   text-align: center;
 }
 
-.login-error {
+.auth-error {
   color: $error-color;
   text-align: center;
 }
@@ -49,7 +49,8 @@ label {
   background: $color-2;
   color: $color-3;
 }
+
 .btn-primary {
-  background-color:  $color-1;
+  background-color: $color-1;
   color: $color-white;
 }

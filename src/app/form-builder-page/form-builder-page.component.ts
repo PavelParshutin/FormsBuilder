@@ -2,16 +2,15 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  OnInit,
-  ViewChild,
-  ViewContainerRef
+  OnInit
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {CdkDragDrop, copyArrayItem, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import {
-  getDefaultComponentsStyle,
-  getGeneralStyle, getNewComponentsArray
+  getDefaultComponentsStyleSelector,
+  getAppGeneralStyleSelector,
+  getNewComponentsArraySelector
 } from '../store/component-styles.reduser';
 import { LabelComponent } from './shared/components/label/label.component';
 import { InputTextComponent } from './shared/components/input-text/input-text.component';
@@ -19,7 +18,7 @@ import { ButtonComponent } from './shared/components/button/button.component';
 import { SelectComponent } from './shared/components/select/select.component';
 import { CheckboxComponent } from './shared/components/checkbox/checkbox.component';
 import { TextAreaComponent } from './shared/components/text-area/text-area.component';
-import { addNewComponentAction} from '../store/component-styles.actions';
+import { addNewComponentAction } from '../store/component-styles.actions';
 import { DefaultComponent, ComponentFields } from '../store/interfaces';
 import { ComponentName } from '../store/enums';
 
@@ -63,8 +62,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
 
   tempGeneralStyle;
 
-  constructor(private store: Store, private cdr: ChangeDetectorRef) {
-  }
+  constructor(private store: Store, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.subscribe()
@@ -83,7 +81,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   }
 
   drop(event: CdkDragDrop<DefaultComponent[]>): void {
-    if (event.previousContainer === event.container) {
+    if(event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       // copyArrayItem(
@@ -97,37 +95,32 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  subscribe(): void{
-    this.store.select(getGeneralStyle).subscribe(style => this.tempGeneralStyle = style)
+  subscribe(): void {
+    this.store.select(getAppGeneralStyleSelector).subscribe(style => this.tempGeneralStyle = style)
 
-    const defaultComponentsStyle$ = this.store.select(getDefaultComponentsStyle)
+    const defaultComponentsStyle$ = this.store.select(getDefaultComponentsStyleSelector)
     defaultComponentsStyle$.subscribe(comp => {
       this.defaultComponentsStyles = comp
       this.setStyle(comp, this.dragList)
     })
 
-    const dropElemStyles$ = this.store.select(getNewComponentsArray);
+    const dropElemStyles$ = this.store.select(getNewComponentsArraySelector);
     dropElemStyles$.subscribe(comp => {
       this.setStyle(comp, this.dropList)
-      for(const elem of this.dropList){
+      for(const elem of this.dropList) {
         const result = comp.find(item => item.id === elem.inputs.id)
-        if(!result){
+        if(!result) {
           this.dropList = this.dropList.filter(item => item.inputs.id !== elem.inputs.id)
         }
       }
     });
   }
 
-  setStyle(arrayComp: ComponentFields[], arrayForChange: Array<DefaultComponent>): void{
-    let compareParam = ''
-    if(arrayForChange === this.dragList){
-      compareParam = 'componentType'
-    } else {
-      compareParam = 'id'
-    }
-    for(const comp of arrayComp){
+  setStyle(arrayComp: ComponentFields[], arrayForChange: Array<DefaultComponent>): void {
+    const compareParam = arrayForChange === this.dragList ? 'componentType' : 'id'
+    for(const comp of arrayComp) {
       const currentElement = arrayForChange.find(elem => elem.inputs[compareParam] === comp[compareParam])
-      if(currentElement){
+      if(currentElement) {
         currentElement.inputs.style = comp.style;
         currentElement.inputs.title = comp.title;
         currentElement.inputs.anotherProperties = comp.anotherProperties;
@@ -135,7 +128,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  createComponent(componentType: string): DefaultComponent{
+  createComponent(componentType: string): DefaultComponent {
     const componentStyle = this.defaultComponentsStyles.find(item => item.componentType === componentType)
     const defaultClass = this.defaultComponents.find(item => item.componentType === componentType)
     return {

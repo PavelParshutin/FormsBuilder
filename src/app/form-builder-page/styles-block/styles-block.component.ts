@@ -3,7 +3,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import {
-  setComponentStyleAction,
+  setNewComponentStyleAction,
   deleteComponentAction,
   setDefaultComponentStyleAction
 } from '../../store/component-styles.actions';
@@ -28,7 +28,7 @@ export class StylesBlockComponent implements OnInit {
   showStyleBlock = false
   showApplyBtn = false
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -63,7 +63,7 @@ export class StylesBlockComponent implements OnInit {
     this.dispatchNewStyle()
   }
 
-  addNewStyleProperty(styleProp): void{
+  addNewStyleProperty(styleProp): void {
     this.showApplyBtn = true
     const {property, value} = styleProp;
     (<FormGroup> this.form.controls['style']).addControl(property, new FormControl(value));
@@ -83,11 +83,11 @@ export class StylesBlockComponent implements OnInit {
     this.dispatchNewStyle()
   }
 
-  dispatchNewStyle(): void{
+  dispatchNewStyle(): void {
     const obj: ComponentFields = this.createObj()
-    if(this.form.value.id){
-      this.store.dispatch(setComponentStyleAction(obj))
-    }else {
+    if(this.form.value.id) {
+      this.store.dispatch(setNewComponentStyleAction(obj))
+    } else {
       this.store.dispatch(setDefaultComponentStyleAction(obj))
     }
   }

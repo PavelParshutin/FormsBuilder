@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
+
   @Input() title = 'Select'
   @Input() style: {}
   @Input() id = ''
@@ -13,7 +14,8 @@ export class SelectComponent implements OnInit {
     options: []
   }
 
-  constructor() {}
+  constructor() { }
 
-ngOnInit(): void {}
+  ngOnInit(): void { }
+
 }

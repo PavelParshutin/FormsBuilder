@@ -1,10 +1,10 @@
-import {ComponentType} from "@angular/cdk/overlay";
+import { ComponentType } from '@angular/cdk/overlay';
 
 export interface Styles {
-   defaultStyles?: { [key: string]: string }
-   generalStyle?: { [key: string]: string }
+   availableStyleProperties: { [key: string]: string }
+   generalStyle: { [key: string]: string }
    defaultComponentsStyle: ComponentFields[]
-  newComponents?: ComponentFields[],
+   newComponents: ComponentFields[],
 }
 
 export interface ComponentFields {
@@ -12,8 +12,13 @@ export interface ComponentFields {
     componentType: string;
     title: string;
     style: { [key: string]: string };
-    anotherProperties?: {};
+    anotherProperties: {};
  }
+
+export interface DefaultComponent {
+  component: ComponentType<any>
+  inputs: ComponentFields
+}
 
 export interface User {
   id?: string;
@@ -34,9 +39,4 @@ export interface Response {
   token: AuthResponse;
   error: Error;
   isAuth: boolean;
-}
-
-export interface DefaultComponent {
-  component?: ComponentType<any>
-  inputs: ComponentFields
 }

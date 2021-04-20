@@ -3,11 +3,11 @@
   <span>
     <div>Property Name</div>
     <input id="propName" formControlName="property" type="text" (blur)="addNewStyleProperty()" #propName placeholder="enter property name">
-
     <div *ngIf="form.get('property').touched && form.get('property').invalid">
       <small class="error-message" *ngIf="form.get('property').errors.required">Field must be not empty</small>
     </div>
   </span>
+
   <span>
     <div>Property Value</div>
     <input id="propValue" formControlName="value" type="text" (blur)="addNewStyleProperty()" #propValue placeholder="enter property value">

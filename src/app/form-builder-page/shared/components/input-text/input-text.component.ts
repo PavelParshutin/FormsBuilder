@@ -6,12 +6,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./input-text.component.scss'],
 })
 export class InputTextComponent implements OnInit {
+
   @Input() title = 'Input';
   @Input() style: {};
   @Input() id = '';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 }

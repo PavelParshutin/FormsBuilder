@@ -6,12 +6,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./checkbox.component.scss']
 })
 export class CheckboxComponent implements OnInit {
+
   @Input() title = 'checkbox'
   @Input() style: {}
   @Input() id = ''
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 }

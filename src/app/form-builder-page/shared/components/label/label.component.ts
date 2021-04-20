@@ -6,11 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./label.component.scss']
 })
 export class LabelComponent implements OnInit {
+
   @Input() title = 'Label'
   @Input() style: {}
   @Input() id = ''
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -16,8 +16,7 @@ import { AuthResponse, User, Error } from './interfaces';
 
 @Injectable()
 export class Effects {
-  constructor(private actions$: Actions, private auth: AuthService) {
-  }
+  constructor(private actions$: Actions, private auth: AuthService) { }
 
   onRegistration$ = createEffect( () =>
     this.actions$.pipe(

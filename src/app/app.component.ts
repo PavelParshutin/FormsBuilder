@@ -9,10 +9,8 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit {
-  ngAfterViewInit(): void {
-  }
+export class AppComponent implements OnInit {
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
+
 }

@@ -2,17 +2,16 @@ import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/
 
 import { Styles} from './interfaces';
 import { addNewComponentAction,
-  setComponentStyleAction,
+  setNewComponentStyleAction,
   setDefaultComponentStyleAction,
-  setGeneralStyle,
-  updateOptionsAction,
+  setAppGeneralStyleAction,
   deleteComponentAction
 } from './component-styles.actions';
-import {ComponentName} from "./enums";
+import { ComponentName } from './enums';
 
 
 export const initialState: Styles = {
-  defaultStyles: {
+  availableStyleProperties: {
     fontSize: 'font-size',
     fontWeigh: 'font-weigh',
     fontStyle: 'font-style',
@@ -44,15 +43,17 @@ export const initialState: Styles = {
   },
   defaultComponentsStyle : [
     {
+      componentType: ComponentName.Label,
+      title: 'Label',
       style: {
         margin: '10px'
       },
-      title: 'Label',
-      componentType: ComponentName.Label,
       anotherProperties: {},
       id: '',
     },
     {
+      componentType: ComponentName.Input,
+      title: 'Input',
       style: {
         width: '100%',
         border: '1px solid black',
@@ -61,29 +62,29 @@ export const initialState: Styles = {
         borderRadius: '20px',
         outline: 'none'
       },
-      title: 'Input',
-      componentType: ComponentName.Input,
       anotherProperties: {},
       id: ''
     },
     {
-        style: {
-          border: '1px solid black',
-          outline: 'none',
-          padding: '10px 15px',
-          fontSize: '14px',
-          color: 'black',
-          backgroundColor: 'white',
-          borderRadius: '20px',
-          cursor: 'pointer',
-          margin: '10px'
-        },
-        title: 'Button',
-        componentType: ComponentName.Button,
-        anotherProperties: {},
-        id: ''
+      componentType: ComponentName.Button,
+      title: 'Button',
+      style: {
+        border: '1px solid black',
+        outline: 'none',
+        padding: '10px 15px',
+        fontSize: '14px',
+        color: 'black',
+        backgroundColor: 'white',
+        borderRadius: '20px',
+        cursor: 'pointer',
+        margin: '10px'
+      },
+      anotherProperties: {},
+      id: ''
     },
     {
+      componentType: ComponentName.Select,
+      title: 'Select',
       style: {
         width: '30%',
         padding: '10px 15px',
@@ -92,24 +93,24 @@ export const initialState: Styles = {
         borderRadius: '30px',
         outline: 'none'
       },
-      title: 'Select',
-      componentType: ComponentName.Select,
       anotherProperties: {
         options: ['option 1', 'option 2']
       },
       id: ''
     },
     {
+      componentType: ComponentName.Checkbox,
+      title: 'CheckBox',
       style: {
         margin: '5px'
       },
-      title: 'CheckBox',
-      componentType: ComponentName.Checkbox,
       anotherProperties: {},
       id: ''
     },
     {
-        style: {
+      componentType: ComponentName.TextArea,
+      title: 'Text Area',
+      style: {
           display: 'block',
           width: '100%',
           border: '1px solid black',
@@ -118,27 +119,22 @@ export const initialState: Styles = {
           padding: '10px 15px',
           margin: '10px auto',
         },
-        title: 'Text Area',
-        anotherProperties: {},
-        componentType: ComponentName.TextArea,
-        id: ''
+      anotherProperties: {},
+      id: ''
     }
-  ]
-
-  ,
+  ],
   newComponents: []
 };
 
 export const styleReducer = createReducer(initialState,
-  on(setGeneralStyle, (state, prop) => ({
+  on(setAppGeneralStyleAction, (state, prop) => ({
     ...state,
     generalStyle: prop.style
   })),
-  on(setComponentStyleAction, (state, prop) => {
+  on(setNewComponentStyleAction, (state, prop) => {
     const index = state.newComponents.findIndex(item => item.id === prop.id)
     const tempComponentsArray = [...state.newComponents]
     tempComponentsArray.splice(index, 1, prop)
-    console.log(tempComponentsArray)
     return {
       ...state,
       newComponents: tempComponentsArray
@@ -156,7 +152,6 @@ export const styleReducer = createReducer(initialState,
     const index = state.defaultComponentsStyle.findIndex(item => item.componentType === prop.componentType)
     const tempComponentsArray = [...state.defaultComponentsStyle]
     tempComponentsArray.splice(index, 1, prop)
-    console.log(tempComponentsArray)
     return {
       ...state,
       defaultComponentsStyle: tempComponentsArray
@@ -166,8 +161,8 @@ export const styleReducer = createReducer(initialState,
 
 export const defaultStylesFeatureSelector = createFeatureSelector<Styles>('defaultComponentStyles');
 
-export const getDefaultStyles = createSelector(defaultStylesFeatureSelector, state => state.defaultStyles);
-export const getGeneralStyle = createSelector(defaultStylesFeatureSelector, state => state.generalStyle);
+export const getAvailableStylePropertiesSelector = createSelector(defaultStylesFeatureSelector, state => state.availableStyleProperties);
+export const getAppGeneralStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.generalStyle);
 
-export const getNewComponentsArray = createSelector(defaultStylesFeatureSelector, state => state.newComponents);
-export const getDefaultComponentsStyle = createSelector(defaultStylesFeatureSelector, state => state.defaultComponentsStyle);
+export const getNewComponentsArraySelector = createSelector(defaultStylesFeatureSelector, state => state.newComponents);
+export const getDefaultComponentsStyleSelector = createSelector(defaultStylesFeatureSelector, state => state.defaultComponentsStyle);

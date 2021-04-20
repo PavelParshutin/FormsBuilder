@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { getDefaultStyles } from '../../../store/component-styles.reduser';
+import { getAvailableStylePropertiesSelector } from '../../../store/component-styles.reduser';
 
 @Component({
   selector: 'app-add-property',
@@ -32,10 +32,10 @@ export class AddPropertyComponent implements OnInit {
   addNewStyleProperty(): void {
     const controlName = this.newPropKey ? this.newPropKey.nativeElement.value : null;
     const controlValue = this.newPropValue ? this.newPropValue.nativeElement.value : null;
-    if (controlName && controlValue && !Object.keys(this.styles).includes(controlName)){
-      this.store.select(getDefaultStyles).subscribe(styles => this.defaultStyles = styles )
-      for(const prop in this.defaultStyles){
-        if(prop === controlName || this.defaultStyles[prop] === controlName){
+    if (controlName && controlValue && !Object.keys(this.styles).includes(controlName)) {
+      this.store.select(getAvailableStylePropertiesSelector).subscribe(styles => this.defaultStyles = styles )
+      for(const prop in this.defaultStyles) {
+        if(prop === controlName || this.defaultStyles[prop] === controlName) {
           this.newProperty.emit(this.form.value)
           break;
         }

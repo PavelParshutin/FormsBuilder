@@ -1,4 +1,4 @@
-import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 
 import { registrationSuccessAction, registrationFailedAction, loginSuccessAction, loginFailedAction } from './auth.actions';
 import { Response } from './interfaces';
@@ -40,5 +40,5 @@ export const authReducer = createReducer(
 
 export const defaultStylesFeatureSelector = createFeatureSelector<Response>('authReducer');
 
-export const getToken = createSelector(defaultStylesFeatureSelector, state => state.token);
-export const getIsAuth = createSelector(defaultStylesFeatureSelector, state => state.isAuth);
+export const getTokenSelector = createSelector(defaultStylesFeatureSelector, state => state.token);
+export const getIsAuthSelector = createSelector(defaultStylesFeatureSelector, state => state.isAuth);

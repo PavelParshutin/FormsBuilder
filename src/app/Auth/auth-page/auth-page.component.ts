@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { AuthService } from '../../services/auth.service';
 import { loginAction, registrationAction } from '../../store/auth.actions';
-import { getIsAuth } from '../../store/auth.reducer';
+import { AuthService } from '../../services/auth.service';
+import { getIsAuthSelector } from '../../store/auth.reducer';
 
 @Component({
   selector: 'app-auth-page',
@@ -16,9 +16,9 @@ import { getIsAuth } from '../../store/auth.reducer';
 })
 export class AuthPageComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  submited = false;
-  bntName: string
-  unsubscribe$ = new Subject()
+  submitted = false;
+  bntName: string;
+  unsubscribe$ = new Subject();
 
   constructor(private auth: AuthService, private store: Store, private router: Router) {
   }
@@ -37,7 +37,7 @@ export class AuthPageComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(loginAction(this.form.value))
     }
-    this.store.select(getIsAuth).pipe(
+    this.store.select(getIsAuthSelector).pipe(
       takeUntil(this.unsubscribe$),
       filter(isAuth => !!isAuth)
     ).subscribe((isAuth: boolean) => this.router.navigate(['/forms']))
@@ -45,8 +45,7 @@ export class AuthPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
-    this.unsubscribe$.complete()
+    this.unsubscribe$.complete();
   }
-
 
 }

@@ -10,9 +10,9 @@ import { AuthResponse, User } from '../store/interfaces';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  logIn(newUser: User): Observable<AuthResponse>{
+  logIn(newUser: User): Observable<AuthResponse> {
     return this.http.post(`${environment.baseUrl}/users`, newUser).pipe(
       map((user: User) => {
           const accessToken = this.createToken(user);
@@ -22,22 +22,19 @@ export class AuthService {
       ))
   }
 
-  registration(newUser: User): Observable<AuthResponse>{
+  registration(newUser: User): Observable<AuthResponse> {
     return this.http.post(`${environment.baseUrl}/users`, newUser).pipe(
       map((user: User) => {
           const accessToken = this.createToken(user);
           return {accessToken};
         },
-        catchError(
-          err => {
-            return err;
-          }
-        )
-      ))
+        catchError(err => err)
+      )
+    )
   }
 
-  createToken(obj): string
-  {
+  createToken(obj): string {
     return jwtEncode(obj, 'secretKey')
   }
+
 }

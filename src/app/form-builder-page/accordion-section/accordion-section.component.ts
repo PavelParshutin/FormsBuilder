@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import {
-  getDefaultComponentsStyle,
-  getNewComponentsArray,
+  getDefaultComponentsStyleSelector,
+  getNewComponentsArraySelector,
 } from '../../store/component-styles.reduser';
 import { ComponentFields } from '../../store/interfaces';
 
@@ -21,8 +21,8 @@ export class AccordionSectionComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.styleElements$ = this.store.select(getNewComponentsArray)
-    this.defaultComponentsStyle = this.store.select(getDefaultComponentsStyle)
+    this.styleElements$ = this.store.select(getNewComponentsArraySelector)
+    this.defaultComponentsStyle = this.store.select(getDefaultComponentsStyleSelector)
   }
 
 }

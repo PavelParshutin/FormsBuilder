@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 import { loginAction } from '../../store/auth.actions';
-import { getIsAuth } from '../../store/auth.reducer';
+import { getIsAuthSelector } from '../../store/auth.reducer';
 
 @Component({
   selector: 'app-login-page',
@@ -28,7 +28,7 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(): void {
     this.store.dispatch(loginAction(this.form.value))
-    const isAuth = this.store.select(getIsAuth)
+    const isAuth = this.store.select(getIsAuthSelector)
     isAuth.subscribe(res => {
       console.log('response login', res)
       if(res){

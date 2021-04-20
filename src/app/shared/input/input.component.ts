@@ -21,11 +21,8 @@ export class InputComponent implements ControlValueAccessor {
   state: string
   isActiveInput = false
 
-  compareValue(previousValue, newValue): boolean{
-    if (previousValue !== newValue) {
-      return true
-    }
-    return false
+  compareValue(previousValue: string, newValue: string): boolean {
+    return previousValue !== newValue;
   }
 
   private onChange = (toOutsideValue: string) => {
@@ -33,7 +30,7 @@ export class InputComponent implements ControlValueAccessor {
 
   onBlur(currentState: string): void {
     this.isActiveInput = false
-    if(this.compareValue(this.previousValue, currentState)){
+    if(this.compareValue(this.previousValue, currentState)) {
       this.isChange.emit(true)
       this.onChange(currentState)
     }
@@ -53,7 +50,5 @@ export class InputComponent implements ControlValueAccessor {
     this.state = fromOutsideValue
     this.previousValue = fromOutsideValue
   }
-
-
 
 }

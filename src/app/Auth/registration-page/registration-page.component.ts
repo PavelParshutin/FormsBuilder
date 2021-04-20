@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { AuthService } from '../../services/auth.service';
 import { registrationAction } from '../../store/auth.actions';
-import { getIsAuth } from '../../store/auth.reducer';
+import { getIsAuthSelector } from '../../store/auth.reducer';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class RegistrationPageComponent implements OnInit {
 
   onSubmit(): void {
     this.store.dispatch(registrationAction(this.registrationForm.value))
-    const isAuth = this.store.select(getIsAuth)
+    const isAuth = this.store.select(getIsAuthSelector)
     isAuth.subscribe(res => {
       console.log('res registr', res)
       if(res){

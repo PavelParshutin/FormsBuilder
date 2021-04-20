@@ -11,10 +11,8 @@ export class ButtonComponent implements OnInit {
   @Input() title = 'Button'
   @Input() id = ''
 
-  constructor() {
-  }
+  constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

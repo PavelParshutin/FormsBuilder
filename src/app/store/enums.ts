@@ -1,4 +1,4 @@
-export enum ComponentName{
+export enum ComponentName {
   Button = 'Button',
   Label = 'Label',
   Input = 'Input',
