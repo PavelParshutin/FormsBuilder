@@ -4,8 +4,8 @@
     <label for="email">Email</label>
     <input id="email" type="text" formControlName="email" placeholder="Введите email">
     <div *ngIf="registrationForm.get('email').touched && registrationForm.get('email').invalid" class="login-error">
-      <small *ngIf="registrationForm.get('email').errors.required">Поле не может быть пустым</small>
-      <small *ngIf="registrationForm.get('email').errors.email">Некоректный email</small>
+      <small *ngIf="registrationForm.get('email').errors.required">Field must be not empty</small>
+      <small *ngIf="registrationForm.get('email').errors.email">Incorrect email</small>
     </div>
   </div>
 
@@ -13,8 +13,8 @@
     <label for="password">Password</label>
     <input id="password" type="password" formControlName="password" placeholder="Введите пароль">
     <div *ngIf="registrationForm.get('password').touched && registrationForm.get('password').invalid" class="login-error">
-      <small *ngIf="registrationForm.get('password').errors.required">Поле не может быть пустым</small>
-      <small *ngIf="registrationForm.get('password').errors.minlength">Пароль не может быть менше 4х символов</small>
+      <small *ngIf="registrationForm.get('password').errors.required">Field must be not empty</small>
+      <small *ngIf="registrationForm.get('password').errors.minlength">Password cannot be less then 4 characters</small>
     </div>
   </div>
 

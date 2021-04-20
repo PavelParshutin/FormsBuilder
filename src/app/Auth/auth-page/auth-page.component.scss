@@ -1,0 +1,55 @@
+@import "src/assets/scss/variables";
+
+.login-form {
+  max-width: 600px;
+  border: 1px solid $color-5;
+  margin: 0 auto;
+}
+
+.login-input-block {
+  text-align: center;
+}
+
+.login-error {
+  color: $error-color;
+  text-align: center;
+}
+
+input {
+  margin: 0 auto;
+  width: 90%;
+  padding: 4px;
+  border: 1px solid $color-5;
+}
+
+label {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+  color: $color-black;
+}
+
+.btn {
+  display:block;
+  background: $color-2;
+  color: $color-4;
+  padding: 10px 15px;
+  margin: 10px auto;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s linear;
+  outline: none;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  background: $color-2;
+  color: $color-3;
+}
+.btn-primary {
+  background-color:  $color-1;
+  color: $color-white;
+}

@@ -5,14 +5,14 @@
     <input id="propName" formControlName="property" type="text" (blur)="addNewStyleProperty()" #propName placeholder="enter property name">
 
     <div *ngIf="form.get('property').touched && form.get('property').invalid">
-      <small class="error-message" *ngIf="form.get('property').errors.required">Fields must be not empty</small>
+      <small class="error-message" *ngIf="form.get('property').errors.required">Field must be not empty</small>
     </div>
   </span>
   <span>
     <div>Property Value</div>
     <input id="propValue" formControlName="value" type="text" (blur)="addNewStyleProperty()" #propValue placeholder="enter property value">
     <div *ngIf="form.get('value').touched && form.get('value').invalid">
-      <small class="error-message" *ngIf="form.get('value').errors.required">Fields must be not empty</small>
+      <small class="error-message" *ngIf="form.get('value').errors.required">Field must be not empty</small>
     </div>
   </span>
 </div>

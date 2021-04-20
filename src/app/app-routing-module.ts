@@ -6,11 +6,12 @@ import { RegistrationPageComponent } from './Auth/registration-page/registration
 import { LoginPageComponent } from './Auth/login-page/login-page.component';
 import { FormBuilderPageComponent } from './form-builder-page/form-builder-page.component';
 import { AuthGuard } from './auth.guard';
+import {AuthPageComponent} from "./Auth/auth-page/auth-page.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
-  {path: 'registration', component: RegistrationPageComponent},
-  {path: 'login', component: LoginPageComponent},
+  {path: 'registration', component: AuthPageComponent},
+  {path: 'login', component: AuthPageComponent},
   {path: 'forms', component: FormBuilderPageComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: ''},
 ]
