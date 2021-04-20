@@ -17,7 +17,7 @@ export class AddPropertyComponent implements OnInit {
   @Output() newProperty = new EventEmitter()
 
   showAddProperty = false
-  defaultStyles = {}
+  availableStyleProperties = {}
   form: FormGroup;
 
   constructor(private store: Store) { }
@@ -33,9 +33,9 @@ export class AddPropertyComponent implements OnInit {
     const controlName = this.newPropKey ? this.newPropKey.nativeElement.value : null;
     const controlValue = this.newPropValue ? this.newPropValue.nativeElement.value : null;
     if (controlName && controlValue && !Object.keys(this.styles).includes(controlName)) {
-      this.store.select(getAvailableStylePropertiesSelector).subscribe(styles => this.defaultStyles = styles )
-      for(const prop in this.defaultStyles) {
-        if(prop === controlName || this.defaultStyles[prop] === controlName) {
+      this.store.select(getAvailableStylePropertiesSelector).subscribe(styles => this.availableStyleProperties = styles )
+      for(const prop in this.availableStyleProperties) {
+        if(prop === controlName || this.availableStyleProperties[prop] === controlName) {
           this.newProperty.emit(this.form.value)
           break;
         }

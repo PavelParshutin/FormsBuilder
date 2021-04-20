@@ -1,4 +1,4 @@
-<div *ngrxLet="defaultComponentsStyle as elemArray">
+<div *ngrxLet="defaultComponentsStyle$ as elemArray">
   <div *ngFor="let elem of elemArray | keyvalue" class="item">
     <app-styles-block [id]="elem.value.id"
                       [componentType]="elem.value.componentType"

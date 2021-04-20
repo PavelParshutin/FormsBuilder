@@ -65,7 +65,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
   constructor(private store: Store, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.subscribe()
+    this.setComponentsProperties()
   }
 
   ngAfterViewInit(): void {
@@ -95,7 +95,7 @@ export class FormBuilderPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  subscribe(): void {
+  setComponentsProperties(): void {
     this.store.select(getAppGeneralStyleSelector).subscribe(style => this.tempGeneralStyle = style)
 
     const defaultComponentsStyle$ = this.store.select(getDefaultComponentsStyleSelector)

@@ -16,13 +16,13 @@ import { ComponentFields } from '../../store/interfaces';
 export class AccordionSectionComponent implements OnInit {
 
   styleElements$: Observable<ComponentFields[]>
-  defaultComponentsStyle: Observable<ComponentFields[]>
+  defaultComponentsStyle$: Observable<ComponentFields[]>
 
   constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.styleElements$ = this.store.select(getNewComponentsArraySelector)
-    this.defaultComponentsStyle = this.store.select(getDefaultComponentsStyleSelector)
+    this.defaultComponentsStyle$ = this.store.select(getDefaultComponentsStyleSelector)
   }
 
 }

@@ -19,15 +19,11 @@ import { AuthService } from './services/auth.service';
 import { Effects } from './store/effects';
 import { authReducer } from './store/auth.reducer';
 import { styleReducer } from './store/component-styles.reduser';
-import { LoginPageComponent } from './Auth/login-page/login-page.component';
-import { RegistrationPageComponent } from './Auth/registration-page/registration-page.component';
 import { AuthPageComponent } from './Auth/auth-page/auth-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationPageComponent,
-    LoginPageComponent,
     HomePageComponent,
     AuthPageComponent
   ],

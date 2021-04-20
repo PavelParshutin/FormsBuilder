@@ -27,6 +27,6 @@
       <button class="add-btn" type="button" [hidden]="componentType !== 'Select'" (click)="addSelectOptions()">add option</button>
     </div>
   </div>
- <button class="apply-btn" type="submit" [hidden]="!showApplyBtn" #saveBtn>Save Changes</button>
+ <button class="apply-btn" type="submit" [hidden]="!showApplyBtn">Save Changes</button>
  <button class="delete-component-btn" type="button" (click)="deleteComponent()" *ngIf="id">Delete Component</button>
 </form>
