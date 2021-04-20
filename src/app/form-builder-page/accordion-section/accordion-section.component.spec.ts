@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DragAndDropComponent } from './drag-and-drop.component';
+import { AccordionSectionComponent } from './accordion-section.component';
 
-describe('DragAndDropComponent', () => {
-  let component: DragAndDropComponent;
-  let fixture: ComponentFixture<DragAndDropComponent>;
+describe('AccordionSectionComponent', () => {
+  let component: AccordionSectionComponent;
+  let fixture: ComponentFixture<AccordionSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DragAndDropComponent ]
+      declarations: [ AccordionSectionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DragAndDropComponent);
+    fixture = TestBed.createComponent(AccordionSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,6 @@
+<span *ngIf="propName" (click)="isActiveInput = !isActiveInput">{{propName}}: </span>
+<span *ngIf="!isActiveInput"
+      [ngClass]="{'changed-value': compareValue(previousValue, state), 'default-value': !compareValue(previousValue, state) && propName}"
+      (click)="isActiveInput = !isActiveInput">{{state}}
+</span>
+<input type="text" *ngIf="isActiveInput" (blur)="onBlur(state)" [(ngModel)]="state">

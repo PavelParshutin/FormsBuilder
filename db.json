@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "name": "v@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": 36852,
+      "email": "test@gmail.com",
+      "password": "ssss"
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "fffff",
+      "type": "[AUTH] Registration",
+      "id": 36853
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "ffff",
+      "type": "[AUTH] Registration",
+      "id": 36854
+    }
+  ],
+  "tokens": []
+}

@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="header">
+    <input type="text" formControlName="id" hidden="true">
+    <input type="text" formControlName="componentType" hidden="true">
+    <app-input (isChange)="showApplyBtn = $event" formControlName="title"></app-input>
+    <i class="icon" (click)="showStyleBlock = !showStyleBlock"></i>
+  </div>
+
+  <div class="style-block" *ngIf="showStyleBlock">
+    <div formGroupName="style">
+      <div *ngFor="let st of style| keyvalue" class="item">
+        <app-input (isChange)="showApplyBtn = $event" propName="{{st.key}}" formControlName="{{st.key}}"></app-input>
+        <i (click)="deleteStyleProp(st.key)" class="delete-btn"></i>
+      </div>
+      <app-add-property [styles]=style (newProperty)="addNewStyleProperty($event)"></app-add-property>
+    </div>
+
+    <div formGroupName="anotherProperties">
+      <div *ngFor="let option of anotherProperties | keyvalue">
+        <div formArrayName="{{option.key}}">
+          <div *ngFor="let i of option.value; let idx = index" class="item">
+            <app-input (isChange)="showApplyBtn = $event" formControlName="{{idx}}"></app-input>
+            <i type="button" (click)="deleteOption(idx)" class="delete-btn"></i>
+          </div>
+        </div>
+      </div>
+      <button class="add-btn" type="button" [hidden]="componentType !== 'Select'" (click)="addSelectOptions()">add option</button>
+    </div>
+  </div>
+ <button class="apply-btn" type="submit" [hidden]="!showApplyBtn">Save Changes</button>
+ <button class="delete-component-btn" type="button" (click)="deleteComponent()" *ngIf="id">Delete Component</button>
+</form>

@@ -1,0 +1,15 @@
+@import "src/assets/scss/variables";
+
+:host {
+  display: block;
+}
+
+.default-value {
+  color: $color-6;
+  font-weight: 700;
+}
+
+.changed-value {
+  color: $color-8;
+  font-weight: 700;
+}
